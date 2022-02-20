@@ -1,0 +1,112 @@
+/* daftar isi */
+
+/* 1. navbar
+2. main-home
+3. footer */
+
+nav.navbar-expand-lg,
+.navbar-light {
+    background-color: #ffad32;
+    padding: 1px;
+}
+
+.icon-brand {
+    margin-right: 30px;
+}
+
+.navbar-brand {
+    position: relative;
+}
+
+a.navbar-brand {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 17px;
+    display: flex;
+    align-items: center;
+    margin-right: 220px;
+}
+
+.dropdown-menu {
+    box-shadow: 0 10px 40px 0 rgba(51, 73, 94, 0.15);
+    border: none;
+    width: 200px;
+}
+
+.dropdown-menu.show {
+    display: block;
+    width: 0px;
+    box-shadow: none;
+}
+
+.navbar-nav > li > .dropdown-menu {
+    margin-top: 2px;
+}
+
+div.d-sm-none.d-lg-inline-block {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 16px;
+}
+
+.dropdown-menu a {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 13px;
+}
+.dropdown-menu .dropdown-title {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    text-transform: uppercase;
+    font-size: 13px;
+    letter-spacing: 1.5px;
+    font-weight: 700;
+    color: #191d21 !important;
+    padding: 10px 20px;
+    line-height: 20px;
+    color: #98a6ad;
+}
+
+a.dropdown-item {
+    padding: 10px 20px;
+    font-weight: 500;
+    line-height: 1.2;
+}
+a.dropdown-item:focus,
+a.dropdown-item:active,
+a.dropdown-item.active {
+    background-color: #6777ef;
+    color: #fff !important;
+}
+
+.dropdown-item {
+    display: inline-block;
+    width: 100%;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    font-size: 13px;
+    border-bottom: 1px solid #f9f9f9;
+}
+
+/* 2. isi content utama*/
+.main-content {
+    margin-top: 100px;
+    text-align: center;
+}
+
+/* 3. footer */
+.main-footer {
+    margin-top: 50px;
+    width: 100%;
+    text-align: center;
+    padding-left: 10px;
+    line-height: 50px;
+    position: relative;
+    background: rgb(247, 244, 244);
+    color: #333;
+    font-family: "Nunito", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.bullet {
+    display: inline;
+    margin: 0.4px;
+}
+.bullet:after {
+    content: "\2022";
+}
