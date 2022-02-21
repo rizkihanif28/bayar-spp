@@ -4,6 +4,46 @@
 2. main-home
 3. footer */
 
+/* Login */
+.bg-blue {
+    background-color: blue;
+}
+
+.title.row.justify-content-center {
+    padding-bottom: 40px;
+    font-size: 30px;
+}
+
+.row.justify-content-center {
+    margin-top: 50px;
+}
+
+.logo-brand {
+    display: block;
+    margin: auto;
+}
+
+.form-signin .checkbox {
+    font-weight: 400;
+}
+
+.form-signin .form-floating:focus-within {
+    z-index: 2;
+}
+
+.form-signin input[type="email"] {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="password"] {
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+/* Beranda */
 nav.navbar-expand-lg,
 .navbar-light {
     background-color: #ffad32;

@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>{{ $tittle }}</title>
+    <title>Home</title>
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="assets/fonts/font-awesome/css/fontawesome.css" />
@@ -14,6 +14,7 @@
 </head>
 
 <body>
+    {{-- Navbar --}}
     <nav class="navbar navbar-expand-lg navbar-light fixed-top">
         <div class="container-fluid">
             <img src="{{ asset('assets/img/logo-brand.png') }}" style="width: 33px" class="icon-brand" />
@@ -31,7 +32,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item mx-3">
-                            <a class="nav-link {{ $tittle === 'Home' ? 'active' : '' }}" href="/">Beranda</a>
+                            <a class="nav-link" href="/">Beranda</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle mx-3" href="/kesiswaan" id="navbarDropdown" role="button"
@@ -85,8 +86,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="#">
-                                        Logout
+                                    <a class="dropdown-item" href="/login">Logout
                                     </a>
                                 </li>
                             </ul>
@@ -97,10 +97,13 @@
         </div>
     </nav>
 
+    {{-- Main Content --}}
 
     <div class="main-content">
         @yield('master')
     </div>
+
+    {{-- Main Footer --}}
 
     <footer class="main-footer">
         Copyright &copy; 2022

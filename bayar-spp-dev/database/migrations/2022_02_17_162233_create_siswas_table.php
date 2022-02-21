@@ -17,10 +17,11 @@ class CreateSiswasTable extends Migration
             $table->id();
             $table->string('NIS');
             $table->string('Nama');
+            $table->string('Email')->unique();
             $table->enum('Jenis Kelamin', ['L', 'P']);
             $table->enum('Kelas', ['X', 'XI', 'XII']);
             $table->enum('Jurusan', ['TSM', 'TKR', 'AK', 'AP']);
-            $table->string('Alamat');
+            $table->text('Alamat');
             $table->string('Telpon');
             $table->timestamps();
         });
