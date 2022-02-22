@@ -11,7 +11,7 @@
 
 .title.row.justify-content-center {
     padding-bottom: 40px;
-    font-size: 30px;
+    font-size: 2vw;
 }
 
 .row.justify-content-center {
@@ -100,7 +100,6 @@ div.d-sm-none.d-lg-inline-block {
     color: #191d21 !important;
     padding: 10px 20px;
     line-height: 20px;
-    color: #98a6ad;
 }
 
 a.dropdown-item {

@@ -7,9 +7,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Home</title>
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="assets/fonts/font-awesome/css/fontawesome.css" />
-    <link rel="stylesheet" href="assets/fonts/font-awesome/css/fontawesome.min.css">
+    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/js/bootstrap.min.js') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/fonts/font-awesome/css/fontawesome.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/fonts/font-awesome/css/fontawesome.min.css') }}" />
 
 </head>
 
@@ -32,7 +33,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item mx-3">
-                            <a class="nav-link" href="/">Beranda</a>
+                            <a class="nav-link" href="/home">Beranda</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle mx-3" href="/kesiswaan" id="navbarDropdown" role="button"
@@ -79,7 +80,6 @@
                                 <div class="d-sm-none d-lg-inline-block">Administrator</div>
                             </a>
                             <ul class="dropdown-menu ">
-
                                 <li>
                                     <a class="dropdown-item" href="/profil">
                                         Profil

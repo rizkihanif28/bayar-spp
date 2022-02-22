@@ -3,14 +3,14 @@
 @section('login')
     <div class="row justify-content-center">
         <div class="title row justify-content-center">Sistem Informasi Pembayaran SMK Walang Jaya</div>
-        <div class="col-md-3">
+        <div class="col-lg-3">
             <form>
                 <img class="logo-brand mb-4" src="{{ asset('assets/img/logo-brand.png') }}" alt="" width="65" height="65">
-                <h1 class="h3 mb-3 fw-normal text-center">Please Login</h1>
+                <h2 class="h3 mb-3 fw-normal text-center">Please Login</h2>
 
                 <div class="form-floating">
                     <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-                    <label for="floatingInput">Email address</label>
+                    <label for="floatingInput">Username</label>
                 </div>
                 <div class="form-floating">
                     <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
@@ -23,7 +23,7 @@
                 <a class="btn btn-primary w-100" href="/home">Login</a>
 
             </form>
-            <small class="mt-2"><a href="/register">Lupa Password?</a></small>
+            <small class="mt-2"><a href="/lupas">Lupa Password?</a></small>
         </div>
     </div>
 @endsection
