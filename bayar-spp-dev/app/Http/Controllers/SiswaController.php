@@ -4,12 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class HomeController extends Controller
+class SiswaController extends Controller
 {
     public function index()
     {
-        return view('home.index', [
-            'title' => 'Home',
+        return view('page-siswa.index', [
+            'title' => 'Home'
         ]);
     }
 }

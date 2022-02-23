@@ -78,6 +78,10 @@ a.navbar-brand {
     box-shadow: none;
 }
 
+/* .dropdown-menu .circle {
+    padding-right: 5px;
+} */
+
 .navbar-nav > li > .dropdown-menu {
     margin-top: 2px;
 }

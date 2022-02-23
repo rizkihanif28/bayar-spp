@@ -1,9 +1,12 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LupasController;
+use App\Http\Controllers\SiswaController;
+use App\Http\Controllers\TatusController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,7 +25,9 @@ use App\Http\Controllers\LupasController;
 
 Route::get('/login', [LoginController::class, 'index']);
 Route::get('/lupas', [LupasController::class, 'index']);
-Route::get('/home', [HomeController::class, 'index']);
+Route::get('/home-admin', [AdminController::class, 'index']);
+Route::get('/home-siswa', [SiswaController::class, 'index']);
+Route::get('/home-tatus', [TatusController::class, 'index']);
 
 Route::get('/kesiswaan', function () {
     return view('kesiswaan', [
