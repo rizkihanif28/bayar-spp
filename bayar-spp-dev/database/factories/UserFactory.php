@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+namespace Database\Seeders;
+
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -15,6 +17,7 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
+            'username' => $this->faker->unique()->name(),
             'name' => $this->faker->name(),
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),

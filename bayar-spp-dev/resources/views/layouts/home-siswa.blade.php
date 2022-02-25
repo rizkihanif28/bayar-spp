@@ -32,10 +32,10 @@
             <div class="container">
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto">
-                        <li class="nav-item mx-5">
+                        <li class="nav-item mx-auto">
                             <a class="nav-link" href="/home-siswa">Beranda</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item mx-4">
                             <a class="nav-link" href="#">SPP Pembayaran</a>
                         </li>
                     </ul>

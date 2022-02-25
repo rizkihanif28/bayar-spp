@@ -15,14 +15,15 @@ class CreateSiswasTable extends Migration
     {
         Schema::create('siswas', function (Blueprint $table) {
             $table->id();
-            $table->string('NIS');
-            $table->string('Nama');
-            $table->string('Email')->unique();
-            $table->enum('Jenis Kelamin', ['L', 'P']);
-            $table->enum('Kelas', ['X', 'XI', 'XII']);
-            $table->enum('Jurusan', ['TSM', 'TKR', 'AK', 'AP']);
-            $table->text('Alamat');
-            $table->string('Telpon');
+            $table->integer('siswa_id');
+            $table->string('nis');
+            $table->string('nama');
+            $table->string('email')->unique();
+            $table->string('jenis_kelamin');
+            $table->string('kelas');
+            $table->string('jurusan');
+            $table->text('alamat');
+            $table->string('telepon');
             $table->timestamps();
         });
     }

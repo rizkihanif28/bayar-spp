@@ -15,6 +15,10 @@ class CreateTatusesTable extends Migration
     {
         Schema::create('tatuses', function (Blueprint $table) {
             $table->id();
+            $table->string('tu_id');
+            $table->string('nip');
+            $table->string('nama');
+            $table->string('email')->unique();
             $table->timestamps();
         });
     }

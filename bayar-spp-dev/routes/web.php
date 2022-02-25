@@ -1,12 +1,13 @@
 <?php
 
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LupasController;
+use App\Http\Controllers\RegisController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\TatusController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,10 +24,22 @@ use App\Http\Controllers\TatusController;
 //     return view('welcome');
 // });
 
+// login
 Route::get('/login', [LoginController::class, 'index']);
+Route::get('/regis', [RegisController::class, 'index']);
 Route::get('/lupas', [LupasController::class, 'index']);
+// post register
+Route::post('/regis', [RegisController::class, 'store']);
+
+// home admin
 Route::get('/home-admin', [AdminController::class, 'index']);
+
+
+// home siswa
 Route::get('/home-siswa', [SiswaController::class, 'index']);
+
+
+// home tata usaha
 Route::get('/home-tatus', [TatusController::class, 'index']);
 
 Route::get('/kesiswaan', function () {
@@ -77,3 +90,7 @@ Route::get('/profil', function () {
         "tittle" => "Profil"
     ]);
 });
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

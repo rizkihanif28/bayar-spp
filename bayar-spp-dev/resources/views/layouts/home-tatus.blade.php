@@ -32,7 +32,7 @@
             <div class="container">
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto">
-                        <li class="nav-item mx-3">
+                        <li class="nav-item mx-auto">
                             <a class="nav-link" href="/home">Beranda</a>
                         </li>
                         <li class="nav-item dropdown">

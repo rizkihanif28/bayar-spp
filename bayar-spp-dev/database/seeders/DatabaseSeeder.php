@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Siswa;
+use App\Models\Tatus;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,6 +15,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        $this->call(RoleSeeder::class);
+        $this->call(UserSeeder::class);
+
+        Siswa::factory(5)->create();
+        Tatus::factory(2)->create();
     }
 }
