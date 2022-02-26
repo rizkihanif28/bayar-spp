@@ -4,34 +4,26 @@
 2. main-home
 3. footer */
 
-/* Login */
+/* Form Login */
 .title.row.justify-content-center {
     padding-bottom: 40px;
     font-size: 2vw;
 }
 
-/* .row.justify-content-center  {
-    margin-top: 50px;
-} */
+.row.justify-content-center {
+    margin-top: 30px;
+}
 
 .logo-brand {
     display: block;
     margin: auto;
 }
 
-.form-signin {
-    margin-top: 90px;
+.form-floating input {
+    margin-top: -1px;
 }
 
-.form-signin .checkbox {
-    font-weight: 400;
-}
-
-.mb-3 {
-    margin-bottom: 0.5rem !important;
-}
-
-.form-signin .form-floating:focus-within {
+.form-floating:focus-within {
     z-index: 2;
 }
 
@@ -39,21 +31,7 @@
     height: 80%;
 }
 
-.form-signin input[type="username"] {
-    margin-bottom: -1px;
-    border-bottom-right-radius: 0;
-    border-bottom-left-radius: 0;
-}
-
-.form-signin input[type="password"] {
-    margin-bottom: 10px;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-}
-
-.form-registration {
-    margin-top: 100px;
-}
+/* Form registrasi */
 
 .form-registration input {
     border-radius: 0;

@@ -1,9 +1,9 @@
-@extends('layouts.regis')
+@extends('layouts.app')
 
-@section('regis')
+@section('content')
     <div class="row justify-content-center">
         <div class="col-lg-5">
-            <form action="/regis" method="post">
+            <form action="/register" method="post">
                 @csrf
                 <h2 class="h3 mb-3 fw-normal text-center">Form Registrasi Siswa</h2>
                 <div class="form-floating">

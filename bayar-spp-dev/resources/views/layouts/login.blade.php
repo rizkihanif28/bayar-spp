@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{{-- <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -17,4 +17,4 @@
     <main class="form-signin"> @yield('login')</main>
 </body>
 
-</html>
+</html> --}}
