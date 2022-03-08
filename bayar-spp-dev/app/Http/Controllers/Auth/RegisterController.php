@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -47,14 +49,15 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email:dns', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
-    }
+    // protected function validator(array $data)
+    // {
+    //     return Validator::make($data, [
+    //         'username' => ['required', 'string', 'max:255'],
+    //         'name' => ['required', 'string', 'max:255'],
+    //         'email' => ['required', 'string', 'email:dns', 'max:255', 'unique:users'],
+    //         'password' => ['required', 'string', 'min:6', 'confirmed'],
+    //     ]);
+    // }
 
     /**
      * Create a new user instance after a valid registration.
@@ -62,12 +65,19 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\Models\User
      */
-    protected function create(array $data)
+
+    public function create(Request $request)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+        $validatedData = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email:dns', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:6', 'confirmed'],
+
         ]);
+        $validatedData['password'] = Hash::make($validatedData['password']);
+
+        User::create($validatedData);
+
+        return redirect('/login')->with('success', 'Registrasi Berhasil, Silahkan Login');
     }
 }

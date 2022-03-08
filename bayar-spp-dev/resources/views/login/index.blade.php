@@ -1,4 +1,4 @@
-@extends('layouts.login')
+{{-- @extends('layouts.login')
 
 @section('login')
     <div class="row justify-content-center">
@@ -39,4 +39,4 @@
             <small class="mt-2"><a href="/lupas">Lupa Password?</a></small>
         </div>
     </div>
-@endsection
+@endsection --}}

@@ -5,6 +5,12 @@
         <div class="title row justify-content-center">Sistem Informasi Pembayaran SMK Walang Jaya</div>
         <div class="col-md-3">
             <img class="logo-brand mb-4" src="{{ asset('assets/img/logo-brand.png') }}" alt="" width="65" height="65">
+            @if (session()->has('success'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{ session('success') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
             <form method="POST" action="{{ route('login') }}">
                 @csrf
                 <div class="form-floating">

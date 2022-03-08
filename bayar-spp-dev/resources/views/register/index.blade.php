@@ -1,4 +1,4 @@
-@extends('layouts.app')
+{{-- @extends('layouts.app')
 
 @section('content')
     <div class="row justify-content-center">
@@ -50,4 +50,4 @@
             <small class="mt-2"><a href="/lupas">Lupa Password?</a></small>
         </div>
     </div>
-@endsection
+@endsection --}}
