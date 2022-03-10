@@ -1,8 +1,13 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\SiswaController;
+use App\Http\Controllers\TatusController;
+use App\Models\Siswa;
+use App\Models\Tatus;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -22,25 +27,41 @@ use Illuminate\Support\Facades\Auth;
 // });
 
 
+// Auth::routes();
+
+// // Route::middleware('auth')->group(function () {
+// //     Route::prefix('admin')->group(function () {
+// //         Route::get('dashboard', [DashboardController::class, 'index'])->name('admin');
+
+// //         /** Action Siswa dengan route resource */
+// //         Route::resource('master_data', [SiswaController::class, 'index'])->except([
+// //             'show',
+// //         ])->names([
+// //             'index' => 'admin.master_data.index',
+// //             'create' => 'admin.master_data.create',
+// //             'store' => 'admin.master_data.store',
+// //             'update' => 'admin.master_data.update',
+// //             'destroy' => 'admin.master_data.destroy'
+
+// //         ]);
+// //     });
+// // });
+
+// Route::get('home', [HomeController::class, 'index'])->name('home');
+// Route::middleware('role:admin')->get('dashboard-admin', [LoginController::class, 'index'])->name('dashboard-admin');
+
+// // Route::post('/register', [RegisterController::class, 'create']);
+
 Auth::routes();
 
-// Route::middleware('auth')->group(function () {
-//     Route::prefix('admin')->group(function () {
-//         Route::get('dashboard', [DashboardController::class, 'index'])->name('admin');
+// Logout auth
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout')->middleware('auth');
 
-//         /** Action Siswa dengan route resource */
-//         Route::resource('master_data', [SiswaController::class, 'index'])->except([
-//             'show',
-//         ])->names([
-//             'index' => 'admin.master_data.index',
-//             'create' => 'admin.master_data.create',
-//             'store' => 'admin.master_data.store',
-//             'update' => 'admin.master_data.update',
-//             'destroy' => 'admin.master_data.destroy'
+Route::middleware('role:user')->post('/dashboard/siswa', [RegisterController::class, 'create'])->name('register');
+// ** Dashboard User ** //
+// Route::get('/dashboard/siswa', [HomeController::class, 'index'])->name('dashboard/siswa');
+// Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
 
-//         ]);
-//     });
-// });
-
-Route::get('home', [HomeController::class, 'index'])->name('home');
-Route::get('dashboard-admin', [LoginController::class, 'index'])->name('dashboard-admin');
+Route::middleware('role:admin')->get('/dashboard/admin', [AdminController::class, 'index'])->name('dashboard/admin');
+Route::middleware('role:tatus')->get('/dashboard/tatus', [TatusController::class, 'index'])->name('dashboard/tatus');
+Route::middleware('role:user')->get('/dashboard/siswa', [SiswaController::class, 'index'])->name('dashboard/siswa');

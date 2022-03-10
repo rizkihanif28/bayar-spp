@@ -7,7 +7,6 @@ use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -31,7 +30,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    // protected $redirectTo = RouteServiceProvider::HOME;
 
     /**
      * Create a new controller instance.
@@ -49,15 +48,14 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    // protected function validator(array $data)
-    // {
-    //     return Validator::make($data, [
-    //         'username' => ['required', 'string', 'max:255'],
-    //         'name' => ['required', 'string', 'max:255'],
-    //         'email' => ['required', 'string', 'email:dns', 'max:255', 'unique:users'],
-    //         'password' => ['required', 'string', 'min:6', 'confirmed'],
-    //     ]);
-    // }
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:3', 'confirmed'],
+        ]);
+    }
 
     /**
      * Create a new user instance after a valid registration.
@@ -65,19 +63,30 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\Models\User
      */
-
-    public function create(Request $request)
+    protected function create(array $data)
     {
-        $validatedData = $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email:dns', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:6', 'confirmed'],
-
+        $user = User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => Hash::make($data['password']),
         ]);
-        $validatedData['password'] = Hash::make($validatedData['password']);
 
-        User::create($validatedData);
+        $user->assignRole('user');
 
-        return redirect('/login')->with('success', 'Registrasi Berhasil, Silahkan Login');
+        return redirect('dashboard/siswa');
     }
+
+    // public function store(Request $request)
+    // {
+    //     $validatedData = $request->validate([
+    //         'name' => ['name'],
+    //         'email' => ['email'],
+    //         'password' => ['password']
+    //     ]);
+    //     $validatedData['password'] = Hash::make($validatedData['password']);
+    //     // create user ke db
+    //     User::create($validatedData);
+    //     // flash message
+    //     return redirect('/login');
+    // }
 }

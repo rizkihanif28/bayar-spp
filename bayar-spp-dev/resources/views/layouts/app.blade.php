@@ -29,7 +29,7 @@
 </head>
 
 <body>
-    {{-- @include('partials/navbar/navbar'); --}}
+    @include('partials/navbar/navbar');
 
     <div id="app">
         <main class="py-4">
