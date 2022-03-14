@@ -7,6 +7,7 @@ use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -51,11 +52,16 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:3', 'confirmed'],
+            'name' => ['required', 'max:255'],
+            'email' => ['required', 'email:dns', 'unique:users'],
+            'password' => ['required', 'min:3', 'confirmed'],
         ]);
     }
+
+    // public function index()
+    // {
+    //     return view('register');
+    // }
 
     /**
      * Create a new user instance after a valid registration.
@@ -73,8 +79,10 @@ class RegisterController extends Controller
 
         $user->assignRole('user');
 
-        return redirect('dashboard/siswa');
+        return $user;
     }
+
+
 
     // public function store(Request $request)
     // {

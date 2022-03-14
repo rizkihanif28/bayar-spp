@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale('/login')) }}">
 
 <head>
     <meta charset="utf-8">
@@ -25,17 +25,23 @@
     <link rel="stylesheet" href="{{ asset('assets/js/bootstrap.min.js') }}" />
     <link rel="stylesheet" href="{{ asset('assets/fonts/font-awesome/css/fontawesome.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/fonts/font-awesome/css/fontawesome.min.css') }}" />
-
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
 </head>
 
 <body>
-    @include('partials/navbar/navbar');
+    {{-- @include('partials/navbar/navbar'); --}}
 
     <div id="app">
-        <main class="py-4">
+        <main class="py-5">
             @yield('content')
         </main>
     </div>
+
+    <footer class="main-footer fixed-bottom">
+        Copyright &copy; 2022
+        <div class="bullet"></div>
+        SMK Walang Jaya Jakarta
+    </footer>
 </body>
 
 </html>

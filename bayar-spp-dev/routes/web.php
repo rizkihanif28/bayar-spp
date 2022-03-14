@@ -27,37 +27,14 @@ use Illuminate\Support\Facades\Auth;
 // });
 
 
-// Auth::routes();
-
-// // Route::middleware('auth')->group(function () {
-// //     Route::prefix('admin')->group(function () {
-// //         Route::get('dashboard', [DashboardController::class, 'index'])->name('admin');
-
-// //         /** Action Siswa dengan route resource */
-// //         Route::resource('master_data', [SiswaController::class, 'index'])->except([
-// //             'show',
-// //         ])->names([
-// //             'index' => 'admin.master_data.index',
-// //             'create' => 'admin.master_data.create',
-// //             'store' => 'admin.master_data.store',
-// //             'update' => 'admin.master_data.update',
-// //             'destroy' => 'admin.master_data.destroy'
-
-// //         ]);
-// //     });
-// // });
-
-// Route::get('home', [HomeController::class, 'index'])->name('home');
-// Route::middleware('role:admin')->get('dashboard-admin', [LoginController::class, 'index'])->name('dashboard-admin');
-
-// // Route::post('/register', [RegisterController::class, 'create']);
-
 Auth::routes();
 
 // Logout auth
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout')->middleware('auth');
 
-Route::middleware('role:user')->post('/dashboard/siswa', [RegisterController::class, 'create'])->name('register');
+// Route::get('auth/register', [RegisterController::class, 'index'])->name('register');
+// Route::middleware('role:user')->post('/register', [RegisterController::class, 'index'])->name('register');
+
 // ** Dashboard User ** //
 // Route::get('/dashboard/siswa', [HomeController::class, 'index'])->name('dashboard/siswa');
 // Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');

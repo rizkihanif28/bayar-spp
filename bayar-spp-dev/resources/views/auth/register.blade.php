@@ -7,12 +7,14 @@
                 <form method="POST" action="{{ route('register') }}">
                     @csrf
                     <h2 class="h3 mb-3 fw-normal text-center">Form Registrasi Siswa</h2>
+
                     <div class="form-floating">
-                        <input type="text" name="name" class="form-control rounded-top @error('name') is-invalid @enderror"
-                            id="name" placeholder="Name" required value="{{ old('name') }}">
-                        <label for="name">Name</label>
+                        <input type="name" name="name" class="form-control rounded-top @error('name') is-invalid @enderror"
+                            id="name" placeholder="Name" required autocomplete="name" value="{{ old('name') }}" autofocus>
+                        <label for="name">{{ __('Name') }}</label>
+
                         @error('name')
-                            <div class="invalid-feedback"> {{ $message }}</div>
+                            <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
 
@@ -41,8 +43,7 @@
                         <label for="password-confirm">{{ __('Confirm Password') }}</label>
                     </div>
 
-
-                    <button type="w-100 submit" class="btn btn-primary mt-3">
+                    <button type="submit" class="btn btn-primary mt-3 w-100">
                         {{ __('Register') }}
                     </button>
                 </form>

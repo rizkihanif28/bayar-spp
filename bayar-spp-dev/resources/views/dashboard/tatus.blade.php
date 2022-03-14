@@ -65,15 +65,18 @@
                             </a>
                             <ul class="dropdown-menu ">
                                 <li>
-                                    <a class="dropdown-item" href="/profil">
-                                        Profil
-                                    </a>
+                                    <form action="/logout" method="post">
+                                        <button type="submit" class="dropdown-item">
+                                            Profil
+                                        </button>
+                                    </form>
                                 </li>
                                 <li>
                                     <form action="/logout" method="post">
                                         @csrf
                                         <button type="submit" class="dropdown-item"><i class="bi bi-box-arrow-right"></i>
-                                            Logout</button>
+                                            Keluar
+                                        </button>
                                     </form>
                                 </li>
                             </ul>
@@ -86,7 +89,23 @@
 
     {{-- Main Content --}}
 
-    <div class="main-content">
-        @yield('tatus')
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <section class="content">
+                <div class="jumbotron bg-warning">
+                    {{ __('Selamat Datang, ') }}
+                    {{ Auth::user()->name }}
+                    <p>Silahkan Pilih Menu Diatas Untuk Memulai Aktifitas</p>
+                </div>
+            </section>
+
+            <div class="jumbotron">
+                @if (session('status'))
+                    <div class="alert alert-success" role="alert">
+                        {{ session('status') }}
+                    </div>
+                @endif
+            </div>
+        </div>
     </div>
 @endsection

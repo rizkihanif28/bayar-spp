@@ -11,7 +11,7 @@
 }
 
 .row.justify-content-center {
-    margin-top: 30px;
+    margin-top: 15px;
 }
 
 .logo-brand {
@@ -123,9 +123,15 @@ a.dropdown-item.active {
 }
 
 /* 2. isi content utama*/
-.main-content {
+.jumbotron {
     margin-top: 100px;
     text-align: center;
+    font-size: 40px;
+    border-radius: 20px;
+}
+
+.jumbotron p {
+    font-size: 25px;
 }
 
 /* 3. footer */
