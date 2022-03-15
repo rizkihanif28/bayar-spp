@@ -123,6 +123,10 @@ a.dropdown-item.active {
 }
 
 /* 2. isi content utama*/
+.app-admin {
+    margin-top: 80px;
+}
+
 .jumbotron {
     margin-top: 100px;
     text-align: center;

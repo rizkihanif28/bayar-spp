@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Bayar_SPP'),
+    // 'name' => env('APP_NAME', 'Pembayaran Walang Jaya'),
 
     /*
     |--------------------------------------------------------------------------

@@ -1,13 +1,11 @@
 <?php
 
-use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Admin\DasusController;
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Dashboard\AdminController as DashboardAdminController;
+use App\Http\Controllers\Dashboard\SiswaController as DashboardSiswaController;
+use App\Http\Controllers\Dashboard\TatusController;
 use App\Http\Controllers\SiswaController;
-use App\Http\Controllers\TatusController;
-use App\Models\Siswa;
-use App\Models\Tatus;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -22,8 +20,8 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
+// Route::get('/home', function () {
+//     return view('home');
 // });
 
 
@@ -32,13 +30,12 @@ Auth::routes();
 // Logout auth
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout')->middleware('auth');
 
-// Route::get('auth/register', [RegisterController::class, 'index'])->name('register');
-// Route::middleware('role:user')->post('/register', [RegisterController::class, 'index'])->name('register');
-
-// ** Dashboard User ** //
-// Route::get('/dashboard/siswa', [HomeController::class, 'index'])->name('dashboard/siswa');
-// Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
-
-Route::middleware('role:admin')->get('/dashboard/admin', [AdminController::class, 'index'])->name('dashboard/admin');
+// Dashboard Users
+Route::middleware('role:admin')->get('/dashboard/admin', [DashboardAdminController::class, 'index'])->name('dashboard/admin');
 Route::middleware('role:tatus')->get('/dashboard/tatus', [TatusController::class, 'index'])->name('dashboard/tatus');
-Route::middleware('role:user')->get('/dashboard/siswa', [SiswaController::class, 'index'])->name('dashboard/siswa');
+Route::middleware('role:user')->get('dashboard/siswa', [DashboardSiswaController::class, 'index'])->name('dashboard/siswa');
+
+// Daftar Siswa Admin
+Route::get('admin/daftar-siswa', [DasusController::class, 'index'])->name('admin/daftar-siswa');
+Route::get('admin/create-siswa', [DasusController::class, 'create'])->name('admin/create-siswa');
+Route::get('admin/store-siswa', [DasusController::class, 'store'])->name('admin/store-siswa');
