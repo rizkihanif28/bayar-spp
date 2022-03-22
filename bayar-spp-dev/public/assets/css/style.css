@@ -138,14 +138,17 @@ a.dropdown-item.active {
     font-size: 25px;
 }
 
+/* Konten Admin Pembayaran Siswa*/
+
 /* 3. footer */
 .main-footer {
-    margin-top: 50px;
     width: 100%;
+    bottom: 0;
+    position: static;
+    border-top: 1px;
     text-align: center;
     padding-left: 10px;
     line-height: 50px;
-    position: relative;
     background: rgb(247, 244, 244);
     color: #333;
     font-family: "Nunito", "Helvetica Neue", Helvetica, Arial, sans-serif;

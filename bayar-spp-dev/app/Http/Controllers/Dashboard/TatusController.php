@@ -10,6 +10,8 @@ class TatusController extends Controller
 {
     public function index()
     {
-        return view('/dashboard/tatus');
+        return view('dashboard/tatus', [
+            'title' => 'Dashboard'
+        ]);
     }
 }

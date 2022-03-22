@@ -8,11 +8,15 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>SPP WALANG JAYA</title>
+    <title>SPP WJ | {{ $title }}</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+
+
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}"></script>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -23,7 +27,6 @@
     <link rel="stylesheet" href="{{ asset('assets/fonts/font-awesome/css/fontawesome.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/fonts/font-awesome/css/fontawesome.min.css') }}" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
-    <link rel="stylesheet" href="https://code.jquery.com/jquery-3.6.0.min.js">
 </head>
 
 <body>
@@ -45,7 +48,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item mx-auto">
-                            <a class="nav-link" href="/home">Beranda</a>
+                            <a class="nav-link" href="../dashboard/tatus">Beranda</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle mx-3" href="/kesiswaan" id="navbarDropdown" role="button"
@@ -55,7 +58,7 @@
 
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li>
-                                    <a class="dropdown-item" href="/siswa">Siswa</a>
+                                    <a class="dropdown-item" href="../tatus/daftar-siswa">Siswa</a>
                                 </li>
                                 <li>
                                     <a class="dropdown-item" href="/pembayaran">Pembayaran</a>
@@ -129,11 +132,8 @@
         SMK Walang Jaya Jakarta
     </footer>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="{{ asset('js/admin/tambah-siswa.js') }}"></script>
 
 </body>
+@stack('js')
 
 </html>

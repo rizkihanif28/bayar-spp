@@ -56,7 +56,7 @@ class LoginController extends Controller
         } elseif ($user->hasRole('user')) {
             return redirect()->route('dashboard/siswa');
         }
-        return redirect()->route('login');
+        return redirect('login');
     }
 
     public function logout(Request $request)

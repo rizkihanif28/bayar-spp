@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>SPP WALANG JAYA</title>
+    <title>SPP WJ | {{ $title }}</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -23,12 +23,9 @@
     <link rel="stylesheet" href="{{ asset('assets/fonts/font-awesome/css/fontawesome.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/fonts/font-awesome/css/fontawesome.min.css') }}" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
-    <link rel="stylesheet" href="https://code.jquery.com/jquery-3.6.0.min.js">
 
     <!-- Scripts -->
-    <script src="{{ asset('js/admin/tambah-siswa.js') }}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>
@@ -66,7 +63,7 @@
                                     <a class="dropdown-item" href="../admin/daftar-siswa">Siswa</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="#">Pembayaran</a>
+                                    <a class="dropdown-item" href="../admin/pembayaran-search">Pembayaran</a>
                                 </li>
                                 <li>
                                     <a class="dropdown-item" href="#">Data Pembayaran</a>
@@ -129,11 +126,12 @@
         @yield('content-admin')
     </div>
 
-    <footer class="main-footer fixed-bottom">
+    {{-- <footer class="main-footer">
         Copyright &copy; 2022
         <div class="bullet"></div>
         SMK Walang Jaya Jakarta
-    </footer>
+    </footer> --}}
 </body>
+@stack('js')
 
 </html>
