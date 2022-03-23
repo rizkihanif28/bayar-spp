@@ -45,6 +45,10 @@ Route::get('admin/read-siswa', [DasusController::class, 'read'])->name('admin/re
 
 // Daftar Siswa Tatus
 Route::get('tatus/daftar-siswa', [DasisController::class, 'index'])->name('tatus/daftar-siswa');
+Route::post('tatus/store-siswa', [DasisController::class, 'store'])->name('tatus/store-siswa');
+Route::post('tatus/update-siswa', [DasisController::class, 'update'])->name('tatus/update-siswa');
+Route::post('tatus/destroy-siswa', [DasisController::class, 'destroy'])->name('tatus/delete-siswa');
+
 
 // Pembayaran Siswa
 Route::get('admin/pembayaran-search', [PemsisController::class, 'index'])->name('admin/pembayaran-search');

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Siswa;
 use DataTables;
 use Illuminate\Http\Request;
+use Laravel\Ui\Presets\React;
 
 class DasisController extends Controller
 {
@@ -14,6 +15,12 @@ class DasisController extends Controller
         $data = Siswa::get();
         if ($request->ajax()) {
             return datatables()->of($data)
+                ->addColumn('aksi', function ($data) {
+                    $button = "<button class='update btn btn-success btn-sm col-9' id='" . $data->id . "'>Update</button>";
+                    $button .= "<button class='delete btn btn-danger btn-sm col-9' id='" . $data->id . "'>Delete</button>";
+                    return $button;
+                })
+                ->rawColumns(['aksi'])
                 ->make(true);
         }
 
@@ -22,31 +29,62 @@ class DasisController extends Controller
         ]);
     }
 
-    // public function read()
-    // {
-    //     $data = Siswa::all();
-    //     return view('tatus/read-siswa')->with([
-    //         'data' => $data
-    //     ]);
-    // }
+    public function store(Request $request)
+    {
+        $data['siswa_id'] = $request->siswa_id;
+        $data['nis'] = $request->nis;
+        $data['nama'] = $request->nama;
+        $data['email'] = $request->email;
+        $data['jenis_kelamin'] = $request->jenis_kelamin;
+        $data['kelas'] = $request->kelas;
+        $data['jurusan'] = $request->jurusan;
+        $data['alamat'] = $request->alamat;
+        $data['telepon'] = $request->telepon;
+        // Create siswa
+        $siswa =  Siswa::create($data);
 
-    // public function create()
-    // {
-    //     return view('tatus/create-siswa');
-    // }
+        if ($siswa) {
+            return response()->json([
+                'data' => $data,
+                'message' => 'Data berhasil di simpan'
+            ], 200);
+        } else {
+            return response()->json([
+                'data' => $data,
+                'message' => 'Data berhasil di simpan'
+            ]);
+        }
+    }
 
-    // public function store(Request $request)
-    // {
-    //     $data['siswa_id'] = $request->siswa_id;
-    //     $data['nis'] = $request->nis;
-    //     $data['nama'] = $request->nama;
-    //     $data['email'] = $request->email;
-    //     $data['jenis_kelamin'] = $request->jenis_kelamin;
-    //     $data['kelas'] = $request->kelas;
-    //     $data['jurusan'] = $request->jurusan;
-    //     $data['alamat'] = $request->alamat;
-    //     $data['telepon'] = $request->telepon;
+    public function update(Request $request)
+    {
+        $id = $request->id;
+        $datas = [
+            'siswa_id' => $request->siswa_id,
+            'nis' => $request->nis,
+            'nama' => $request->nama,
+            'email' => $request->email,
+            'jenis_kelamin' => $request->jenis_kelamin,
+            'kelas' => $request->kelas,
+            'jurusan' => $request->jurusan,
+            'alamat' => $request->alamat,
+            'telepon' => $request->telepon,
+        ];
+        $data = Siswa::find($id);
+        $save = $data->update($datas);
 
-    //     Siswa::create($data);
-    // }
+        if ($save) {
+            return response()->json([
+                'message' => 'Berhasil di simpan'
+            ], 200);
+        } else {
+            return response()->json([
+                'message' => 'Gagal di simpan'
+            ], 422);
+        }
+    }
+
+    public function destroy(Request $request)
+    {
+    }
 }

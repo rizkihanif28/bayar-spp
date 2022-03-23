@@ -23,7 +23,6 @@
     <link rel="stylesheet" href="{{ asset('assets/fonts/font-awesome/css/fontawesome.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/fonts/font-awesome/css/fontawesome.min.css') }}" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
-    <link rel="stylesheet" href="https://code.jquery.com/jquery-3.6.0.min.js">
 </head>
 
 <body>
@@ -35,9 +34,7 @@
     </div>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="{{ asset('js/admin/tambah-siswa.js') }}"></script>
+    {{-- <script src="{{ asset('js/app.js') }}"></script> --}}
 
 </body>
 

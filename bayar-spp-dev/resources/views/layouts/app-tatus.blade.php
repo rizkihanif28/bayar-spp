@@ -16,7 +16,12 @@
 
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
+    {{-- <script src="{{ asset('js/app.js') }}"></script> --}}
+
+    {{-- online bootstrap --}}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
+    </script>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -27,6 +32,10 @@
     <link rel="stylesheet" href="{{ asset('assets/fonts/font-awesome/css/fontawesome.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/fonts/font-awesome/css/fontawesome.min.css') }}" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+    {{-- online bootstrap --}}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 </head>
 
 <body>
@@ -96,7 +105,7 @@
                             </a>
                             <ul class="dropdown-menu ">
                                 <li>
-                                    <form action="/logout" method="post">
+                                    <form action="#" method="post">
                                         <button type="submit" class="dropdown-item">
                                             Profil
                                         </button>
@@ -105,8 +114,8 @@
                                 <li>
                                     <form action="/logout" method="post">
                                         @csrf
-                                        <button type="submit" class="dropdown-item"><i
-                                                class="bi bi-box-arrow-right"></i>
+                                        <button type="submit" class="dropdown-item">
+                                            <i class="bi bi-box-arrow-right"></i>
                                             Keluar
                                         </button>
                                     </form>
@@ -125,12 +134,11 @@
             @yield('content-tatus')
         </main>
     </div>
-
-    <footer class="main-footer fixed-bottom">
+    {{-- <footer class="main-footer fixed-bottom">
         Copyright &copy; 2022
         <div class="bullet"></div>
         SMK Walang Jaya Jakarta
-    </footer>
+    </footer> --}}
 
 
 </body>
