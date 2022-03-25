@@ -13,6 +13,7 @@ class DasisController extends Controller
     public function index(Request $request)
     {
         $data = Siswa::get();
+
         if ($request->ajax()) {
             return datatables()->of($data)
                 ->addColumn('aksi', function ($data) {
@@ -52,13 +53,23 @@ class DasisController extends Controller
             return response()->json([
                 'data' => $data,
                 'message' => 'Data berhasil di simpan'
-            ]);
+            ], 422);
         }
     }
 
-    public function update(Request $request)
+    public function edits(Request $request)
     {
         $id = $request->id;
+        $data = Siswa::find($id);
+
+        return response()->json(['message' => $data]);
+    }
+
+    public function updates(Request $request)
+    {
+        $id = $request->id;
+        $data = Siswa::find($id);
+
         $datas = [
             'siswa_id' => $request->siswa_id,
             'nis' => $request->nis,
@@ -70,21 +81,23 @@ class DasisController extends Controller
             'alamat' => $request->alamat,
             'telepon' => $request->telepon,
         ];
-        $data = Siswa::find($id);
         $save = $data->update($datas);
-
         if ($save) {
             return response()->json([
-                'message' => 'Berhasil di simpan'
+                'message' => 'Berhasil di ubah'
             ], 200);
         } else {
             return response()->json([
-                'message' => 'Gagal di simpan'
+                'messsage' => 'Gagal di ubah'
             ], 422);
         }
     }
 
     public function destroy(Request $request)
     {
+        $id = $request->id;
+        $data = Siswa::find($id);
+        $data->delete();
+        return response()->json(['message' => 'Data berhasil di hapus'], 200);
     }
 }
