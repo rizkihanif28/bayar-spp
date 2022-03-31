@@ -28,14 +28,12 @@
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-light fixed-top">
-        <div class="container-fluid mx-4">
+        <div class="container-fluid mx-5">
+
             <img src="{{ asset('assets/img/logo-brand.png') }}" style="width: 33px" class="icon-brand" />
             <a class="navbar-brand" href="http://127.0.0.1:8000">
                 Pembayaran Walang Jaya
             </a>
-            {{-- <a class="navbar-brand" href="{{ url('dashboard/siswa') }}">
-                {{ config('app.name', 'Bayar_SPP') }}
-            </a> --}}
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="{{ __('Toggle navigation') }}">
@@ -105,6 +103,7 @@
             </div>
         </div>
     </nav>
+
 
     {{-- Main Content --}}
     <div id="app-siswa">

@@ -15,7 +15,7 @@ class SiswaController extends Controller
 
     public function index()
     {
-        return view('/dashboard/siswa', [
+        return view('dashboard/siswa', [
             'title' => 'Dashboard'
         ]);
     }

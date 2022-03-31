@@ -15,13 +15,11 @@ class CreateSiswasTable extends Migration
     {
         Schema::create('siswas', function (Blueprint $table) {
             $table->id();
-            $table->string('siswa_id')->unique();
-            $table->string('nis')->unique();
+            $table->foreignId('jurusan_id');
+            $table->foreignId('kelas_id');
             $table->string('nama');
             $table->string('email')->unique();
-            $table->string('jenis_kelamin');
-            $table->string('kelas');
-            $table->string('jurusan');
+            $table->enum('jenis_kelamin', ['L,', 'P'])->nullable();
             $table->text('alamat');
             $table->string('telepon');
             $table->timestamps();

@@ -7,21 +7,34 @@ use Illuminate\Database\Eloquent\Model;
 
 class Siswa extends Model
 {
-    // use HasFactory;
+    use HasFactory;
     protected $fillable = [
-        'siswa_id',
-        'nis',
+        'jurusan_id',
+        'kelas_id',
         'nama',
         'email',
         'jenis_kelamin',
-        'kelas',
-        'jurusan',
         'alamat',
         'telepon',
     ];
 
-    public function pembayaran()
+    public function transaksi()
     {
-        return $this->belongsTo(Pembayaran::class);
+        return $this->hasMany(Transaksi::class);
+    }
+
+    public function tagihan()
+    {
+        return $this->hasMany(Tagihan::class);
+    }
+
+    public function jurusan()
+    {
+        return $this->hasOne(Jurusan::class);
+    }
+
+    public function kelas()
+    {
+        return $this->hasOne(Kelas::class);
     }
 }

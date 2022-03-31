@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Kelas;
 use Illuminate\Http\Request;
 use App\Models\Siswa;
 use Illuminate\Support\Facades\Validator;
@@ -27,6 +28,19 @@ class DasusController extends Controller
         return view('admin/daftar-siswa', [
             "title" => "Data Siswa"
         ]);
+    }
+
+
+    public function create()
+    {
+        $kelas = Kelas::all();
+        return view(
+            'admin/create-siswa',
+            [
+                'kelas' => $kelas,
+                'title' => 'Tambah Siswa'
+            ]
+        );
     }
 
     public function store(Request $request)

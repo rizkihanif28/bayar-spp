@@ -9,8 +9,19 @@ class Tatus extends Model
 {
     use HasFactory;
 
-    public function pembayaran()
+    protected $fillable = [
+        'nip',
+        'nama',
+        'email'
+    ];
+
+    public function Transaksi()
     {
-        return $this->hasMany(Pembayaran::class);
+        return $this->hasMany(Transaksi::class);
+    }
+
+    public function Tagihan()
+    {
+        return $this->hasMany(Tagihan::class);
     }
 }
