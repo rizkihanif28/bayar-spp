@@ -8,10 +8,10 @@
     </div>
     <div class="row">
         <div class="col-12">
-            <div class="card" style="margin-top: 2%">
+            <div class="card">
                 <div class="card-header">
                     <h4 class="card-title">Kelas</h4>
-                    <a href="{{ route('admins/kelas/create') }}" class="btn btn-outline-primary btn-sm mt-2">Tambah
+                    <a href="{{ route('admins/kelas/create') }}" class="btn btn-primary btn-sm ml-5">Tambah
                         Kelas</a>
                 </div>
                 @if (session()->has('msg'))
@@ -25,12 +25,12 @@
                         {{ session()->get('msg') }}
                     </div>
                 @endif
-                <div class="table-responsive mt-3 p-3 text-left">
+                <div class="table-responsive mt-3 p-3 text-center">
 
                     <table class="table table-striped card-table table-hover table-vcenter text-nowrap" id="table-kelas">
-                        <thead style="margin-top: 70%">
+                        <thead>
                             <tr>
-                                <th class="w-1">No.</th>
+                                <th>No.</th>
                                 <th>Periode</th>
                                 <th>Nama</th>
                                 <th>Aksi</th>

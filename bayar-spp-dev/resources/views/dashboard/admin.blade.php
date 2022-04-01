@@ -8,14 +8,6 @@
                 {{ Auth::user()->name }}
                 <p>Silahkan Pilih Menu Diatas Untuk Memulai Aktifitas</p>
             </section>
-
-            <div class="jumbotron">
-                @if (session('status'))
-                    <div class="alert alert-success" role="alert">
-                        {{ session('status') }}
-                    </div>
-                @endif
-            </div>
         </div>
     </div>
 @endsection

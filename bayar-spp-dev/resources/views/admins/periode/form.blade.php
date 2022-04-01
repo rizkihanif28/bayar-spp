@@ -10,7 +10,7 @@
         <div class="col-8">
             <form
                 action="{{ isset($periode) ? route('admins/periode/update', $periode->id) : route('admins/periode/store') }}"
-                method="post" class="card" style="margin-top: 2%">
+                method="POST" class="card">
                 <div class="card-header">
                     <h5 class="card-title">Periode</h5>
                 </div>
@@ -25,12 +25,12 @@
                     <div class="row">
                         <div class="col-12">
                             @csrf
-                            <div class="form-group">
+                            <div class="form-group mb-3">
                                 <label class="form-label">Nama</label>
                                 <input type="text" placeholder="Nama" name="nama" class="form-control"
                                     value="{{ isset($periode) ? $periode->nama : old('nama') }}" required>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group mb-3">
                                 <label class="form-label">Tanggal Mulai s/d Selesai</label>
                                 <div class="row gutters-xs">
                                     <div class="col-6">
@@ -38,7 +38,7 @@
                                             placeholder="Tanggal Mulai" required autocomplete="off"
                                             value="{{ isset($periode) ? $periode->tgl_mulai : old('tgl_mulai') }}">
                                     </div>
-                                    <div class="col-6">
+                                    <div class="col-6 mb-1">
                                         <input type="text" class="form-control" name="tgl_selesai"
                                             data-toggle="datepicker" placeholder="Tanggal Selesai" required
                                             autocomplete="off"

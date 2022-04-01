@@ -43,13 +43,11 @@ class PeriodeController extends Controller
             return redirect()->route('admins/periode/index')->with([
                 'type' => 'success',
                 'msg' => 'Periode ditambahkan',
-                'title' => 'Periode'
             ]);
         } else {
             return redirect()->route('admins/periode/index')->with([
                 'type' => 'danger',
                 'msg' => 'Err.., Terjadi Kesalahan',
-                'title' => 'Periode'
             ]);
         }
     }
@@ -69,7 +67,7 @@ class PeriodeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $periode)
+    public function update(Request $request, Periode $periode)
     {
         $request->validate([
             'nama' => 'required|max:255',
@@ -78,7 +76,7 @@ class PeriodeController extends Controller
             'is_active' => 'nullable|boolean',
         ]);
 
-        $periode->fil($request->input());
+        $periode->fill($request->input());
 
         if ($request->is_active == null) {
             $periode->is_active = 0;

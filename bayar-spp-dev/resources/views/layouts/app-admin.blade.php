@@ -4,8 +4,6 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -20,19 +18,24 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="shortcut icon" href="{{ asset('assets/img/favicon.ico') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" />
-    {{-- <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}" /> --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i,500,500i,600,600i,700,700i&amp;subset=latin-ext">
+
     <link rel="stylesheet" href="{{ asset('assets/plugins/datatables/datatables.css') }}" />
 
+    {{-- Other Script --}}
+
+    <script src=""></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
     </script>
 
     <script src="{{ asset('assets/js/require.min.js') }}"></script>
 
+    <link rel="stylesheet" href="{{ asset('assets/css/tabler.css') }}">
     {{-- Datepicker --}}
     <link rel="stylesheet" href="{{ asset('assets/plugins/datepicker/datepicker.css') }}" />
 
@@ -45,7 +48,8 @@
                 "selectize": "assets/js/vendors/selectize.min",
                 "datepicker": "assets/js/vendors/datepicker",
                 "selectize": "assets/js/vendors/selectize.min",
-                "sweetalert": "assets/js/vendors/sweetalert.min"
+                "sweetalert": "assets/js/vendors/sweetalert.min",
+                "moment": "assets/js/vendors/moment.min"
             }
         });
     </script>
@@ -55,8 +59,8 @@
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-light fixed-top mb-5">
-        <div class="container-fluid mx-4">
-            <img src="{{ asset('assets/img/logo-brand.png') }}" style="width: 36px" class="icon-brand" />
+        <div class="container-fluid">
+            <img src="{{ asset('assets/img/logo-brand.png') }}" style="width: 38px" class="icon-brand" />
             <a class="navbar-brand" href="http://127.0.0.1:8000">
                 Pembayaran Walang Jaya
             </a>
@@ -71,41 +75,56 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="/dashboard/admin">Beranda</a>
+                            <a class="nav-link active" href="/dashboard/admin">Beranda</a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle mx-3" href="/kesiswaan" id="navbarDropdown" role="button"
-                                data-bs-toggle="dropdown" aria-expanded="false" style="font-size: 16px">
+                            <a class="nav-link active dropdown-toggle " href="/kesiswaan" id="navbarDropdown"
+                                role="button" data-bs-toggle="dropdown" aria-expanded="false" style="font-size: 16px">
                                 Master Data
                             </a>
 
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li>
-                                    <a class="dropdown-item" href="/#">User</a>
+                                    <a class="dropdown-item" href="/#">
+                                        <i class="bi bi-people-fill"></i>
+                                        User
+                                    </a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="../admin/daftar-siswa">Siswa</a>
+                                    <a class="dropdown-item" href="/admins/siswa/index">
+                                        <i class="bi bi-person-lines-fill"></i>
+                                        Siswa
+                                    </a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="../admin/pembayaran-search">Pembayaran</a>
+                                    <a class="dropdown-item" href="../admin/pembayaran-search">
+                                        <i class="bi bi-wallet"></i>
+                                        Pembayaran
+                                    </a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="#">Data Pembayaran</a>
+                                    <a class="dropdown-item" href="#">
+                                        <i class="bi bi-bar-chart-steps"></i>
+                                        Data Pembayaran
+                                    </a>
                                 </li>
                             </ul>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="/admins/periode/index">Periode</a>
+                            <a class="nav-link active" href="/admins/periode/index">Periode</a>
                         </li>
 
-                        <li class="nav-item mx-3">
-                            <a class="nav-link" href="/admins/kelas/index">Kelas</a>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/admins/kelas/index">Kelas</a>
                         </li>
 
+                        <li class="nav-item ">
+                            <a class="nav-link active" href="/admins/jurusan/index">Jurusan</a>
+                        </li>
 
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="/laporan" id="navbarDropdown" role="button"
+                            <a class="nav-link active dropdown-toggle" href="/laporan" id="navbarDropdown" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
                                 Laporan
                             </a>
@@ -124,7 +143,7 @@
 
                     <ul class="navbar-nav">
                         <li class="nav-item dropdown">
-                            <a class="nav-link" href="#" id="navbarDropdown" role="button"
+                            <a class="nav-link active" href="#" id="navbarDropdown" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
                                 <img alt="image" src="{{ asset('assets/img/avatar/avatar-1.png') }}"
                                     style="width: 30px" class="rounded-circle mr-1" />
@@ -163,10 +182,16 @@
     </div>
 
 
-    {{-- <footer class="main-footer">
-        Copyright &copy; 2022
-        <div class="bullet"></div>
-        SMK Walang Jaya Jakarta
+    {{-- <footer class="footer">
+        <div class="container">
+            <div class="row align-items-center flex-row-reverse">
+                <div class="col-12 col-lg-auto mt-3 mt-lg-0 text-center">
+                    Copyright &copy; 2022
+                    <div class="bullet"></div>
+                    SMK Walang Jaya Jakarta
+                </div>
+            </div>
+        </div>
     </footer> --}}
 
     {{-- Custom JS --}}

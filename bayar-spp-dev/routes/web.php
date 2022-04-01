@@ -2,9 +2,11 @@
 
 use App\Http\Controllers\Admin\DasusController;
 use App\Http\Controllers\admin\DetyarController;
+use App\Http\Controllers\Admin\JurusanController;
 use App\Http\Controllers\Admin\KelasController;
 use App\Http\Controllers\admin\PemsisController;
 use App\Http\Controllers\Admin\PeriodeController;
+use App\Http\Controllers\Admin\SiswaController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Dashboard\AdminController as DashboardAdminController;
 use App\Http\Controllers\Dashboard\SiswaController as DashboardSiswaController;
@@ -50,10 +52,23 @@ Route::middleware(['auth:web'])->group(function () {
     Route::post('admin/updates-siswa', [DasusController::class, 'updates'])->name('admin/updates-siswa');
     Route::post('admin/destroy-siswa', [DasusController::class, 'destroy'])->name('admin/destroy-siswa');
 
-    // example admins
-    Route::get('admins/index-siswa', [DasusController::class, 'create'])->name('admins/index-siswa');
+    // siswa
+    Route::get('admins/siswa/index', [SiswaController::class, 'index'])->name('admins/siswa/index');
+    Route::get('admins/siswa/create', [SiswaController::class, 'create'])->name('admins/siswa/create');
+    Route::post('admins/siswa/store', [SiswaController::class, 'store'])->name('admins/siswa/store');
+    Route::get('admins/siswa/edit', [SiswaController::class, 'edit'])->name('admins/siswa/edit');
+    Route::post('admins/siswa/update', [SiswaController::class, 'update'])->name('admins/siswa/update');
+    Route::post('admins/siswa/destroy', [SiswaController::class, 'destroy'])->name('admins/siswa/destroy');
 
-    // example periode
+    // jurusan
+    Route::get('admins/jurusan/index', [JurusanController::class, 'index'])->name('admins/jurusan/index');
+    Route::get('admins/jurusan/create', [JurusanController::class, 'create'])->name('admins/jurusan/create');
+    Route::post('admins/jurusan/store', [JurusanController::class, 'store'])->name('admins/jurusan/store');
+    Route::get('admins/jurusan/{jurusan}/edit', [JurusanController::class, 'edit'])->name('admins/jurusan/edit');
+    Route::post('admins/jurusan/{jurusan}/update', [JurusanController::class, 'update'])->name('admins/jurusan/update');
+    Route::post('admins/jurusan/{jurusan}/destroy', [JurusanController::class, 'destroy'])->name('admins/jurusan/destroy');
+
+    // periode
     Route::get('admins/periode/index', [PeriodeController::class, 'index'])->name('admins/periode/index');
     Route::get('admins/periode/create', [PeriodeController::class, 'create'])->name('admins/periode/create');
     Route::post('admins/periode/store', [PeriodeController::class, 'store'])->name('admins/periode/store');
@@ -61,7 +76,7 @@ Route::middleware(['auth:web'])->group(function () {
     Route::post('admins/periode/{periode}/update', [PeriodeController::class, 'update'])->name('admins/periode/update');
     Route::post('admins/periode/{periode}/destroy', [PeriodeController::class, 'destroy'])->name('admins/periode/destroy');
 
-    // example kelas
+    // kelas
     Route::get('admins/kelas/index', [KelasController::class, 'index'])->name('admins/kelas/index');
     Route::get('admins/kelas/create', [KelasController::class, 'create'])->name('admins/kelas/create');
     Route::post('admins/kelas/store', [KelasController::class, 'store'])->name('admins/kelas/store');

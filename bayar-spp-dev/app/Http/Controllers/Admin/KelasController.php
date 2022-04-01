@@ -56,9 +56,10 @@ class KelasController extends Controller
     public function edit(Kelas $kelas)
     {
         $periode = Periode::all();
-        return view('kelas.form', [
+        return view('admins/kelas/form', [
             'periode' => $periode,
-            'kelas' => $kelas
+            'kelas' => $kelas,
+            'title' => 'Edit Kelas'
         ]);
     }
 
@@ -77,12 +78,12 @@ class KelasController extends Controller
         ]);
 
         if ($kelas->fill($request->input())->save()) {
-            return redirect()->route('kelas.index')->with([
+            return redirect()->route('admins/kelas/index')->with([
                 'type' => 'success',
                 'msg' => 'Kelas diubah'
             ]);
         } else {
-            return redirect()->route('kelas.index')->with([
+            return redirect()->route('admins/kelas/index')->with([
                 'type' => 'danger',
                 'msg' => 'Err.., Terjadi Kesalahan'
             ]);
@@ -98,18 +99,18 @@ class KelasController extends Controller
     public function destroy(Kelas $kelas)
     {
         if ($kelas->siswa->count() != 0) {
-            return redirect()->route('kelas.index')->with([
+            return redirect()->route('admins/kelas/index')->with([
                 'type' => 'danger',
                 'msg' => 'Tidak dapat menghapus kelas yang memiliki siswa'
             ]);
         }
         if ($kelas->delete()) {
-            return redirect()->route('kelas.index')->with([
+            return redirect()->route('admins/kelas/index')->with([
                 'type' => 'success',
                 'msg' => 'Kelas dihapus'
             ]);
         } else {
-            return redirect()->route('kelas.index')->with([
+            return redirect()->route('admins/kelas/index')->with([
                 'type' => 'danger',
                 'msg' => 'Err.., Terjadi Kesalahan'
             ]);
