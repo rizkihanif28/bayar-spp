@@ -30,11 +30,11 @@ class Siswa extends Model
 
     public function jurusan()
     {
-        return $this->hasOne(Jurusan::class);
+        return $this->hasOne('App\Models\Jurusan', 'id', 'jurusan_id');
     }
 
     public function kelas()
     {
-        return $this->hasOne(Kelas::class);
+        return $this->hasOne('App\Models\Kelas', 'id', 'kelas_id');
     }
 }

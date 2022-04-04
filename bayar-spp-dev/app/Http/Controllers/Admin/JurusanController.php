@@ -109,12 +109,7 @@ class JurusanController extends Controller
      */
     public function destroy(Jurusan $jurusan)
     {
-        if ($jurusan->siswa->count() != 0) {
-            return redirect()->route('admins/jurusan/index')->with([
-                'type' => 'danger',
-                'msg' => 'Tidak dapat menghapus kelas yang memiliki siswa'
-            ]);
-        }
+
         if ($jurusan->delete()) {
             return redirect()->route('admins/jurusan/index')->with([
                 'type' => 'success',

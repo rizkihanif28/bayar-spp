@@ -13,27 +13,27 @@
                     <h4 class="card-title">Siswa</h4>
                     <a href="{{ route('admins/siswa/create') }}" class="btn btn-primary btn-sm ml-5">+ Tambah Siswa</a>
                 </div>
-                @if (session()->has('msg'))
-                    <div class="card-alert alert alert-{{ session()->get('type') }}" id="message"
+                @if (Session::get('msg'))
+                    <div class="card-alert alert alert-{{ Session::get('type') }}" id="message"
                         style="border-radius: 0px !important">
-                        @if (session()->get('type') == 'success')
+                        @if (Session::get('type') == 'success')
                             <i class="fe fe-check mr-2" aria-hidden="true"></i>
                         @else
                             <i class="fe fe-alert-triangle mr-2" aria-hidden="true"></i>
                         @endif
-                        {{ session()->get('msg') }}
+                        {{ Session::get('msg') }}
                     </div>
                 @endif
-                <div class="table-responsive mt-3 p-3 text-center">
-                    <table id="table-siswa" class="table table-striped card-table table-hover text-nowrap">
+                <div class="p-3 text-center">
+                    <table id="table-siswa" class="table table-striped card-table table-hover">
                         <thead>
                             <tr>
                                 <th class="w-1">No</th>
-                                <th>Nama</th>
                                 <th>Jurusan</th>
                                 <th>Kelas</th>
+                                <th>Nama</th>
                                 <th>Email</th>
-                                <th>Jenis Kelamin</th>
+                                <th>JK</th>
                                 <th>Alamat</th>
                                 <th>Telepon</th>
                                 <th>Aksi</th>
@@ -43,23 +43,21 @@
                             @foreach ($siswa as $index => $item)
                                 <tr>
                                     <td><span class="text-muted">{{ $index + 1 }}</span></td>
-                                    <td><a href="{{ route('admins/siswa/show', $item->id) }}" class="link-unmuted"></a>
-                                        {{ $item->nama }}
-                                    </td>
                                     <td>{{ $item->jurusan->nama }}{{ isset($item->siswa->jurusan) ? '(' . $item->siswa->jurusan->nama . ')' : '' }}
                                     </td>
                                     <td>{{ $item->kelas->nama }}{{ isset($item->kelas->periode) ? '(' . $item->kelas->periode->nama . ')' : '' }}
                                     </td>
+                                    <td>{{ $item->nama }}</td>
                                     <td>{{ $item->email }}</td>
                                     <td>{{ $item->jenis_kelamin }}</td>
                                     <td>{{ $item->alamat }}</td>
-                                    <td>{{ $$tem->telepon }}</td>
+                                    <td>{{ $item->telepon }}</td>
 
                                     <td class="text-center">
-                                        <a class="icon" href="{{ route('admins/siswa/show', $item->id) }}"
+                                        {{-- <a class="icon" href="{{ route('admins/siswa/show', $item->id) }}"
                                             title="lihat detail">
                                             <i class="bi bi-ticket-detailed"></i>
-                                        </a>
+                                        </a> --}}
                                         <a class="icon" href="{{ route('admins/siswa/edit', $item->id) }}"
                                             title="edit item">
                                             <i class="bi bi-pencil"></i>

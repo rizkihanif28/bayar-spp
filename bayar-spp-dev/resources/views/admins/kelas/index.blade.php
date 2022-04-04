@@ -11,7 +11,7 @@
             <div class="card">
                 <div class="card-header">
                     <h4 class="card-title">Kelas</h4>
-                    <a href="{{ route('admins/kelas/create') }}" class="btn btn-primary btn-sm ml-5">Tambah
+                    <a href="{{ route('admins/kelas/create') }}" class="btn btn-primary btn-sm ml-5">+ Tambah
                         Kelas</a>
                 </div>
                 @if (session()->has('msg'))
@@ -30,7 +30,7 @@
                     <table class="table table-striped card-table table-hover table-vcenter text-nowrap" id="table-kelas">
                         <thead>
                             <tr>
-                                <th>No.</th>
+                                <th style="width: 40px">No.</th>
                                 <th>Periode</th>
                                 <th>Nama</th>
                                 <th>Aksi</th>

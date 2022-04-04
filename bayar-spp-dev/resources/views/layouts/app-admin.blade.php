@@ -18,8 +18,9 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link rel="shortcut icon" href="{{ asset('assets/img/favicon.ico') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" />
+    <link rel="shortcut icon" href="{{ asset('assets/img/favicon.ico') }}" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i,500,500i,600,600i,700,700i&amp;subset=latin-ext">
@@ -36,6 +37,7 @@
     <script src="{{ asset('assets/js/require.min.js') }}"></script>
 
     <link rel="stylesheet" href="{{ asset('assets/css/tabler.css') }}">
+
     {{-- Datepicker --}}
     <link rel="stylesheet" href="{{ asset('assets/plugins/datepicker/datepicker.css') }}" />
 
@@ -49,18 +51,16 @@
                 "datepicker": "assets/js/vendors/datepicker",
                 "selectize": "assets/js/vendors/selectize.min",
                 "sweetalert": "assets/js/vendors/sweetalert.min",
-                "moment": "assets/js/vendors/moment.min"
+
             }
         });
     </script>
-
-
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top mb-5">
-        <div class="container-fluid">
-            <img src="{{ asset('assets/img/logo-brand.png') }}" style="width: 38px" class="icon-brand" />
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container-fluid ml-6">
+            <img src="{{ asset('assets/img/logo-brand.png') }}" style="width: 40px" class="icon-brand" />
             <a class="navbar-brand" href="http://127.0.0.1:8000">
                 Pembayaran Walang Jaya
             </a>
@@ -73,16 +73,15 @@
 
             <div class="container">
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
                             <a class="nav-link active" href="/dashboard/admin">Beranda</a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link active dropdown-toggle " href="/kesiswaan" id="navbarDropdown"
-                                role="button" data-bs-toggle="dropdown" aria-expanded="false" style="font-size: 16px">
+                            <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
                                 Master Data
                             </a>
-
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li>
                                     <a class="dropdown-item" href="/#">
@@ -90,6 +89,7 @@
                                         User
                                     </a>
                                 </li>
+
                                 <li>
                                     <a class="dropdown-item" href="/admins/siswa/index">
                                         <i class="bi bi-person-lines-fill"></i>
@@ -141,7 +141,7 @@
                         </li>
                     </ul>
 
-                    <ul class="navbar-nav">
+                    <ul class="navbar-nav mr-7">
                         <li class="nav-item dropdown">
                             <a class="nav-link active" href="#" id="navbarDropdown" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
@@ -149,10 +149,11 @@
                                     style="width: 30px" class="rounded-circle mr-1" />
                                 <div class="d-sm-none d-lg-inline-block">Administrator</div>
                             </a>
-                            <ul class="dropdown-menu pr-md-4">
+                            <ul class="dropdown-menu">
                                 <li>
                                     <form action="#" method="post">
-                                        <button type="submit" class="dropdown-item" style="font-size: 14px">
+                                        <button type="submit" class="dropdown-item">
+                                            <i class="bi bi-person-bounding-box"></i>
                                             Profil
                                         </button>
                                     </form>
@@ -160,8 +161,8 @@
                                 <li>
                                     <form action="/logout" method="post">
                                         @csrf
-                                        <button type="submit" class="dropdown-item" style="font-size: 14px">
-                                            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                                        <button type="submit" class="dropdown-item">
+                                            <i class="bi bi-box-arrow-left"></i>
                                             Keluar
                                         </button>
                                     </form>
@@ -175,7 +176,7 @@
     </nav>
 
     {{-- Main Content --}}
-    <div class=" my-3 my-md-5 ">
+    <div class="app-admin ">
         <div class="container">
             @yield('content-admin')
         </div>

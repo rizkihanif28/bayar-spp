@@ -112,7 +112,7 @@ class KelasController extends Controller
         } else {
             return redirect()->route('admins/kelas/index')->with([
                 'type' => 'danger',
-                'msg' => 'Err.., Terjadi Kesalahan'
+                'msg' => 'Kelas gagal dihapus'
             ]);
         }
     }

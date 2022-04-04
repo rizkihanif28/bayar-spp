@@ -3,7 +3,7 @@
 @section('content-admin')
     <div class="page-header" style="margin-top: 7%">
         <h2 class="page-title">
-            Form Jurusan
+            Jurusan
         </h2>
     </div>
     <div class="row">
@@ -11,25 +11,25 @@
             <div class="card">
                 <div class="card-header">
                     <h4 class="card-title">Jurusan</h4>
-                    <a href="{{ route('admins/jurusan/create') }}" class="btn btn-primary btn-sm ml-5">Tambah
+                    <a href="{{ route('admins/jurusan/create') }}" class="btn btn-primary btn-sm ml-5">+ Tambah
                         Jurusan</a>
                 </div>
-                @if (session()->has('msg'))
-                    <div class="card-alert alert alert-{{ session()->get('type') }}" id="message"
+                @if (Session::get('msg'))
+                    <div class="card-alert alert alert-{{ Session::get('type') }}" id="message"
                         style="border-radius: 0px !important">
-                        @if (session()->get('type') == 'success')
+                        @if (Session::get('type') == 'success')
                             <i class="bi bi-check-lg" aria-hidden="true"></i>
                         @else
                             <i class="bi bi-x-lg" aria-hidden="true"></i>
                         @endif
-                        {{ session()->get('msg') }}
+                        {{ Session::get('msg') }}
                     </div>
                 @endif
                 <div class="table-responsive mt-3 p-3 text-center">
                     <table class="table table-striped card-table table-hover table-vcenter text-nowrap" id="table-jurusan">
                         <thead>
                             <tr>
-                                <th style="width: 20%">No.</th>
+                                <th style="width: 15%">No.</th>
                                 <th>Nama</th>
                                 <th>Aksi</th>
                             </tr>

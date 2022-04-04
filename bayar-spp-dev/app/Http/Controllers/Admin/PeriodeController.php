@@ -27,10 +27,10 @@ class PeriodeController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama' => 'required|max:255',
+            'nama' => ['required', 'max:255'],
             'tgl_mulai' => 'required|date|before:' . $request->tgl_selesai,
-            'tgl_selesai' => 'required|date',
-            'is_active' => 'nullable|boolean',
+            'tgl_selesai' => ['required', 'date'],
+            'is_active' => ['nullable', 'boolean'],
         ]);
 
         $periode = Periode::make($request->input());
@@ -47,7 +47,7 @@ class PeriodeController extends Controller
         } else {
             return redirect()->route('admins/periode/index')->with([
                 'type' => 'danger',
-                'msg' => 'Err.., Terjadi Kesalahan',
+                'msg' => 'Periode gagal ditambahkan',
             ]);
         }
     }
@@ -90,7 +90,7 @@ class PeriodeController extends Controller
         } else {
             return redirect()->route('admins/periode/index')->with([
                 'type' => 'danger',
-                'msg' => 'Err.., Terjadi Kesalahan'
+                'msg' => 'Periode gagal diubah'
             ]);
         }
     }
@@ -117,7 +117,7 @@ class PeriodeController extends Controller
         } else {
             return redirect()->route('admins/periode/index')->with([
                 'type' => 'danger',
-                'msg' => 'Err.., Terjadi Kesalahan'
+                'msg' => 'Periode gagal dihapus'
             ]);
         }
     }

@@ -3,7 +3,7 @@
 @section('content-admin')
     <div class="page-header" style="margin-top: 7%">
         <h2 class="page-title">
-            Periode
+            Form Periode
         </h2>
     </div>
     <div class="row">
@@ -30,7 +30,7 @@
                                 <input type="text" placeholder="Nama" name="nama" class="form-control"
                                     value="{{ isset($periode) ? $periode->nama : old('nama') }}" required>
                             </div>
-                            <div class="form-group mb-3">
+                            <div class="form-group">
                                 <label class="form-label">Tanggal Mulai s/d Selesai</label>
                                 <div class="row gutters-xs">
                                     <div class="col-6">

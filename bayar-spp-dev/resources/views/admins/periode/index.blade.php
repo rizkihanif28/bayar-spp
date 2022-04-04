@@ -11,25 +11,25 @@
             <div class="card">
                 <div class="card-header">
                     <h4 class="card-title">Periode</h4>
-                    <a href="{{ route('admins/periode/create') }}" class="btn btn-primary btn-sm ml-5">Tambah
+                    <a href="{{ route('admins/periode/create') }}" class="btn btn-primary btn-sm ml-5">+ Tambah
                         Periode</a>
                 </div>
-                @if (session()->has('msg'))
-                    <div class="card-alert alert alert-{{ session()->get('type') }}" id="message"
+                @if (Session::get('msg'))
+                    <div class="card-alert alert alert-{{ Session::get('type') }}" id="message"
                         style="border-radius: 0px !important">
-                        @if (session()->get('type') == 'success')
+                        @if (Session::get('type') == 'success')
                             <i class="fe fe-check mr-2" aria-hidden="true"></i>
                         @else
                             <i class="fe fe-alert-triangle mr-2" aria-hidden="true"></i>
                         @endif
-                        {{ session()->get('msg') }}
+                        {{ Session::get('msg') }}
                     </div>
                 @endif
                 <div class="table-responsive mt-3 p-3 text-center">
                     <table id="table-periode" class="table table-striped card-table table-hover text-nowrap">
                         <thead>
                             <tr>
-                                <th class="w-1">No.</th>
+                                <th>No.</th>
                                 <th>Nama</th>
                                 <th>Tanggal Mulai</th>
                                 <th>Tanggal Selesai</th>

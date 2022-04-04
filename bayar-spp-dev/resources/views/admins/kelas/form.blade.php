@@ -3,7 +3,7 @@
 @section('content-admin')
     <div class="page-header" style="margin-top: 7%">
         <h2 class="page-title">
-            Kelas
+            Form Kelas
         </h2>
     </div>
     <div class="row">
@@ -28,7 +28,6 @@
                                 <label class="form-label">Periode</label>
                                 <select class="form-control" name="periode_id">
                                     @foreach ($periode as $item)
-                                        <option value=""></option>
                                         <option value="{{ $item->id }}"
                                             {{ isset($kelas) ? ($item->id == $kelas->id ? 'selected' : '') : '' }}>
                                             {{ $item->nama }}</option>
@@ -37,7 +36,7 @@
                             </div>
                             <div class="form-group mt-3">
                                 <label class="form-label">Nama</label>
-                                <input type="text" class="form-control" name="nama"
+                                <input type="text" class="form-control" name="nama" placeholder="Nama Kelas"
                                     value="{{ isset($kelas) ? $kelas->nama : old('nama') }}" required>
                             </div>
                         </div>

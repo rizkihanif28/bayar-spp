@@ -10,12 +10,11 @@ class Jurusan extends Model
     use HasFactory;
 
     protected $fillable = [
-        'siswa_id',
         'nama'
     ];
 
     public function siswa()
     {
-        return $this->hasMany(Siswa::class);
+        return $this->hasMany('App\Models\Siswa', 'jurusan_id', 'id');
     }
 }
