@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\KelasController;
 use App\Http\Controllers\admin\PemsisController;
 use App\Http\Controllers\Admin\PeriodeController;
 use App\Http\Controllers\Admin\SiswaController;
+use App\Http\Controllers\Admin\UserContoller;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Dashboard\AdminController as DashboardAdminController;
 use App\Http\Controllers\Dashboard\SiswaController as DashboardSiswaController;
@@ -45,12 +46,13 @@ Route::middleware(['auth:web'])->group(function () {
     Route::middleware('role:tatus')->get('dashboard/tatus', [TatusController::class, 'index'])->name('dashboard/tatus');
     Route::middleware('role:user')->get('dashboard/siswa', [DashboardSiswaController::class, 'index'])->name('dashboard/siswa');
 
-    // Daftar Siswa Admin
-    Route::get('admin/daftar-siswa', [DasusController::class, 'index'])->name('admin/daftar-siswa');
-    Route::post('admin/store-siswa', [DasusController::class, 'store'])->name('admin/store-siswa');
-    Route::post('admin/edits-siswa', [DasusController::class, 'edits'])->name('admin/edits-siswa');
-    Route::post('admin/updates-siswa', [DasusController::class, 'updates'])->name('admin/updates-siswa');
-    Route::post('admin/destroy-siswa', [DasusController::class, 'destroy'])->name('admin/destroy-siswa');
+    // Pengguna / Users
+    Route::get('admins/users/index', [UserContoller::class, 'index'])->name('admins/users/index');
+    Route::get('admins/users/create', [UserContoller::class, 'create'])->name('admins/users/create');
+    Route::post('admins/users/store', [UserContoller::class, 'store'])->name('admins/users/store');
+    Route::get('admins/users/edit', [UserContoller::class, 'edit'])->name('admins/users/edit');
+    Route::post('admins/users/update', [UserContoller::class, 'update'])->name('admins/users/update');
+    Route::post('admins/users/destroy', [UserContoller::class, 'destroy'])->name('admins/users/destroy');
 
     // siswa
     Route::get('admins/siswa/index', [SiswaController::class, 'index'])->name('admins/siswa/index');
@@ -86,17 +88,12 @@ Route::middleware(['auth:web'])->group(function () {
 });
 
 
-
-
-
-
-
-
-
-
-
-
-
+// Daftar Siswa Admin
+    // Route::get('admin/daftar-siswa', [DasusController::class, 'index'])->name('admin/daftar-siswa');
+    // Route::post('admin/store-siswa', [DasusController::class, 'store'])->name('admin/store-siswa');
+    // Route::post('admin/edits-siswa', [DasusController::class, 'edits'])->name('admin/edits-siswa');
+    // Route::post('admin/updates-siswa', [DasusController::class, 'updates'])->name('admin/updates-siswa');
+    // Route::post('admin/destroy-siswa', [DasusController::class, 'destroy'])->name('admin/destroy-siswa');
 
 // Daftar Siswa Tatus
 // Route::get('tatus/daftar-siswa', [DasisController::class, 'index'])->name('tatus/daftar-siswa');

@@ -84,7 +84,7 @@
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li>
-                                    <a class="dropdown-item" href="/#">
+                                    <a class="dropdown-item" href="/admins/users/index">
                                         <i class="bi bi-people-fill"></i>
                                         User
                                     </a>
