@@ -14,6 +14,8 @@ use App\Http\Controllers\Dashboard\SiswaController as DashboardSiswaController;
 use App\Http\Controllers\Dashboard\TatusController;
 use App\Http\Controllers\Tatus\DasisController;
 use App\Http\Controllers\Tatus\PembayaranController;
+use App\Http\Controllers\Tatus\ProfilController;
+use App\Http\Controllers\Tatus\SiswaController as TatusSiswaController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -46,21 +48,18 @@ Route::middleware(['auth:web'])->group(function () {
     Route::middleware('role:tatus')->get('dashboard/tatus', [TatusController::class, 'index'])->name('dashboard/tatus');
     Route::middleware('role:user')->get('dashboard/siswa', [DashboardSiswaController::class, 'index'])->name('dashboard/siswa');
 
+    // {{ Route Admin }}
     // Pengguna / Users
     Route::get('admins/users/index', [UserContoller::class, 'index'])->name('admins/users/index');
-    Route::get('admins/users/create', [UserContoller::class, 'create'])->name('admins/users/create');
-    Route::post('admins/users/store', [UserContoller::class, 'store'])->name('admins/users/store');
-    Route::get('admins/users/edit', [UserContoller::class, 'edit'])->name('admins/users/edit');
-    Route::post('admins/users/update', [UserContoller::class, 'update'])->name('admins/users/update');
-    Route::post('admins/users/destroy', [UserContoller::class, 'destroy'])->name('admins/users/destroy');
+    Route::get('admins/users/{users}/edit', [UserContoller::class, 'edit'])->name('admins/users/edit');
 
     // siswa
     Route::get('admins/siswa/index', [SiswaController::class, 'index'])->name('admins/siswa/index');
     Route::get('admins/siswa/create', [SiswaController::class, 'create'])->name('admins/siswa/create');
     Route::post('admins/siswa/store', [SiswaController::class, 'store'])->name('admins/siswa/store');
-    Route::get('admins/siswa/edit', [SiswaController::class, 'edit'])->name('admins/siswa/edit');
-    Route::post('admins/siswa/update', [SiswaController::class, 'update'])->name('admins/siswa/update');
-    Route::post('admins/siswa/destroy', [SiswaController::class, 'destroy'])->name('admins/siswa/destroy');
+    Route::get('admins/siswa/{siswa}/edit', [SiswaController::class, 'edit'])->name('admins/siswa/edit');
+    Route::post('admins/siswa/{siswa}/update', [SiswaController::class, 'update'])->name('admins/siswa/update');
+    Route::post('admins/siswa/{siswa}/destroy', [SiswaController::class, 'destroy'])->name('admins/siswa/destroy');
 
     // jurusan
     Route::get('admins/jurusan/index', [JurusanController::class, 'index'])->name('admins/jurusan/index');
@@ -85,26 +84,25 @@ Route::middleware(['auth:web'])->group(function () {
     Route::get('admins/kelas/{kelas}/edit', [KelasController::class, 'edit'])->name('admins/kelas/edit');
     Route::post('admins/kelas/{kelas}/update', [KelasController::class, 'update'])->name('admins/kelas/update');
     Route::post('admins/kelas/{kelas}/destroy', [KelasController::class, 'destroy'])->name('admins/kelas/destroy');
+
+    // Laporan
+
+
+    // Profil 
+    Route::get('admins');
+
+
+    // {{ Route TataUsaha }}
+    // siswa
+    Route::get('tatus/siswa/index', [TatusSiswaController::class, 'index'])->name('tatus/siswa/index');
+    Route::get('tatus/siswa/create', [TatusSiswaController::class, 'create'])->name('tatus/siswa/create');
+    Route::post('tatus/siswa/store', [TatusSiswaController::class, 'store'])->name('tatus/siswa/store');
+    Route::get('tatus/siswa/{siswa}/edit', [TatusSiswaController::class, 'edit'])->name('tatus/siswa/edit');
+    Route::post('tatus/siswa/{siswa}/update', [TatusSiswaController::class, 'update'])->name('tatus/siswa/update');
+    Route::post('tatus/siswa/{siswa}/destroy', [TatusSiswaController::class, 'destroy'])->name('tatus/siswa/destroy');
+
+
+    // Profil 
+    Route::get('tatus/profil/{user}/edit', [UserContoller::class, 'edit'])->name('tatus/profil/edit');
+    Route::post('tatus/profil/{user}/update', [ProfilController::class, 'update'])->name('tatus/profil/update');
 });
-
-
-// Daftar Siswa Admin
-    // Route::get('admin/daftar-siswa', [DasusController::class, 'index'])->name('admin/daftar-siswa');
-    // Route::post('admin/store-siswa', [DasusController::class, 'store'])->name('admin/store-siswa');
-    // Route::post('admin/edits-siswa', [DasusController::class, 'edits'])->name('admin/edits-siswa');
-    // Route::post('admin/updates-siswa', [DasusController::class, 'updates'])->name('admin/updates-siswa');
-    // Route::post('admin/destroy-siswa', [DasusController::class, 'destroy'])->name('admin/destroy-siswa');
-
-// Daftar Siswa Tatus
-// Route::get('tatus/daftar-siswa', [DasisController::class, 'index'])->name('tatus/daftar-siswa');
-// Route::post('tatus/store-siswa', [DasisController::class, 'store'])->name('tatus/store-siswa');
-// Route::post('tatus/edits-siswa', [DasisController::class, 'edits'])->name('tatus/edits-siswa');
-// Route::post('tatus/updates-siswa', [DasisController::class, 'updates'])->name('tatus/updates-siswa');
-// Route::post('tatus/destroy-siswa', [DasisController::class, 'destroy'])->name('tatus/destroy-siswa');
-
-// Pembayaran Siswa Admin
-// Route::get('admin/pembayaran-search', [PemsisController::class, 'index'])->name('admin/pembayaran-search');
-// Route::get('admin/detail-pembayaran', [DetyarController::class, 'index'])->name('admin/detail-pembayaran');
-
-// Pembayaran siswa tatus
-// Route::get('tatus/pembayaran/index', [PembayaranController::class, 'index'])->name('tatus/pembayaran/index');

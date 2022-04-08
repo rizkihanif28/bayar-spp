@@ -18,41 +18,11 @@ class UserContoller extends Controller
         ]);
     }
 
-    public function create()
-    {
-        return view('admins/users/form', [
-            'title' => 'Tambah User'
-        ]);
-    }
-
-    public function store(Request $request)
-    {
-        $request->validate([
-            'name' => 'nullable|max:255',
-            'email' => 'required|email:rfc,dns|unique:users',
-            'password' => 'required|confirmed|min:3',
-            'role' => 'nullable|in:admin,tatausaha,user'
-        ]);
-
-        if (User::create($request->input())) {
-            return redirect()->route('admins/users/index')->with([
-                'type' => 'success',
-                'msg' => 'User ditambahkan'
-            ]);
-        } else {
-            return redirect()->route('admins/users/index')->with([
-                'type' => 'danger',
-                'msg' => 'User gagal ditambahakan'
-            ]);
-        }
-    }
-
     public function edit(User $user)
     {
-        $user = User::all();
         return view('admins/users/form', [
             'user' => $user,
-            'title' => 'Edit User'
+            'title' => 'Edit Pengguna'
         ]);
     }
 
@@ -76,21 +46,6 @@ class UserContoller extends Controller
             return redirect()->route('admins/users/index', [
                 'type' => 'danger',
                 'msg' => 'User gagal diubah'
-            ]);
-        }
-    }
-
-    public function destroy(User $user)
-    {
-        if ($user->delete()) {
-            return redirect()->route('admins/users/index', [
-                'type' => 'Success',
-                'msg' => 'User dihapus'
-            ]);
-        } else {
-            return redirect()->route('admins/users/index', [
-                'type' => 'danger',
-                'msg' => 'User gagal dihapus'
             ]);
         }
     }

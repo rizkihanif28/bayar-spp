@@ -36,6 +36,7 @@
 
     <script src="{{ asset('assets/js/require.min.js') }}"></script>
 
+    {{-- Other CSS --}}
     <link rel="stylesheet" href="{{ asset('assets/css/tabler.css') }}">
 
     {{-- Datepicker --}}
@@ -151,12 +152,10 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <form action="#" method="post">
-                                        <button type="submit" class="dropdown-item">
-                                            <i class="bi bi-person-bounding-box"></i>
-                                            Profil
-                                        </button>
-                                    </form>
+                                    <a class="dropdown-item"> {{-- href="{{ route('/admins/users/edit', Auth::user()->id) }}"> --}}
+                                        <i>class="bi bi-person-bounding-box"></i>
+                                        Profil
+                                    </a>
                                 </li>
                                 <li>
                                     <form action="/logout" method="post">
@@ -181,7 +180,6 @@
             @yield('content-admin')
         </div>
     </div>
-
 
     {{-- <footer class="footer">
         <div class="container">
