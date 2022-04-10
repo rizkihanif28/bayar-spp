@@ -13,7 +13,7 @@ use function PHPSTORM_META\type;
 
 class SiswaController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
         $siswa = Siswa::all();
         return view('admins/siswa/index', [
@@ -38,6 +38,7 @@ class SiswaController extends Controller
         $request->validate([
             'jurusan_id' => 'required|numeric',
             'kelas_id' => 'required|numeric',
+            'nis' => 'required|numeric',
             'nama' => 'required|max:255',
             'email' => 'required|email:rfc,dns|unique:siswas|max:255',
             'jenis_kelamin' => 'nullable|in:L,P',

@@ -3,15 +3,15 @@
 @section('content-admin')
     <div class="page-header" style="margin-top: 7%">
         <h2 class="page-title">
-            Siswa
+            Tagihan
         </h2>
     </div>
     <div class="row">
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">Siswa</h4>
-                    <a href="{{ route('admins/siswa/create') }}" class="btn btn-primary btn-sm ml-5">+ Tambah Siswa</a>
+                    <h4 class="card-title">Tagihan</h4>
+                    <a href="{{ route('admins/tagihan/create') }}" class="btn btn-primary btn-sm ml-5">+ Tambah Tagihan</a>
                 </div>
                 @if (Session::get('msg'))
                     <div class="card-alert alert alert-{{ Session::get('type') }}" id="message"
@@ -24,39 +24,31 @@
                         {{ Session::get('msg') }}
                     </div>
                 @endif
-                <div class="p-3 text-center">
-                    <table id="table-siswa" class="table table-striped card-table table-hover">
+                <div class="table-responsive p-3 text-center">
+                    <table id="table-tagihan" class="table table-striped card-table table-hover">
                         <thead>
                             <tr>
                                 <th class="w-1">No</th>
-                                <th>NIS</th>
+                                {{-- <th>Tatausaha</th> --}}
                                 <th>Nama</th>
-                                <th>Kelas</th>
-                                <th>Jurusan</th>
-                                <th>JK</th>
-                                <th>Telepon</th>
+                                <th>Jumlah</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($siswa as $index => $item)
+                            @foreach ($tagihan as $index => $item)
                                 <tr>
-                                    <td><span class="text-muted">{{ $index + 1 }}</span></td>
-                                    <td>{{ $item->nis }}</td>
+                                    <td><span class="text-muted"> {{ $index + 1 }}</span></td>
+                                    {{-- <td>{{ $item->tu_id->nama }}{{ isset($item->tagihan->tu_id) ? '(' . $item->tagihan->tu_id->nama . ')' : '' }}
+                                    </td> --}}
                                     <td>{{ $item->nama }}</td>
-                                    <td>{{ $item->kelas->nama }}{{ isset($item->kelas->periode) ? '(' . $item->kelas->periode->nama . ')' : '' }}
-                                    </td>
-                                    <td>{{ $item->jurusan->nama }}{{ isset($item->siswa->jurusan) ? '(' . $item->siswa->jurusan->nama . ')' : '' }}
-                                    </td>
-                                    <td>{{ $item->jenis_kelamin }}</td>
-                                    <td>{{ $item->telepon }}</td>
-
+                                    <td> @currency($item->jumlah)</td>
                                     <td class="text-center">
                                         {{-- <a class="icon" href="{{ route('admins/siswa/show', $item->id) }}"
                                             title="lihat detail">
                                             <i class="bi bi-ticket-detailed"></i>
                                         </a> --}}
-                                        <a class="icon" href="{{ route('admins/siswa/edit', $item->id) }}"
+                                        <a class="icon" href="{{ route('admins/tagihan/edit', $item->id) }}"
                                             title="edit item">
                                             <i class="bi bi-pencil"></i>
                                         </a>
@@ -64,7 +56,7 @@
                                             title="delete item">
                                             <i class="bi bi-trash3"></i>
                                         </a>
-                                        <form action="{{ route('admins/siswa/destroy', $item->id) }}" method="POST"
+                                        <form action="{{ route('admins/tagihan/destroy', $item->id) }}" method="POST"
                                             id="form-{{ $item->id }}">
                                             @csrf
                                         </form>
@@ -82,7 +74,7 @@
 @section('js')
     <script>
         requirejs(["datatables"], function() {
-            $("#table-siswa").dataTable();
+            $('#table-tagihan').dataTable();
         });
     </script>
     <script>

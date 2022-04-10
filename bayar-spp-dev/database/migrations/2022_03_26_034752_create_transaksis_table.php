@@ -15,10 +15,9 @@ class CreateTransaksisTable extends Migration
     {
         Schema::create('transaksis', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('siswa_id');
-            $table->foreignId('tagihan_id');
-            $table->foreignId('tu_id');
-            $table->boolean('is_lunas')->nullable();
+            $table->string('tu_id');
+            $table->integer('siswa_id');
+            $table->integer('tagihan_id');
             $table->timestamps();
         });
     }

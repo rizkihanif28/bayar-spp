@@ -25,16 +25,17 @@
                     <div class="row">
                         <div class="col-12">
                             @csrf
+
                             <div class="form-group">
-                                <label class="form-label">Jurusan</label>
-                                <select id="select-beast" class="form-control custom-select" name="jurusan_id">
-                                    @foreach ($jurusan as $item)
-                                        <option value="{{ $item->id }}"
-                                            {{ isset($siswa) ? ($item->id == $siswa->jurusan_id ? 'selected' : '') : '' }}>
-                                            {{ $item->nama }}
-                                        </option>
-                                    @endforeach
-                                </select>
+                                <label class="form-label">NIS</label>
+                                <input type="text" placeholder="NIS" name="nis" class="form-control"
+                                    value="{{ isset($nis) ? $nis->nama : old('nama') }}" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Nama</label>
+                                <input type="text" placeholder="Nama" name="nama" class="form-control"
+                                    value="{{ isset($siswa) ? $siswa->nama : old('nama') }}" required>
                             </div>
 
                             <div class="form-group">
@@ -50,9 +51,15 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="form-label">Nama</label>
-                                <input type="text" placeholder="Nama" name="nama" class="form-control"
-                                    value="{{ isset($siswa) ? $siswa->nama : old('nama') }}" required>
+                                <label class="form-label">Jurusan</label>
+                                <select id="select-beast" class="form-control custom-select" name="jurusan_id">
+                                    @foreach ($jurusan as $item)
+                                        <option value="{{ $item->id }}"
+                                            {{ isset($siswa) ? ($item->id == $siswa->jurusan_id ? 'selected' : '') : '' }}>
+                                            {{ $item->nama }}
+                                        </option>
+                                    @endforeach
+                                </select>
                             </div>
 
                             <div class="form-group">

@@ -10,8 +10,8 @@ class Tagihan extends Model
     use HasFactory;
 
     protected $fillable = [
+        'tu_id',
         'nama',
-        'tgl_pembayaran',
         'jumlah',
         'wajib_semua',
         'kelas_id',
@@ -22,8 +22,18 @@ class Tagihan extends Model
         return $this->hasOne(Tatus::class);
     }
 
-    public function siswa()
+    public function transaksi()
     {
-        return $this->hasOne(Siswa::class);
+        return $this->hasMany('App\Models\Transaksi', 'tagihan_id', 'id');
+    }
+
+    public function transaksiToday()
+    {
+        return $this->transaksi()->whereDate('created_at', now()->today());
+    }
+
+    public function kelas()
+    {
+        return $this->hasOne('App\Models\Kelas', 'id', 'kelas_id');
     }
 }

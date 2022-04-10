@@ -17,6 +17,7 @@ class CreateSiswasTable extends Migration
             $table->id();
             $table->integer('jurusan_id');
             $table->integer('kelas_id');
+            $table->integer('nis');
             $table->string('nama');
             $table->string('email')->unique();
             $table->enum('jenis_kelamin', ['L', 'P'])->nullable();

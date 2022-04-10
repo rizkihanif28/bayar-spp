@@ -97,8 +97,16 @@
                                         Siswa
                                     </a>
                                 </li>
+
                                 <li>
-                                    <a class="dropdown-item" href="../admin/pembayaran-search">
+                                    <a class="dropdown-item" href="/admins/tagihan/index">
+                                        <i class="bi bi-receipt"></i>
+                                        Tagihan
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a class="dropdown-item" href="/admins/pembayaran/index">
                                         <i class="bi bi-wallet"></i>
                                         Pembayaran
                                     </a>

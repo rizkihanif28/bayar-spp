@@ -10,10 +10,9 @@ class Transaksi extends Model
     use HasFactory;
 
     protected $fillable = [
+        'tu_id',
         'siswa_id',
         'tagihan_id',
-        'tu_id',
-        'is_lunas',
     ];
 
     public function siswa()
@@ -24,5 +23,9 @@ class Transaksi extends Model
     public function tatus()
     {
         return $this->hasOne(Tatus::class);
+    }
+    public function tagihan()
+    {
+        return $this->hasOne('App\Models\Tagihan', 'id', 'tagihan_id');
     }
 }

@@ -11,7 +11,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="card-title">Users</div>
-                    <a href="{{ route('admins/users/create') }}" class="btn btn-primary btn-sm ml-5">+ Tambah User</a>
+                    {{-- <a href="{{ route('admins/users/create') }}" class="btn btn-primary btn-sm ml-5">+ Tambah User</a> --}}
                 </div>
                 @if (session()->has('msg'))
                     <div class="card=alert alert alert-{{ session()->get('type') }}" id="message"

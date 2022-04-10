@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\KelasController;
 use App\Http\Controllers\admin\PemsisController;
 use App\Http\Controllers\Admin\PeriodeController;
 use App\Http\Controllers\Admin\SiswaController;
+use App\Http\Controllers\Admin\TagihanController;
 use App\Http\Controllers\Admin\UserContoller;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Dashboard\AdminController as DashboardAdminController;
@@ -60,6 +61,15 @@ Route::middleware(['auth:web'])->group(function () {
     Route::get('admins/siswa/{siswa}/edit', [SiswaController::class, 'edit'])->name('admins/siswa/edit');
     Route::post('admins/siswa/{siswa}/update', [SiswaController::class, 'update'])->name('admins/siswa/update');
     Route::post('admins/siswa/{siswa}/destroy', [SiswaController::class, 'destroy'])->name('admins/siswa/destroy');
+
+    // Tagihan
+    Route::get('admins/tagihan/index', [TagihanController::class, 'index'])->name('admins/tagihan/index');
+    Route::get('admins/tagihan/create', [TagihanController::class, 'create'])->name('admins/tagihan/create');
+    Route::post('admins/tagihan/store', [TagihanController::class, 'store'])->name('admins/tagihan/store');
+    Route::get('admins/tagihan/edit', [TagihanController::class, 'edit'])->name('admins/tagihan/edit');
+    Route::post('admins/tagihan/update', [TagihanController::class, 'update'])->name('admins/tagihan/update');
+    Route::post('admins/tagihan/destroy', [TagihanController::class, 'destroy'])->name('admins/tagihan/destroy');
+
 
     // jurusan
     Route::get('admins/jurusan/index', [JurusanController::class, 'index'])->name('admins/jurusan/index');
