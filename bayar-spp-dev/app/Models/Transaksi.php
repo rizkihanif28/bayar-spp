@@ -13,6 +13,8 @@ class Transaksi extends Model
         'tu_id',
         'siswa_id',
         'tagihan_id',
+        'total',
+        'is lunas'
     ];
 
     public function siswa()

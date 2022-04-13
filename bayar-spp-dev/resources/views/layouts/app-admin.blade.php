@@ -52,10 +52,12 @@
                 "datepicker": "assets/js/vendors/datepicker",
                 "selectize": "assets/js/vendors/selectize.min",
                 "sweetalert": "assets/js/vendors/sweetalert.min",
-
+                "select2": "assets/js/vendors/select2.min",
             }
         });
     </script>
+
+    @yield('css')
 </head>
 
 <body>

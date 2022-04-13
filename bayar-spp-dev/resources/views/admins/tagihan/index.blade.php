@@ -32,6 +32,7 @@
                                 {{-- <th>Tatausaha</th> --}}
                                 <th>Nama</th>
                                 <th>Jumlah</th>
+                                <th>Peserta</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -43,6 +44,9 @@
                                     </td> --}}
                                     <td>{{ $item->nama }}</td>
                                     <td> @currency($item->jumlah)</td>
+                                    <td>{{ $item->wajib_semua }}
+                                        <p>Wajib Semua</p>
+                                    </td>
                                     <td class="text-center">
                                         {{-- <a class="icon" href="{{ route('admins/siswa/show', $item->id) }}"
                                             title="lihat detail">
@@ -85,7 +89,7 @@
                     formid = $(this).attr('data-id');
                     swal({
                         title: 'Anda yakin ingin menghapus?',
-                        text: 'periode yang dihapus tidak dapat dikembalikan',
+                        text: 'tagihan yang dihapus tidak dapat dikembalikan',
                         dangerMode: true,
                         buttons: {
                             cancel: true,

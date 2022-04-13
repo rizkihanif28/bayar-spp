@@ -29,12 +29,12 @@
                             <div class="form-group">
                                 <label class="form-label">NIS</label>
                                 <input type="text" placeholder="NIS" name="nis" class="form-control"
-                                    value="{{ isset($nis) ? $nis->nama : old('nama') }}" required>
+                                    value="{{ isset($siswa) ? $siswa->nis : old('nis') }}" required>
                             </div>
 
                             <div class="form-group">
                                 <label class="form-label">Nama</label>
-                                <input type="text" placeholder="Nama" name="nama" class="form-control"
+                                <input type="name" placeholder="Nama" name="nama" class="form-control"
                                     value="{{ isset($siswa) ? $siswa->nama : old('nama') }}" required>
                             </div>
 

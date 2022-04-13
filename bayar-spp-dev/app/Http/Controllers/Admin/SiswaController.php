@@ -79,6 +79,7 @@ class SiswaController extends Controller
         $request->validate([
             'jurusan_id' => 'required|numeric',
             'kelas_id' => 'required|numeric',
+            'nis' => 'required',
             'nama' => 'required|max:255',
             'email' => 'required|email:rfc,dns|unique:siswas|max:255',
             'jenis_kelamin' => 'nullable|in:L,P',
@@ -105,12 +106,12 @@ class SiswaController extends Controller
     {
         if ($siswa->delete()) {
             return redirect()->route('admins/siswa/index')->with([
-                'type' => 'Success',
+                'type' => 'success',
                 'msg' => 'Siswa dihapus'
             ]);
         } else {
             return redirect()->route('admins/siswa/index')->with([
-                'type' => 'Success',
+                'type' => 'danger',
                 'msg' => 'Siswa gagal dihapus'
             ]);
         }

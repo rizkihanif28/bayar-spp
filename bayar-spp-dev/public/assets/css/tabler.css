@@ -1943,6 +1943,10 @@ pre code {
     border: 0;
 }
 
+.input-icon #bayar-search {
+    line-height: 3;
+}
+
 .form-control {
     display: block;
     width: 100%;

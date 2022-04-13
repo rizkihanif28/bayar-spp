@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\DasusController;
 use App\Http\Controllers\admin\DetyarController;
 use App\Http\Controllers\Admin\JurusanController;
 use App\Http\Controllers\Admin\KelasController;
+use App\Http\Controllers\Admin\PembayaranController as AdminPembayaranController;
 use App\Http\Controllers\admin\PemsisController;
 use App\Http\Controllers\Admin\PeriodeController;
 use App\Http\Controllers\Admin\SiswaController;
@@ -66,10 +67,14 @@ Route::middleware(['auth:web'])->group(function () {
     Route::get('admins/tagihan/index', [TagihanController::class, 'index'])->name('admins/tagihan/index');
     Route::get('admins/tagihan/create', [TagihanController::class, 'create'])->name('admins/tagihan/create');
     Route::post('admins/tagihan/store', [TagihanController::class, 'store'])->name('admins/tagihan/store');
-    Route::get('admins/tagihan/edit', [TagihanController::class, 'edit'])->name('admins/tagihan/edit');
-    Route::post('admins/tagihan/update', [TagihanController::class, 'update'])->name('admins/tagihan/update');
-    Route::post('admins/tagihan/destroy', [TagihanController::class, 'destroy'])->name('admins/tagihan/destroy');
+    Route::get('admins/tagihan/{tagihan}/edit', [TagihanController::class, 'edit'])->name('admins/tagihan/edit');
+    Route::post('admins/tagihan/{tagihan}/update', [TagihanController::class, 'update'])->name('admins/tagihan/update');
+    Route::post('admins/tagihan/{tagihan}/destroy', [TagihanController::class, 'destroy'])->name('admins/tagihan/destroy');
 
+    // pembayaran
+    Route::get('admins/pembayaran/index', [AdminPembayaranController::class, 'index'])->name('admins/pembayaran/index');
+    Route::get('admins/pembayaran/create', [AdminPembayaranController::class, 'create'])->name('admins/pembayaran/create');
+    Route::get('admins/pembayaran/store', [AdminPembayaranController::class, 'store'])->name('admins/pembayaran/store');
 
     // jurusan
     Route::get('admins/jurusan/index', [JurusanController::class, 'index'])->name('admins/jurusan/index');

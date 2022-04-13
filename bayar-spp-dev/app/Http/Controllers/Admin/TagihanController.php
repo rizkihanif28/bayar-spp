@@ -49,16 +49,17 @@ class TagihanController extends Controller
             'tu_id' => 'required|max:255',
             'nama' => 'required|max:255',
             'jumlah' => 'required|numeric',
+            'peserta' => 'required|numeric'
         ]);
         $tagihan = Tagihan::make($request->input());
 
         if ($tagihan->save()) {
-            return redirect()->route('admins/tagihan/index', [
+            return redirect()->route('admins/tagihan/index',)->with([
                 'type' => 'success',
                 'msg' => 'Tagihan berhasil ditambahkan'
             ]);
         } else {
-            return redirect()->route('admins/tagihan/index', [
+            return redirect()->route('admins/tagihan/index')->with([
                 'type' => 'danger',
                 'msg' => 'Tagihan gagal ditambahkan'
             ]);
@@ -82,9 +83,15 @@ class TagihanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Tagihan $tagihan)
     {
-        //
+        $tatus = Tatus::all();
+
+        return view('admins/tagihan/form', [
+            'tatus' => $tatus,
+            'tagihan' => $tagihan,
+            'title' => 'Edit Tagihan'
+        ]);
     }
 
     /**
@@ -94,9 +101,28 @@ class TagihanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Tagihan $tagihan)
     {
-        //
+        $request->validate([
+            'tu_id' => 'required|max:255',
+            'nama' => 'required|max:255',
+            'jumlah' => 'required|numeric',
+            'peserta' => 'required|numeric'
+        ]);
+
+        $tagihan = $tagihan->fill($request->input());
+
+        if ($tagihan->save()) {
+            return redirect()->route('admins/tagihan/index')->with([
+                'type' => 'success',
+                'msg' => 'Tagihan diubah'
+            ]);
+        } else {
+            return redirect()->route('admins/tagihan/index')->with([
+                'type' => 'danger',
+                'msg' => 'Tagihan gagal diubah'
+            ]);
+        }
     }
 
     /**
@@ -105,8 +131,18 @@ class TagihanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Tagihan $tagihan)
     {
-        //
+        if ($tagihan->delete()) {
+            return redirect()->route('admins/tagihan/index')->with([
+                'type' => 'success',
+                'msg' => 'Siswa dihapus'
+            ]);
+        } else {
+            return redirect()->route('admins/tagihan/index')->with([
+                'type' => 'danger',
+                'msg' => 'Siswa dihapus'
+            ]);
+        }
     }
 }

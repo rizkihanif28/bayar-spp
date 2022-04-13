@@ -8,11 +8,11 @@
     </div>
     <div class="row">
         <div class="col-8">
-            <form
+            <form class="card"
                 action="{{ isset($tagihan) ? route('admins/tagihan/update', $tagihan->id) : route('admins/tagihan/store') }}"
-                method="POST" class="card">
+                method="POST">
                 <div class="card-header">
-                    <h5>Tagihan</h5>
+                    <h5 class="cartd title">Tagihan</h5>
                 </div>
                 <div class="card-body">
                     @if ($errors->any())
@@ -30,8 +30,7 @@
                                 <label class="form-label">Nama Tatausaha</label>
                                 <select id="select-beast" class="form-control custom-select" name="tu_id">
                                     @foreach ($tatus as $item)
-                                        <option value="{{ $item->id }}"
-                                            {{ isset($tagihan) ? ($item->id == $tagihan->$tu_id ? 'selected' : '') : '' }}>
+                                        <option value="{{ $item->id }}">
                                             {{ $item->nama }}
                                         </option>
                                     @endforeach
@@ -40,13 +39,24 @@
 
                             <div class="form-group">
                                 <label class="form-label">Nama</label>
-                                <input type="text" class="form-control" name="nama" placeholder="Nama"
+                                <input type="name" class="form-control" name="nama" placeholder="Nama"
                                     value="{{ isset($tagihan) ? $tagihan->nama : old('nama') }}" required>
                             </div>
                             <div class="form-group">
                                 <label class="form-label">Jumlah</label>
                                 <input type="number" class="form-control" name="jumlah"
                                     value="{{ isset($tagihan) ? $tagihan->jumlah : old('jumlah') }}" required>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-label">Peserta</div>
+                                <div class="custom-switches-stacked">
+                                    <label class="custom-switch">
+                                        <input type="radio" name="peserta" value="1" class="custom-switch-input"
+                                            {{ isset($tagihan) ? $tagihan->wajib_semua : old('peserta') }}>
+                                        <span class="custom-switch-indicator"></span>
+                                        <span class="custom-switch-description">Wajib Semua</span>
+                                    </label>
+                                </div>
                             </div>
                         </div>
                     </div>
