@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Jurusan;
 use App\Models\Kelas;
 use App\Models\Siswa;
+use App\Models\Tagihan;
+use App\Models\Transaksi;
 use Illuminate\Http\Request;
 use Symfony\Component\Console\Input\Input;
 
@@ -115,5 +117,49 @@ class SiswaController extends Controller
                 'msg' => 'Siswa gagal dihapus'
             ]);
         }
+    }
+
+    // api load
+    public function getLoad(Siswa $siswa)
+    {
+        if ($siswa == null) {
+            return response()->json(['msg' => 'siswa tidak ditemukan'], 404);
+        }
+    }
+
+    public function getTagihan(Siswa $siswa)
+    {
+        $tagihan = [];
+        $tagihan_ids = [];
+
+        // wajib_semua
+        $tagihan_wajib = Tagihan::where('wajib_semua', '1')->get()->toArray();
+
+        $tagihan_semua = array_merge($tagihan_wajib);
+
+        foreach ($tagihan_semua as $tagih) {
+            $tagihan_ids[] = $tagih['id'];
+            $payed = Transaksi::where('tagihan_id', $tagih['id'])->where('siswa_id', $siswa->id)->get();
+            if ($payed->count() == 0) {
+                $tagihan[] = [
+                    'nama' => $tagih['nama'],
+                    'jumlah' => format_idr($tagih['jumlah']),
+                    'total' => '',
+                    'is_lunas' => '0',
+                    'created_at' => ''
+                ];
+            } else {
+                foreach ($payed as $pay) {
+                    $tagihan[] = [
+                        'nama' => $pay['nama'],
+                        'jumlah' => format_idr($pay['jumlah']),
+                        'total' => format_idr($pay->jumlah),
+                        'is_lunas' => $pay->is_lunas,
+                        'created_at' => $pay->created_at->format('d-m-Y'),
+                    ];
+                }
+            }
+        }
+        return $tagihan;
     }
 }

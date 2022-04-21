@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Siswa;
+use App\Models\Tagihan;
+use App\Models\Tatus;
 use App\Models\Transaksi;
 use Illuminate\Http\Request;
 
@@ -41,9 +43,22 @@ class PembayaranController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Siswa $siswa, Tatus $tatus)
     {
-        //
+        $jumlah = preg_replace("/[,.]/", "", $request->jumlah);
+        // membuat pembayaran siswa 
+        $tagihan_id = Tagihan::all();
+        $transaksi = Transaksi::make([
+            'tu_id' => $tatus,
+            'siswa_id' => $siswa->id,
+            'tagihan_id' => $request->$tagihan_id,
+            'is_lunas' => 1,
+        ]);
+
+        // // menyimpan transaksi
+        // if ($transaksi->save()) {
+
+        // }
     }
 
     /**
@@ -89,5 +104,19 @@ class PembayaranController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function tagihan(Siswa $siswa)
+    {
+        $tagihan = $this->getTagihan($siswa);
+        return response()->json($tagihan);
+    }
+
+    protected function getTagihan()
+    {
+        $tagihan_wajib = Tagihan::where('wajib_semua', '1')->get()->toArray();
+        $tagihan = array_merge($tagihan_wajib);
+
+        return $tagihan;
     }
 }

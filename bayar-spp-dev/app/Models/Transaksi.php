@@ -19,12 +19,12 @@ class Transaksi extends Model
 
     public function siswa()
     {
-        return $this->hasOne(Siswa::class);
+        return $this->hasOne('App\Models\Siswa', 'id', 'siswa_id');
     }
 
     public function tatus()
     {
-        return $this->hasOne(Tatus::class);
+        return $this->hasOne('App\Models\Tatus', 'id', 'tu_id');
     }
     public function tagihan()
     {

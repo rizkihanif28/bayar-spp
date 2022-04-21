@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Tagihan;
 use App\Models\Tatus;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class TagihanController extends Controller
 {
@@ -52,6 +53,14 @@ class TagihanController extends Controller
             'peserta' => 'required|numeric'
         ]);
         $tagihan = Tagihan::make($request->input());
+
+        switch ($request->peserta) {
+            case 1: // semua
+                $tagihan->wajib_semua = 1;
+                break;
+            default:
+                return Redirect::back()->withErrors(['Peserta Wajib diisi']);
+        }
 
         if ($tagihan->save()) {
             return redirect()->route('admins/tagihan/index',)->with([

@@ -28,7 +28,7 @@
                     <table id="table-tagihan" class="table table-striped card-table table-hover">
                         <thead>
                             <tr>
-                                <th class="w-1">No</th>
+                                <th>No</th>
                                 {{-- <th>Tatausaha</th> --}}
                                 <th>Nama</th>
                                 <th>Jumlah</th>
@@ -44,8 +44,10 @@
                                     </td> --}}
                                     <td>{{ $item->nama }}</td>
                                     <td> @currency($item->jumlah)</td>
-                                    <td>{{ $item->wajib_semua }}
-                                        <p>Wajib Semua</p>
+                                    <td>
+                                        @if ($item->wajib_semua != null)
+                                            <p>Wajib Semua</p>
+                                        @endif
                                     </td>
                                     <td class="text-center">
                                         {{-- <a class="icon" href="{{ route('admins/siswa/show', $item->id) }}"
