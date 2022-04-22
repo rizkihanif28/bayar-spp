@@ -11,7 +11,6 @@ use App\Models\Transaksi;
 use Illuminate\Http\Request;
 use Symfony\Component\Console\Input\Input;
 
-use function PHPSTORM_META\type;
 
 class SiswaController extends Controller
 {

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\DasusController;
+use App\Http\Controllers\Admin\DataBayarController;
 use App\Http\Controllers\admin\DetyarController;
 use App\Http\Controllers\Admin\JurusanController;
 use App\Http\Controllers\Admin\KelasController;
@@ -75,6 +76,9 @@ Route::middleware(['auth:web'])->group(function () {
     Route::get('admins/pembayaran/index', [AdminPembayaranController::class, 'index'])->name('admins/pembayaran/index');
     Route::get('admins/pembayaran/create', [AdminPembayaranController::class, 'create'])->name('admins/pembayaran/create');
     Route::get('admins/pembayaran/store', [AdminPembayaranController::class, 'store'])->name('admins/pembayaran/store');
+
+    // Data Pembayaran
+    Route::get('admins/databayar/index', [DataBayarController::class, 'index'])->name('admins/databayar/index');
 
     // jurusan
     Route::get('admins/jurusan/index', [JurusanController::class, 'index'])->name('admins/jurusan/index');

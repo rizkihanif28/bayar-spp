@@ -114,7 +114,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="#">
+                                    <a class="dropdown-item" href="/admins/databayar/index">
                                         <i class="bi bi-bar-chart-steps"></i>
                                         Data Pembayaran
                                     </a>
