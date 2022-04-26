@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Histori;
 use App\Models\Siswa;
 use App\Models\Tagihan;
 use App\Models\Tatus;
 use App\Models\Transaksi;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PembayaranController extends Controller
 {
@@ -22,7 +24,7 @@ class PembayaranController extends Controller
         $transaksi = Transaksi::all();
         return view('admins/pembayaran/index', [
             'siswa' => $siswa,
-            'pembayaran' => $transaksi,
+            'transaksi' => $transaksi,
             'title' => 'Pembayaran'
         ]);
     }
@@ -45,20 +47,44 @@ class PembayaranController extends Controller
      */
     public function store(Request $request, Siswa $siswa, Tatus $tatus)
     {
+        DB::beginTransaction();
+
         $jumlah = preg_replace("/[,.]/", "", $request->jumlah);
-        // membuat pembayaran siswa 
+
         $tagihan_id = Tagihan::all();
+        $histori = Histori::all();
+        // membuat pembayaran siswa 
         $transaksi = Transaksi::make([
+            'histori_id' => $histori,
             'tu_id' => $tatus,
             'siswa_id' => $siswa->id,
             'tagihan_id' => $request->$tagihan_id,
             'is_lunas' => 1,
         ]);
 
-        // // menyimpan transaksi
-        // if ($transaksi->save()) {
+        // menyimpan transaksi
+        if ($transaksi->save()) {
 
-        // }
+            // menambahkan ke histori
+            // $histori = Histori::orderBy('created_at', 'desc')->first();
+            $histori = Histori::create([
+                'transaksi_id' => $transaksi,
+                'siswa_id' => $siswa,
+                'tagihan_id' => $tagihan_id,
+                'jumlah' => $jumlah
+            ]);
+        }
+
+        if ($histori) {
+            DB::commit();
+            return response()->json(['msg' => 'transaksi berhasil dilakukan']);
+        } else {
+            DB::rollBack();
+            return redirect()->route('admins/pembayaran/index')->with([
+                'type' => 'danger',
+                'msg' => 'terjadi kesalahan'
+            ]);
+        }
     }
 
     /**

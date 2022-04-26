@@ -114,9 +114,15 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="/admins/databayar/index">
+                                    <a class="dropdown-item disabled" href="/admins/databayar/index">
                                         <i class="bi bi-bar-chart-steps"></i>
                                         Data Pembayaran
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="/admins/histori/index">
+                                        <i class="bi bi-bar-chart-steps"></i>
+                                        Histori Pembayaran
                                     </a>
                                 </li>
                             </ul>

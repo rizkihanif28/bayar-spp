@@ -69,7 +69,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-12">
+        {{-- <div class="col-12">
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">Transaksi</h3>
@@ -95,13 +95,13 @@
                                     </a>
                                 </td>
                                 <td>{{ $item->tagihan->nama }}</td>
-                                <td>@currency($item->jumlah)</td>
+                                <td>@currency($item->histori->jumlah)</td>
                             @endforeach
                         </tbody>
                     </table>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div>
 @endsection
 
@@ -131,9 +131,11 @@
                 });
                 $('#tagihan').select2({});
 
+                let histori_id;
+                let tu_id;
                 let siswa_id;
                 let tagihan_id;
-                let total;
+                let harga;
 
                 $('#siswa').on('change', function() {
                     if (this.value == '#') {
@@ -189,12 +191,43 @@
 
                 $('#tagihan').on('change', function() {
                     tagihan_id = this.value
-                    // set harga dari opsi
-                    harga = $('option:selected', this).attr('data-harga');
 
-                    ('#harga').text(formatNumber(harga));
+                    $('#harga').text(formatNumber(harga));
                     $('#total').val(formatNumber(harga));
 
+                })
+
+                $('#btn-simpan').on('click', function() {
+                    console.log(harga);
+                    $('#btn-simpan').addClass("btn-loading")
+                    $.ajax({
+                        type: "POST",
+                        url: "{{ route('api/bayar-spp') }}/" + siswa_id,
+                        data: {
+                            histori_id: histori_id,
+                            tagihan_id: tagihan_id,
+                            tu_id: tu_id,
+                            siswa_id: siswa_id,
+                            jumlah: harga,
+                        },
+                        success: function(data) {
+                            console.log(data);
+                            swal({
+                                title: data.msg
+                            })
+                            setTimeout(() => {
+                                window.location.reload()
+                            }, 2000)
+                        },
+                        error: function(data) {
+                            swal({
+                                title: "Terjadi kesalahan pada transaksi, transaksi dibatalkan"
+                            })
+                            setTimeout(() => {
+                                window.location.reload()
+                            }, 2000)
+                        }
+                    })
                 })
             });
         });

@@ -1,12 +1,10 @@
 <?php
 
-use App\Http\Controllers\Admin\DasusController;
 use App\Http\Controllers\Admin\DataBayarController;
-use App\Http\Controllers\admin\DetyarController;
+use App\Http\Controllers\Admin\HistoriController;
 use App\Http\Controllers\Admin\JurusanController;
 use App\Http\Controllers\Admin\KelasController;
 use App\Http\Controllers\Admin\PembayaranController as AdminPembayaranController;
-use App\Http\Controllers\admin\PemsisController;
 use App\Http\Controllers\Admin\PeriodeController;
 use App\Http\Controllers\Admin\SiswaController;
 use App\Http\Controllers\Admin\TagihanController;
@@ -15,8 +13,6 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Dashboard\AdminController as DashboardAdminController;
 use App\Http\Controllers\Dashboard\SiswaController as DashboardSiswaController;
 use App\Http\Controllers\Dashboard\TatusController;
-use App\Http\Controllers\Tatus\DasisController;
-use App\Http\Controllers\Tatus\PembayaranController;
 use App\Http\Controllers\Tatus\ProfilController;
 use App\Http\Controllers\Tatus\SiswaController as TatusSiswaController;
 use Illuminate\Support\Facades\Route;
@@ -74,11 +70,12 @@ Route::middleware(['auth:web'])->group(function () {
 
     // pembayaran
     Route::get('admins/pembayaran/index', [AdminPembayaranController::class, 'index'])->name('admins/pembayaran/index');
-    Route::get('admins/pembayaran/create', [AdminPembayaranController::class, 'create'])->name('admins/pembayaran/create');
-    Route::get('admins/pembayaran/store', [AdminPembayaranController::class, 'store'])->name('admins/pembayaran/store');
 
     // Data Pembayaran
     Route::get('admins/databayar/index', [DataBayarController::class, 'index'])->name('admins/databayar/index');
+
+    // Hostori
+    Route::get('admins/histori/index', [HistoriController::class, 'index'])->name('admins/histori/index');
 
     // jurusan
     Route::get('admins/jurusan/index', [JurusanController::class, 'index'])->name('admins/jurusan/index');

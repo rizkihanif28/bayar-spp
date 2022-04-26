@@ -5,17 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Transaksi extends Model
+class Histori extends Model
 {
     use HasFactory;
-
     protected $fillable = [
-        'histori_id',
-        'tu_id',
+        'transaksi_id',
         'siswa_id',
         'tagihan_id',
-        'total',
-        'is lunas'
+        'jumlah',
     ];
 
     public function siswa()
@@ -23,17 +20,13 @@ class Transaksi extends Model
         return $this->hasOne('App\Models\Siswa', 'id', 'siswa_id');
     }
 
-    public function tatus()
-    {
-        return $this->hasOne('App\Models\Tatus', 'id', 'tu_id');
-    }
     public function tagihan()
     {
         return $this->hasOne('App\Models\Tagihan', 'id', 'tagihan_id');
     }
 
-    public function histori()
+    public function transaksi()
     {
-        return $this->hasOne('App\Models\Histori', 'id', 'histori_id');
+        return $this->hasOne('App\Models\Transaksi', 'id', 'transaksi_id');
     }
 }

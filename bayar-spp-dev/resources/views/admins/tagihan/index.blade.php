@@ -43,7 +43,7 @@
                                     {{-- <td>{{ $item->tu_id->nama }}{{ isset($item->tagihan->tu_id) ? '(' . $item->tagihan->tu_id->nama . ')' : '' }}
                                     </td> --}}
                                     <td>{{ $item->nama }}</td>
-                                    <td> @currency($item->jumlah)</td>
+                                    <td>@currency($item->jumlah)</td>
                                     <td>
                                         @if ($item->wajib_semua != null)
                                             <p>Wajib Semua</p>

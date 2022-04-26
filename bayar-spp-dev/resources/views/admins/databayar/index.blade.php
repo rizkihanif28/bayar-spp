@@ -4,7 +4,7 @@
     <div class="page-header">
         <div class="col-10">
             <h1 class="page-title mt-3" style="font-size: 28px">
-                Data Pembayaran
+                Histori Pembayaran
                 <hr class="solid mt-2">
             </h1>
         </div>
@@ -23,7 +23,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h4>Data Pembayaran Siswa</h4>
+                    <h4>Histori</h4>
                 </div>
                 <div class="card-body">
                     @if ($errors->any())
@@ -62,12 +62,12 @@
                                     <td>{{ $item->pembayaran->id }}</td>
                                     <td>{{ $item->siswa->nama }}</td>
                                     <td>
-                                        @if ($item->jan)
+                                        @if ($item->tagihan->jumlah)
                                             <span class="tag tag-green">Lunas</span>
                                         @endif
                                     </td>
                                     <td>
-                                        @if ($item->feb)
+                                        @if ($item->tagihan->jumlah)
                                             <span class="tag tag-green">Lunas</span>
                                         @endif
                                     </td>
