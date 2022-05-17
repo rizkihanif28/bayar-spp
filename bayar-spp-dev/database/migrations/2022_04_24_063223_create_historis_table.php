@@ -15,8 +15,7 @@ class CreateHistorisTable extends Migration
     {
         Schema::create('historis', function (Blueprint $table) {
             $table->id();
-            $table->integer('transaksi_id');
-            $table->integer('siswa_id');
+            $table->integer('transaksi_id')->nullable();
             $table->double('jumlah');
             $table->timestamps();
         });

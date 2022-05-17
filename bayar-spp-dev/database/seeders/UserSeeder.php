@@ -28,14 +28,14 @@ class UserSeeder extends Seeder
             'password' => bcrypt('123')
         ]);
 
-        $tatus->assignRole('tatus');
+        $tatus->assignRole('tata usaha');
 
         $user = User::create([
-            'name' => 'User',
+            'name' => 'Siswa',
             'email' => 'user@gmail.com',
             'password' => bcrypt('123')
         ]);
 
-        $user->assignRole('user');
+        $user->assignRole('siswa');
     }
 }

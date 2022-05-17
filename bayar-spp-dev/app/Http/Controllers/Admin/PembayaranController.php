@@ -10,6 +10,7 @@ use App\Models\Tatus;
 use App\Models\Transaksi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use PhpParser\Builder\Trait_;
 
 class PembayaranController extends Controller
 {
@@ -48,41 +49,33 @@ class PembayaranController extends Controller
     public function store(Request $request, Siswa $siswa, Tatus $tatus)
     {
         DB::beginTransaction();
-
+        // mulai transaksi, membersihkan request->jumlah dari titik dan koma
         $jumlah = preg_replace("/[,.]/", "", $request->jumlah);
 
-        $tagihan_id = Tagihan::all();
-        $histori = Histori::all();
-        // membuat pembayaran siswa 
+        // membuat transaksi baru
         $transaksi = Transaksi::make([
-            'histori_id' => $histori,
             'tu_id' => $tatus,
             'siswa_id' => $siswa->id,
-            'tagihan_id' => $request->$tagihan_id,
-            'is_lunas' => 1,
+            'tagihan_id' => $request->tagihan_id,
+            'is_lunas' => 1
         ]);
 
         // menyimpan transaksi
         if ($transaksi->save()) {
-
-            // menambahkan ke histori
-            // $histori = Histori::orderBy('created_at', 'desc')->first();
             $histori = Histori::create([
-                'transaksi_id' => $transaksi,
-                'siswa_id' => $siswa,
-                'tagihan_id' => $tagihan_id,
+                'transaksi_id' => $transaksi->id,
                 'jumlah' => $jumlah
             ]);
         }
 
         if ($histori) {
             DB::commit();
-            return response()->json(['msg' => 'transaksi berhasil dilakukan']);
+            return response()->json(['msg' => 'Transaksi berhasil dilakukan']);
         } else {
             DB::rollBack();
             return redirect()->route('admins/pembayaran/index')->with([
                 'type' => 'danger',
-                'msg' => 'terjadi kesalahan'
+                'msg' => 'Terjadi kesalahan'
             ]);
         }
     }

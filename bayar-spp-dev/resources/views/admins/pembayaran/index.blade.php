@@ -131,8 +131,6 @@
                 });
                 $('#tagihan').select2({});
 
-                let histori_id;
-                let tu_id;
                 let siswa_id;
                 let tagihan_id;
                 let harga;
@@ -192,23 +190,24 @@
                 $('#tagihan').on('change', function() {
                     tagihan_id = this.value
 
+                    harga = $('option:selected', this).attr('data-harga');
+
+                    // Menampilkan harga dan total
                     $('#harga').text(formatNumber(harga));
                     $('#total').val(formatNumber(harga));
 
                 })
-
+                // batas
                 $('#btn-simpan').on('click', function() {
                     console.log(harga);
                     $('#btn-simpan').addClass("btn-loading")
                     $.ajax({
                         type: "POST",
-                        url: "{{ route('api/bayar-spp') }}/" + siswa_id,
+                        url: "{{ route('admins/histori/index') }}/" + siswa_id,
                         data: {
-                            histori_id: histori_id,
-                            tagihan_id: tagihan_id,
-                            tu_id: tu_id,
                             siswa_id: siswa_id,
-                            jumlah: harga,
+                            tagihan_id: tagihan_id,
+                            jumlah: harga
                         },
                         success: function(data) {
                             console.log(data);
@@ -221,14 +220,15 @@
                         },
                         error: function(data) {
                             swal({
-                                title: "Terjadi kesalahan pada transaksi, transaksi dibatalkan"
+                                title: "Terjadi kesalahan pada transaksi, Transaksi dibatalkan"
                             })
                             setTimeout(() => {
                                 window.location.reload()
                             }, 2000)
                         }
-                    })
+                    });
                 })
+
             });
         });
     </script>

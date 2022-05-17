@@ -38,7 +38,7 @@ Auth::routes();
 
 
 Route::middleware(['auth:web'])->group(function () {
-    Route::get('/', [DashboardAdminController::class, 'index'])->name('web.index');
+    Route::get('/', [DashboardAdminController::class, 'index'])->name('web/index');
 
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout')->middleware('auth');
 

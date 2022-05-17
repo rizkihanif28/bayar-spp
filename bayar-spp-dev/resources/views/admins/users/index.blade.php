@@ -30,6 +30,7 @@
                             <tr>
                                 <th>No</th>
                                 <th>Nama</th>
+                                {{-- <th>Role</th> --}}
                                 <th>Email</th>
                                 <th>Tanggal</th>
                             </tr>
@@ -45,6 +46,7 @@
                                             {{ $item->name }}
                                         @endif
                                     </td>
+                                    {{-- <td>{{ $item->roles->name }}</td> --}}
                                     <td>{{ $item->email }}</td>
                                     <td>{{ $item->created_at->format('d-m-Y') }}</td>
                                 </tr>

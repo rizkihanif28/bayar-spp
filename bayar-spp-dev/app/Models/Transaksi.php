@@ -10,7 +10,6 @@ class Transaksi extends Model
     use HasFactory;
 
     protected $fillable = [
-        'histori_id',
         'tu_id',
         'siswa_id',
         'tagihan_id',
@@ -34,6 +33,6 @@ class Transaksi extends Model
 
     public function histori()
     {
-        return $this->hasOne('App\Models\Histori', 'id', 'histori_id');
+        return $this->hasOne('App\Models\Histori', 'transaksi_id', 'id');
     }
 }

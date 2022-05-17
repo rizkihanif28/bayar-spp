@@ -15,7 +15,6 @@ class CreateTransaksisTable extends Migration
     {
         Schema::create('transaksis', function (Blueprint $table) {
             $table->id();
-            $table->integer('histori_id');
             $table->integer('tu_id');
             $table->integer('siswa_id');
             $table->integer('tagihan_id');

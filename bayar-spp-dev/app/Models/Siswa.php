@@ -21,7 +21,7 @@ class Siswa extends Model
 
     public function transaksi()
     {
-        return $this->hasMany(Transaksi::class);
+        return $this->hasMany('App\Models\Transaksi', 'siswa_id', 'id');
     }
 
     public function tagihan()
