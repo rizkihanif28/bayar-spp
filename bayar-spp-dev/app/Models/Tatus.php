@@ -10,10 +10,16 @@ class Tatus extends Model
     use HasFactory;
 
     protected $fillable = [
+        'user_id',
         'nip',
         'nama',
         'email'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
     public function Transaksi()
     {

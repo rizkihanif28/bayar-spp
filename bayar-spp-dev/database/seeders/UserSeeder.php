@@ -31,8 +31,8 @@ class UserSeeder extends Seeder
         $tatus->assignRole('tata usaha');
 
         $user = User::create([
-            'name' => 'Siswa',
-            'email' => 'user@gmail.com',
+            'name' => 'Ridwan Hanafi',
+            'email' => 'ridwan@gmail.com',
             'password' => bcrypt('123')
         ]);
 

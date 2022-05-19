@@ -94,6 +94,13 @@
                                 </li>
 
                                 <li>
+                                    <a class="dropdown-item" href="/admins/user-role/index">
+                                        <i class="bi bi-people"></i>
+                                        User Role
+                                    </a>
+                                </li>
+
+                                <li>
                                     <a class="dropdown-item" href="/admins/siswa/index">
                                         <i class="bi bi-person-lines-fill"></i>
                                         Siswa

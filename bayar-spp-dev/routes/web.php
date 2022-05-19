@@ -9,12 +9,14 @@ use App\Http\Controllers\Admin\PeriodeController;
 use App\Http\Controllers\Admin\SiswaController;
 use App\Http\Controllers\Admin\TagihanController;
 use App\Http\Controllers\Admin\UserContoller;
+use App\Http\Controllers\Admin\UserRoleController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Dashboard\AdminController as DashboardAdminController;
 use App\Http\Controllers\Dashboard\SiswaController as DashboardSiswaController;
 use App\Http\Controllers\Dashboard\TatusController;
 use App\Http\Controllers\Tatus\ProfilController;
 use App\Http\Controllers\Tatus\SiswaController as TatusSiswaController;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -38,7 +40,7 @@ Auth::routes();
 
 
 Route::middleware(['auth:web'])->group(function () {
-    Route::get('/', [DashboardAdminController::class, 'index'])->name('web/index');
+    Route::get('/', [DashboardAdminController::class, 'index'])->name('web.index');
 
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout')->middleware('auth');
 
@@ -51,6 +53,11 @@ Route::middleware(['auth:web'])->group(function () {
     // Pengguna / Users
     Route::get('admins/users/index', [UserContoller::class, 'index'])->name('admins/users/index');
     Route::get('admins/users/{users}/edit', [UserContoller::class, 'edit'])->name('admins/users/edit');
+
+    // User List
+    Route::get('admins/user-role/index', [UserRoleController::class, 'index'])->name('admins/user-role');
+    Route::get('admins/user-role/create/{id}', [UserRoleController::class, 'create'])->name('admins/user-role/create');
+    Route::post('admins/user-role/store/{id}', [UserRoleController::class, 'store'])->name('admins/user-role/store');
 
     // siswa
     Route::get('admins/siswa/index', [SiswaController::class, 'index'])->name('admins/siswa/index');
