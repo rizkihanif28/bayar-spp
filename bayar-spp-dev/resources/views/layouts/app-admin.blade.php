@@ -87,19 +87,17 @@
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li>
-                                    <a class="dropdown-item" href="/admins/users/index">
+                                    <a class="dropdown-item" href="/admins/user/index">
                                         <i class="bi bi-people-fill"></i>
-                                        User
+                                        Users
                                     </a>
                                 </li>
-
                                 <li>
                                     <a class="dropdown-item" href="/admins/user-role/index">
-                                        <i class="bi bi-people"></i>
+                                        <i class="bi bi-person-workspace"></i>
                                         User Role
                                     </a>
                                 </li>
-
                                 <li>
                                     <a class="dropdown-item" href="/admins/siswa/index">
                                         <i class="bi bi-person-lines-fill"></i>
@@ -171,15 +169,18 @@
                                 data-bs-toggle="dropdown" aria-expanded="false">
                                 <img alt="image" src="{{ asset('assets/img/avatar/avatar-1.png') }}"
                                     style="width: 30px" class="rounded-circle mr-1" />
-                                <div class="d-sm-none d-lg-inline-block">Administrator</div>
+                                <div class="d-sm-none d-lg-inline-block">{{ Auth::user()->name }}</div>
                             </a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a class="dropdown-item"> {{-- href="{{ route('/admins/users/edit', Auth::user()->id) }}"> --}}
-                                        <i>class="bi bi-person-bounding-box"></i>
-                                        Profil
-                                    </a>
+                                    <form action="">
+                                        <button class="dropdown-item">
+                                            <i class="bi bi-person-bounding-box"></i>
+                                            Profil
+                                        </button>
+                                    </form>
                                 </li>
+
                                 <li>
                                     <form action="/logout" method="post">
                                         @csrf

@@ -24,7 +24,7 @@ class Tagihan extends Model
 
     public function transaksi()
     {
-        return $this->hasMany('App\Models\Transaksi', 'tagihan_id', 'id');
+        return $this->hasMany(Transaksi::class);
     }
 
     public function transaksiToday()

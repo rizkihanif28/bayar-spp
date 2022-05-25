@@ -20,4 +20,9 @@ class Periode extends Model
     {
         return $this->hasMany(Kelas::class);
     }
+
+    public function Transaksi()
+    {
+        return $this->hasOne(Transaksi::class);
+    }
 }

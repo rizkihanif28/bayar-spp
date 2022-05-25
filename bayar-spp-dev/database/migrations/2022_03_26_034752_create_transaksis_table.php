@@ -18,7 +18,9 @@ class CreateTransaksisTable extends Migration
             $table->integer('tu_id');
             $table->integer('siswa_id');
             $table->integer('tagihan_id');
-            $table->boolean('is_lunas')->nullable();
+            $table->integer('periode_id');
+            $table->string('nis')->nullable();
+            $table->date('tanggal_bayar')->nullable();
             $table->timestamps();
         });
     }

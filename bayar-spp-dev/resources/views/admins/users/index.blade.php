@@ -3,15 +3,15 @@
 @section('content-admin')
     <div class="page-header" style="margin-top: 7%">
         <h2 class="page-title">
-            Users
+            User List
         </h2>
     </div>
     <div class="row">
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <div class="card-title">Users</div>
-                    {{-- <a href="{{ route('admins/users/create') }}" class="btn btn-primary btn-sm ml-5">+ Tambah User</a> --}}
+                    <div class="card-title">User List</div>
+                    <a href="{{ route('admins/user/create') }}" class="btn btn-primary btn-sm ml-3">+ Tambah User</a>
                 </div>
                 @if (session()->has('msg'))
                     <div class="card=alert alert alert-{{ session()->get('type') }}" id="message"
@@ -25,30 +25,33 @@
                     </div>
                 @endif
                 <div class="table-responsive mt-3 p-3 text-center">
-                    <table class="table table-striped card-table table-hover table-vcenter text-nowrap" id="table-users">
+                    <table class="table table-striped card-table table-hover table-vcenter text-nowrap" id="table-userlist">
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Nama</th>
-                                {{-- <th>Role</th> --}}
+                                <th>Nama Siswa</th>
+                                <th>Username</th>
                                 <th>Email</th>
-                                <th>Tanggal</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($users as $index => $item)
+                            @foreach ($user as $item)
                                 <tr>
-                                    <td><span class="text-muted">{{ $index + 1 }}</span></td>
-                                    <td>
-                                        @if (Auth::user()->id == $item->id)
-                                            <span class="tag tag-teal">{{ $item->name }}</span>
-                                        @else
-                                            {{ $item->name }}
-                                        @endif
-                                    </td>
-                                    {{-- <td>{{ $item->roles->name }}</td> --}}
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $item->name }}</td>
+                                    <td>{{ $item->username }}</td>
                                     <td>{{ $item->email }}</td>
-                                    <td>{{ $item->created_at->format('d-m-Y') }}</td>
+                                    <td>
+                                        <a href="{{ route('admins/user/edit', $item->id) }}"
+                                            class="btn btn-success btn-sm">
+                                            <i class="bi bi-pencil"></i>
+                                        </a>
+                                        <a href="{{ route('admins/user/create', $item->id) }}"
+                                            class="btn btn-danger btn-sm">
+                                            <i class="bi bi-trash3"></i>
+                                        </a>
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -57,4 +60,12 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('js')
+    <script>
+        requirejs(["datatables"], function() {
+            $("#table-userlist").dataTable();
+        });
+    </script>
 @endsection

@@ -51,9 +51,9 @@ class LoginController extends Controller
     {
         if ($user->hasRole('admin')) {
             return redirect()->route('dashboard/admin');
-        } elseif ($user->hasRole('tatus')) {
+        } elseif ($user->hasRole('tata usaha')) {
             return redirect()->route('dashboard/tatus');
-        } elseif ($user->hasRole('user')) {
+        } elseif ($user->hasRole('siswa')) {
             return redirect()->route('dashboard/siswa');
         }
         return redirect('login');

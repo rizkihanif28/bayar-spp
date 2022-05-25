@@ -53,15 +53,11 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => ['required', 'max:255'],
+            'username' => ['required', 'max:255', 'unique:users'],
             'email' => ['required', 'email:dns', 'unique:users'],
             'password' => ['required', 'min:3', 'confirmed'],
         ]);
     }
-
-    // public function index()
-    // {
-    //     return view('register');
-    // }
 
     /**
      * Create a new user instance after a valid registration.
@@ -73,12 +69,12 @@ class RegisterController extends Controller
     {
         $user = User::create([
             'name' => $data['name'],
+            'username' => $data['username'],
             'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+            'password' => $data['password'],
         ]);
 
         $user->assignRole('siswa');
-
         return $user;
     }
 
@@ -88,13 +84,15 @@ class RegisterController extends Controller
     // {
     //     $validatedData = $request->validate([
     //         'name' => ['name'],
+    //         'username' => ['username'],
     //         'email' => ['email'],
     //         'password' => ['password']
     //     ]);
-    //     $validatedData['password'] = Hash::make($validatedData['password']);
     //     // create user ke db
-    //     User::create($validatedData);
+    //     $user = User::create($validatedData);
+
+    //     return $user;
     //     // flash message
-    //     return redirect('/login');
+    //     // return redirect('/login');
     // }
 }

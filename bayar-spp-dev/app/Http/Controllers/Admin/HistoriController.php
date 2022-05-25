@@ -13,7 +13,6 @@ class HistoriController extends Controller
         return view('admins/histori/index', [
             'histori' => $histori,
             'title' => 'Histori Pembayaran'
-
         ]);
     }
 }

@@ -9,7 +9,6 @@ class Siswa extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'user_id',
         'jurusan_id',
         'kelas_id',
         'nis',
@@ -19,11 +18,6 @@ class Siswa extends Model
         'alamat',
         'telepon',
     ];
-
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
 
     public function transaksi()
     {
@@ -43,5 +37,10 @@ class Siswa extends Model
     public function kelas()
     {
         return $this->hasOne('App\Models\Kelas', 'id', 'kelas_id');
+    }
+
+    public function histori()
+    {
+        return $this->belongsTo(Histori::class);
     }
 }

@@ -4,16 +4,30 @@
     <div class="row justify-content-center">
         <div class="row justify-content-center">
             <div class="col-md-5">
+                @foreach ($errors->all() as $error)
+                    {{ $error }}
+                @endforeach
                 <form method="POST" action="{{ route('register') }}">
                     @csrf
                     <h2 class="h3 mb-3 fw-normal text-center">Form Registrasi Siswa</h2>
 
                     <div class="form-floating">
-                        <input type="name" name="name" class="form-control rounded-top @error('name') is-invalid @enderror"
-                            id="name" placeholder="Name" required autocomplete="name" value="{{ old('name') }}" autofocus>
-                        <label for="name">{{ __('Name') }}</label>
-
+                        <input id="name" type="text" class="form-control rounded-top @error('name') is-invalid @enderror"
+                            name="name" value="{{ old('name') }}" placeholder="Nama Lengkap" required autocomplete="name"
+                            autofocus>
+                        <label for="name">{{ __('Nama Lengkap') }}</label>
                         @error('name')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="form-floating">
+                        <input id="username" type="text"
+                            class="form-control rounded-top @error('username') is-invalid @enderror" name="username"
+                            value="{{ old('username') }}" placeholder="Username" required autocomplete="username"
+                            autofocus>
+                        <label for="name">{{ __('Username') }}</label>
+                        @error('username')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>

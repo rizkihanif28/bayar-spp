@@ -8,9 +8,10 @@ use App\Http\Controllers\Admin\PembayaranController as AdminPembayaranController
 use App\Http\Controllers\Admin\PeriodeController;
 use App\Http\Controllers\Admin\SiswaController;
 use App\Http\Controllers\Admin\TagihanController;
-use App\Http\Controllers\Admin\UserContoller;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\UserRoleController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Dashboard\AdminController as DashboardAdminController;
 use App\Http\Controllers\Dashboard\SiswaController as DashboardSiswaController;
 use App\Http\Controllers\Dashboard\TatusController;
@@ -44,20 +45,27 @@ Route::middleware(['auth:web'])->group(function () {
 
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout')->middleware('auth');
 
+    Route::get('register/create', [RegisterController::class, 'create']);
+    Route::post('register/store', [RegisterController::class, 'store']);
+
     // Dashboard Users
     Route::middleware('role:admin')->get('dashboard/admin', [DashboardAdminController::class, 'index'])->name('dashboard/admin');
-    Route::middleware('role:tatus')->get('dashboard/tatus', [TatusController::class, 'index'])->name('dashboard/tatus');
-    Route::middleware('role:user')->get('dashboard/siswa', [DashboardSiswaController::class, 'index'])->name('dashboard/siswa');
+    Route::middleware('role:tata usaha')->get('dashboard/tatus', [TatusController::class, 'index'])->name('dashboard/tatus');
+    Route::middleware('role:siswa')->get('dashboard/siswa', [DashboardSiswaController::class, 'index'])->name('dashboard/siswa');
 
     // {{ Route Admin }}
     // Pengguna / Users
-    Route::get('admins/users/index', [UserContoller::class, 'index'])->name('admins/users/index');
-    Route::get('admins/users/{users}/edit', [UserContoller::class, 'edit'])->name('admins/users/edit');
+    Route::get('admins/user/index', [UserController::class, 'index'])->name('admins/user/index');
+    Route::get('admins/user/create', [UserController::class, 'create'])->name('admins/user/create');
+    Route::post('admins/user/store', [UserController::class, 'store'])->name('admins/user/store');
+    Route::get('admins/user/{user}/edit', [UserController::class, 'edit'])->name('admins/user/edit');
+    Route::post('admins/user/{user}/update', [UserController::class, 'update'])->name('admins/user/update');
+    Route::post('admins/user/{user}/destroy', [UserController::class, 'destroy'])->name('admins/user/destroy');
 
-    // User List
-    Route::get('admins/user-role/index', [UserRoleController::class, 'index'])->name('admins/user-role');
-    Route::get('admins/user-role/create/{id}', [UserRoleController::class, 'create'])->name('admins/user-role/create');
-    Route::post('admins/user-role/store/{id}', [UserRoleController::class, 'store'])->name('admins/user-role/store');
+    // User Role
+    Route::get('admins/user-role/index', [UserRoleController::class, 'index'])->name('admins/user-role/index');
+    Route::get('admins/user-role/{id}/create', [UserRoleController::class, 'create'])->name('admins/user-role/create');
+    Route::post('admins/user-role/{id}/store', [UserRoleController::class, 'store'])->name('admins/user-role/store');
 
     // siswa
     Route::get('admins/siswa/index', [SiswaController::class, 'index'])->name('admins/siswa/index');
@@ -77,6 +85,11 @@ Route::middleware(['auth:web'])->group(function () {
 
     // pembayaran
     Route::get('admins/pembayaran/index', [AdminPembayaranController::class, 'index'])->name('admins/pembayaran/index');
+    Route::get('admins/pembayaran/{nis}/create', [AdminPembayaranController::class, 'create'])->name('admins/pembayaran/create');
+    Route::post('admins/pembayaran/{siswa}/store', [AdminPembayaranController::class, 'store'])->name('admins/pembayaran/store');
+    // Route::get('admins/pembayaran/create', [AdminPembayaranController::class, 'create'])->name('admins/pembayaran/create');
+
+
 
     // Data Pembayaran
     Route::get('admins/databayar/index', [DataBayarController::class, 'index'])->name('admins/databayar/index');
@@ -126,6 +139,6 @@ Route::middleware(['auth:web'])->group(function () {
 
 
     // Profil 
-    Route::get('tatus/profil/{user}/edit', [UserContoller::class, 'edit'])->name('tatus/profil/edit');
-    Route::post('tatus/profil/{user}/update', [ProfilController::class, 'update'])->name('tatus/profil/update');
+    // Route::get('tatus/profil/{user}/edit', [UserContoller::class, 'edit'])->name('tatus/profil/edit');
+    // Route::post('tatus/profil/{user}/update', [ProfilController::class, 'update'])->name('tatus/profil/update');
 });

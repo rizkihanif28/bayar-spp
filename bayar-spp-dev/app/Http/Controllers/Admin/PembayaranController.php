@@ -22,10 +22,8 @@ class PembayaranController extends Controller
     public function index()
     {
         $siswa = Siswa::all();
-        $transaksi = Transaksi::all();
         return view('admins/pembayaran/index', [
             'siswa' => $siswa,
-            'transaksi' => $transaksi,
             'title' => 'Pembayaran'
         ]);
     }
@@ -35,9 +33,15 @@ class PembayaranController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($nis)
     {
-        //
+        $siswa = Siswa::with(['kelas'])
+            ->where('nis', $nis)
+            ->first();
+        return view('admins/pembayaran/form', [
+            'title' => 'Create Pembayaran',
+            'siswa' => $siswa
+        ]);
     }
 
     /**
@@ -48,36 +52,14 @@ class PembayaranController extends Controller
      */
     public function store(Request $request, Siswa $siswa, Tatus $tatus)
     {
-        DB::beginTransaction();
-        // mulai transaksi, membersihkan request->jumlah dari titik dan koma
-        $jumlah = preg_replace("/[,.]/", "", $request->jumlah);
+        $siswa = Siswa::all();
+        $tatus = Tatus::all();
 
-        // membuat transaksi baru
-        $transaksi = Transaksi::make([
-            'tu_id' => $tatus,
-            'siswa_id' => $siswa->id,
-            'tagihan_id' => $request->tagihan_id,
-            'is_lunas' => 1
+        return view('admins/pembayaran/index', [
+            'title' => 'Pembayaran SPP',
+            'siswa' => $siswa,
+            'tatus' => $tatus
         ]);
-
-        // menyimpan transaksi
-        if ($transaksi->save()) {
-            $histori = Histori::create([
-                'transaksi_id' => $transaksi->id,
-                'jumlah' => $jumlah
-            ]);
-        }
-
-        if ($histori) {
-            DB::commit();
-            return response()->json(['msg' => 'Transaksi berhasil dilakukan']);
-        } else {
-            DB::rollBack();
-            return redirect()->route('admins/pembayaran/index')->with([
-                'type' => 'danger',
-                'msg' => 'Terjadi kesalahan'
-            ]);
-        }
     }
 
     /**
@@ -86,7 +68,7 @@ class PembayaranController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function getHistori()
     {
         //
     }

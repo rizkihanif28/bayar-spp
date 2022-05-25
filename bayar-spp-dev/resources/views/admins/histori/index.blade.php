@@ -32,7 +32,7 @@
                                 <th class="w-1">No</th>
                                 <th>Tanggal</th>
                                 <th>Siswa</th>
-                                <th>Tagihan</th>
+                                {{-- <th>Tagihan</th> --}}
                                 <th>Jumlah</th>
                             </tr>
                         </thead>
@@ -42,7 +42,7 @@
                                     <td><span class="text-muted">{{ $index + 1 }}</span></td>
                                     <td>{{ $item->created_at->format('d-m-Y') }}</td>
                                     <td>{{ $item->siswa->nama }}</td>
-                                    <td>{{ $item->tagihan->nama }}</td>
+                                    {{-- <td>{{ $item->tagihan->nama }}</td> --}}
                                     <td>IDR. {{ format_idr($item->jumlah) }}</td>
                                 </tr>
                             @endforeach

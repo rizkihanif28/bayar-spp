@@ -144,13 +144,13 @@
                                 <div class="d-sm-none d-lg-inline-block">Tata Usaha</div>
                             </a>
                             <ul class="dropdown-menu ">
-                                <li>
+                                {{-- <li>
                                     <a class="dropdown-item"
                                         href="{{ route('/tatus/profil/edit', Auth::user()->id) }}">
                                         <i class="bi bi-person-bounding-box"></i>
                                         Profil
                                     </a>
-                                </li>
+                                </li> --}}
 
                                 <li>
                                     <form action="/logout" method="post">

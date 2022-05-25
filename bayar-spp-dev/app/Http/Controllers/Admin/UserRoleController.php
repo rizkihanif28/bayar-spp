@@ -13,8 +13,8 @@ class UserRoleController extends Controller
     {
         $users = User::all();
         return view('admins/user-role/index', [
-            'users' => $users,
-            'title' => 'Users List'
+            'user' => $users,
+            'title' => 'User Role'
         ]);
     }
 
@@ -22,10 +22,11 @@ class UserRoleController extends Controller
     {
         $user = User::findOrFail($id);
         $roles = Role::all();
-        return view('admins/user-role/create', [
+
+        return view('admins/user-role/form', [
+            'title' => 'Edit role',
             'user' => $user,
-            'role' => $roles,
-            'title' => 'Create User'
+            'roles' => $roles
         ]);
     }
 
@@ -33,11 +34,10 @@ class UserRoleController extends Controller
     {
         $user = User::findOrFail($id);
         $user->syncRoles($request->role);
-        // $user = User::make($request->input());
 
-        return redirect()->route('admins/user-role')->with([
+        return redirect()->route('admins/user-role/index')->with([
             'type' => 'success',
-            'msg' => 'User dengan nama : ' . $user->name . ' berhasil diubah'
+            'msg' => 'Role berhasil disimpan!'
         ]);
     }
 }

@@ -25,7 +25,6 @@
                     <div class="row">
                         <div class="col-12">
                             @csrf
-
                             <div class="form-group">
                                 <label class="form-label">NIS</label>
                                 <input type="text" placeholder="NIS" name="nis" class="form-control"

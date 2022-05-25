@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Traits\HasRoles;
@@ -21,6 +22,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'username',
         'email',
         'password',
     ];
@@ -44,13 +46,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function tatus()
+    protected function setPasswordAttribute($password)
     {
-        return $this->hasOne(Tatus::class);
-    }
-
-    public function siswa()
-    {
-        return $this->hasOne(Siswa::class);
+        $this->attributes['password'] = Hash::make($password);
     }
 }
