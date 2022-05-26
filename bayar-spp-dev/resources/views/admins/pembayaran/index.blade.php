@@ -55,7 +55,7 @@
 
                                     <td class="text-center">
                                         <a class="btn btn-primary btn-sm"
-                                            href="{{ route('admins/pembayaran/create', $item->id) }}" title="bayar">
+                                            href="{{ route('admins/pembayaran/create', $item->nis) }}" title="bayar">
                                             <i class="bi bi-wallet"></i> Bayar
                                         </a>
                                     </td>

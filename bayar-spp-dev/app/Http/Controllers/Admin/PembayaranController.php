@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Histori;
+use App\Models\Kelas;
+use App\Models\Periode;
 use App\Models\Siswa;
 use App\Models\Tagihan;
 use App\Models\Tatus;
@@ -33,14 +35,16 @@ class PembayaranController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($nis)
+    public function create(Tatus $tatus, $id)
     {
-        $siswa = Siswa::with(['kelas'])
-            ->where('nis', $nis)
-            ->first();
+        $siswa = Siswa::all()->first();
+        $periode = Periode::all();
+        $tagihan = Tagihan::all();
         return view('admins/pembayaran/form', [
             'title' => 'Create Pembayaran',
-            'siswa' => $siswa
+            'siswa' => $siswa,
+            'periode' => $periode,
+            'tagihan' => $tagihan
         ]);
     }
 
@@ -50,16 +54,42 @@ class PembayaranController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Siswa $siswa, Tatus $tatus)
+    public function store(Request $request)
     {
-        $siswa = Siswa::all();
-        $tatus = Tatus::all();
+        // $siswa = Siswa::all();
+        // $tatus = Tatus::all();
+        // $tagihan = Tagihan::all();
+        // $periode = Periode::all();
 
-        return view('admins/pembayaran/index', [
-            'title' => 'Pembayaran SPP',
-            'siswa' => $siswa,
-            'tatus' => $tatus
-        ]);
+        $pembayaran = Transaksi::with(['tatus', $request->tu_id])
+            ->where('siswa_id', $request->siswa_id)
+            ->where('tagihan_id', $request->tagihan_id)
+            ->where('periode_id', $request->periode_id)
+            ->toArray();
+
+        if (!$pembayaran) {
+            DB::transaction(function () use ($request) {
+                Transaksi::create([
+                    'tu_id' => $request->tu_id,
+                    'siswa_id' => $request->siswa_id,
+                    'tagihan_id' => $request->tagihan_id,
+                    'periode_id' => $request->periode_id,
+                    'nis' => $request->nis,
+                    'tanggal_bayar' => $request->tanggal_bayar
+
+                ]);
+            });
+
+            return redirect()->route('admins/pembayaran/histori', [
+                'type' => 'success',
+                'msg' => 'Transaksi berhasil'
+            ]);
+        } else {
+            return back()->with([
+                'type' => 'danger',
+                'msg' => 'Transaksi gagal'
+            ]);
+        }
     }
 
     /**
