@@ -13,26 +13,23 @@ class Transaksi extends Model
         'tu_id',
         'siswa_id',
         'tagihan_id',
-        'periode_id',
         'nis',
-        'tanggal_bayar',
+        'tanggal_bayar'
     ];
+
+    public function tatus()
+    {
+        return $this->belongsTo(Tatus::class);
+    }
 
     public function siswa()
     {
-        return $this->hasOne(Siswa::class);
+        return $this->belongsTo(Siswa::class);
     }
-    public function tatus()
-    {
-        return $this->hasOne(Tatus::class);
-    }
+
     public function tagihan()
     {
-        return $this->hasOne(Tagihan::class);
-    }
-    public function periode()
-    {
-        return $this->belongsToMany(Periode::class);
+        return $this->belongsTo(Tagihan::class);
     }
 
     public function histori()

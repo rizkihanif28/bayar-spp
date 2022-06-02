@@ -10,8 +10,11 @@ class Histori extends Model
     use HasFactory;
     protected $fillable = [
         'transaksi_id',
+        'tu_id',
         'siswa_id',
-        'jumlah',
+        'tagihan_id',
+        'nis',
+        'tanggal_bayar'
     ];
 
     public function transaksi()
@@ -21,6 +24,16 @@ class Histori extends Model
 
     public function siswa()
     {
-        return $this->hasOne('App\Models\Siswa', 'id', 'siswa_id');
+        return $this->belongsTo('App\Models\Siswa', 'id', 'siswa_id');
+    }
+
+    public function tatus()
+    {
+        return $this->belongsTo(Tatus::class);
+    }
+
+    public function tagihan()
+    {
+        return $this->belongsTo(Tagihan::class);
     }
 }

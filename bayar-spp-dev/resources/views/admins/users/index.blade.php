@@ -29,7 +29,7 @@
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Nama Siswa</th>
+                                <th>Nama</th>
                                 <th>Username</th>
                                 <th>Email</th>
                                 <th>Aksi</th>
@@ -47,10 +47,14 @@
                                             class="btn btn-success btn-sm">
                                             <i class="bi bi-pencil"></i>
                                         </a>
-                                        <a href="{{ route('admins/user/create', $item->id) }}"
-                                            class="btn btn-danger btn-sm">
+                                        <a class="btn btn-danger btn-sm btn-delete" href="#!" data-id="{{ $item->id }}"
+                                            title="delete item">
                                             <i class="bi bi-trash3"></i>
                                         </a>
+                                        <form action="{{ route('admins/user/destroy', $item->id) }}" method="POST"
+                                            id="form-{{ $item->id }}">
+                                            @csrf
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach
@@ -66,6 +70,30 @@
     <script>
         requirejs(["datatables"], function() {
             $("#table-userlist").dataTable();
+        });
+    </script>
+    <script>
+        require(['jquery', 'sweetalert'], function($, sweetalert) {
+            $(document).ready(function() {
+
+                $(document).on('click', '.btn-delete', function() {
+                    formid = $(this).attr('data-id');
+                    swal({
+                        title: 'Anda yakin ingin menghapus?',
+                        text: 'periode yang dihapus tidak dapat dikembalikan',
+                        dangerMode: true,
+                        buttons: {
+                            cancel: true,
+                            confirm: true,
+                        },
+                    }).then((result) => {
+                        if (result) {
+                            $('#form-' + formid).submit();
+                        }
+                    })
+                })
+
+            });
         });
     </script>
 @endsection

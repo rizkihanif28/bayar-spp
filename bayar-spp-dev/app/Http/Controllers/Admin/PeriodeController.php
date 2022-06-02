@@ -27,7 +27,7 @@ class PeriodeController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama' => 'required|max:255',
+            'tahun' => 'required|max:4',
             'tgl_mulai' => 'required|date|before:' . $request->tgl_selesai,
             'tgl_selesai' => 'required|date',
             'is_active' => 'nullable|boolean',
@@ -70,7 +70,7 @@ class PeriodeController extends Controller
     public function update(Request $request, Periode $periode)
     {
         $request->validate([
-            'nama' => 'required|max:255',
+            'tahun' => 'required|max:4',
             'tgl_mulai' => 'required|date|before:' . $request->tgl_selesai,
             'tgl_selesai' => 'required|date',
             'is_active' => 'nullable|boolean',

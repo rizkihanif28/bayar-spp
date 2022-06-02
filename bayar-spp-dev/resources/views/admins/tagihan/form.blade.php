@@ -27,25 +27,14 @@
                         <div class="col-12">
                             @csrf
                             <div class="form-group">
-                                <label class="form-label">Nama Tatausaha</label>
-                                <select id="select-beast" class="form-control custom-select" name="tu_id">
-                                    @foreach ($tatus as $item)
-                                        <option value="{{ $item->id }}">
-                                            {{ $item->nama }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="form-label">Nama</label>
-                                <input type="name" class="form-control" name="nama" placeholder="Nama"
-                                    value="{{ isset($tagihan) ? $tagihan->nama : old('nama') }}" required>
+                                <label class="form-label">Periode</label>
+                                <input type="text" placeholder="Periode" name="periode" class="form-control"
+                                    value="{{ isset($tagihan) ? $tagihan->periode : old('periode') }}" required>
                             </div>
                             <div class="form-group">
                                 <label class="form-label">Jumlah</label>
-                                <input type="number" class="form-control" name="jumlah"
-                                    value="{{ isset($tagihan) ? $tagihan->jumlah : old('jumlah') }}" required>
+                                <input type="number" placeholder="Jumlah" name="jumlah" class="form-control"
+                                    value="{{ isset($tagihan) ? $tagihan->jumlah : old('periode') }}" required>
                             </div>
                             <div class="form-group">
                                 <div class="form-label">Peserta</div>

@@ -24,14 +24,13 @@
                         {{ Session::get('msg') }}
                     </div>
                 @endif
-                <div class="table-responsive p-3 text-center">
+                <div class="p-3 text-center">
                     <table id="table-tagihan" class="table table-striped card-table table-hover">
                         <thead>
                             <tr>
                                 <th>No</th>
-                                {{-- <th>Tatausaha</th> --}}
-                                <th>Nama</th>
                                 <th>Jumlah</th>
+                                <th>Periode</th>
                                 <th>Peserta</th>
                                 <th>Aksi</th>
                             </tr>
@@ -40,10 +39,8 @@
                             @foreach ($tagihan as $index => $item)
                                 <tr>
                                     <td><span class="text-muted"> {{ $index + 1 }}</span></td>
-                                    {{-- <td>{{ $item->tu_id->nama }}{{ isset($item->tagihan->tu_id) ? '(' . $item->tagihan->tu_id->nama . ')' : '' }}
-                                    </td> --}}
-                                    <td>{{ $item->nama }}</td>
                                     <td>@currency($item->jumlah)</td>
+                                    <td>{{ $item->periode }}</td>
                                     <td>
                                         @if ($item->wajib_semua != null)
                                             <p>Wajib Semua</p>
@@ -54,11 +51,11 @@
                                             title="lihat detail">
                                             <i class="bi bi-ticket-detailed"></i>
                                         </a> --}}
-                                        <a class="icon" href="{{ route('admins/tagihan/edit', $item->id) }}"
-                                            title="edit item">
+                                        <a class="btn btn-success btn-sm"
+                                            href="{{ route('admins/tagihan/edit', $item->id) }}" title="edit item">
                                             <i class="bi bi-pencil"></i>
                                         </a>
-                                        <a class="icon btn-delete" href="#!" data-id="{{ $item->id }}"
+                                        <a class="btn btn-danger btn-sm btn-delete" href="#!" data-id="{{ $item->id }}"
                                             title="delete item">
                                             <i class="bi bi-trash3"></i>
                                         </a>

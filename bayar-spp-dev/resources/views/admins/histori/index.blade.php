@@ -16,34 +16,41 @@
                 <div class="card-header">
                     <h4>Histori</h4>
                 </div>
-                <div class="card-body">
-                    @if ($errors->any())
-                        <div class="alert alert-danger">
-                            @foreach ($errors as $error)
-                                {{ $error }} <br>
-                            @endforeach
-                        </div>
-                    @endif
-                </div>
+                @if (Session::get('msg'))
+                    <div class="card-alert alert alert-{{ Session::get('type') }}" id="message"
+                        style="border-radius: 0px !important">
+                        @if (Session::get('type') == 'success')
+                            <i class="bi bi-check-lg" aria-hidden="true"></i>
+                        @else
+                            <i class="bi bi-x-lg" aria-hidden="true"></i>
+                        @endif
+                        {{ Session::get('msg') }}
+                    </div>
+                @endif
                 <div class="p-3 text-center">
                     <table id="table-histori" class="table table-striped card-table table-hover">
                         <thead>
                             <tr>
                                 <th class="w-1">No</th>
-                                <th>Tanggal</th>
-                                <th>Siswa</th>
-                                {{-- <th>Tagihan</th> --}}
+                                <th>Nama Siswa</th>
+                                <th>Kelas</th>
+                                <th>NIS</th>
+                                <th>Tanggal Bayar</th>
+                                <th>Bulan</th>
                                 <th>Jumlah</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($histori as $index => $item)
                                 <tr>
-                                    <td><span class="text-muted">{{ $index + 1 }}</span></td>
-                                    <td>{{ $item->created_at->format('d-m-Y') }}</td>
+                                    {{-- <td><span class="text-muted">{{ $index + 1 }}</span></td> --}}
+                                    {{-- <td>{{ $item->created_at->format('d-m-Y') }}</td> --}}
+                                    <td>{{ $loop->iteration }}</td>
                                     <td>{{ $item->siswa->nama }}</td>
-                                    {{-- <td>{{ $item->tagihan->nama }}</td> --}}
-                                    <td>IDR. {{ format_idr($item->jumlah) }}</td>
+                                    <td>{{ $item->kelas->nama }}</td>
+                                    <td>{{ $item->siswa->nis }}</td>
+                                    <td>{{ $item->transaksi->tanggal_bayar }}</td>
+                                    <td>{{ $item->transaksi->jumlah }}</td>
                                 </tr>
                             @endforeach
                         </tbody>

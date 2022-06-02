@@ -44,7 +44,7 @@
                                     <td><span class="text-muted">{{ $index + 1 }}</span></td>
                                     <td>{{ $item->nis }}</td>
                                     <td>{{ $item->nama }}</td>
-                                    <td>{{ $item->kelas->nama }}{{ isset($item->kelas->periode) ? '(' . $item->kelas->periode->nama . ')' : '' }}
+                                    <td>{{ $item->kelas->nama }}{{ isset($item->kelas->periode) ? '(' . $item->kelas->periode->tahun . ')' : '' }}
                                     </td>
                                     <td>{{ $item->jurusan->nama }}{{ isset($item->siswa->jurusan) ? '(' . $item->siswa->jurusan->nama . ')' : '' }}
                                     </td>
@@ -56,11 +56,11 @@
                                             title="lihat detail">
                                             <i class="bi bi-ticket-detailed"></i>
                                         </a> --}}
-                                        <a class="icon" href="{{ route('admins/siswa/edit', $item->id) }}"
-                                            title="edit item">
+                                        <a class="btn btn-success btn-sm"
+                                            href="{{ route('admins/siswa/edit', $item->id) }}" title="edit item">
                                             <i class="bi bi-pencil"></i>
                                         </a>
-                                        <a class="icon btn-delete" href="#!" data-id="{{ $item->id }}"
+                                        <a class="btn btn-danger btn-sm btn-delete" href="#!" data-id="{{ $item->id }}"
                                             title="delete item">
                                             <i class="bi bi-trash3"></i>
                                         </a>

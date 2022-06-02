@@ -21,26 +21,21 @@ class Siswa extends Model
 
     public function transaksi()
     {
-        return $this->hasMany('App\Models\Transaksi', 'siswa_id', 'id');
-    }
-
-    public function tagihan()
-    {
-        return $this->hasMany(Tagihan::class);
+        return $this->hasMany(Transaksi::class);
     }
 
     public function jurusan()
     {
-        return $this->hasOne('App\Models\Jurusan', 'id', 'jurusan_id');
+        return $this->belongsTo(Jurusan::class);
     }
 
     public function kelas()
     {
-        return $this->hasOne('App\Models\Kelas', 'id', 'kelas_id');
+        return $this->belongsTo(Kelas::class);
     }
 
     public function histori()
     {
-        return $this->belongsTo(Histori::class);
+        return $this->hasMany(Histori::class);
     }
 }

@@ -4,13 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Kelas extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'periode_id',
+        'jurusan_id',
         'nama'
     ];
 
@@ -19,8 +20,8 @@ class Kelas extends Model
         return $this->hasMany(Siswa::class);
     }
 
-    public function periode()
+    public function jurusan()
     {
-        return $this->hasOne('App\Models\Periode', 'id', 'periode_id');
+        return $this->belongsTo(Jurusan::class);
     }
 }

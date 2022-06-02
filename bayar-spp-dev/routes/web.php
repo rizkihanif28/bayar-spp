@@ -85,6 +85,7 @@ Route::middleware(['auth:web'])->group(function () {
 
     // pembayaran
     Route::get('admins/pembayaran/index', [AdminPembayaranController::class, 'index'])->name('admins/pembayaran/index');
+    Route::get('tagihan-siswa/{periode}', [AdminPembayaranController::class, 'spp'])->name('pembayaran/spp');
     Route::get('admins/pembayaran/{nis}/create', [AdminPembayaranController::class, 'create'])->name('admins/pembayaran/create');
     Route::post('admins/pembayaran/{nis}/store', [AdminPembayaranController::class, 'store'])->name('admins/pembayaran/store');
     Route::get('admins/pembayaran/histori', [AdminPembayaranController::class, 'getHistori'])->name('admins/pembayaran/histori');
@@ -104,14 +105,6 @@ Route::middleware(['auth:web'])->group(function () {
     Route::post('admins/jurusan/{jurusan}/update', [JurusanController::class, 'update'])->name('admins/jurusan/update');
     Route::post('admins/jurusan/{jurusan}/destroy', [JurusanController::class, 'destroy'])->name('admins/jurusan/destroy');
 
-    // periode
-    Route::get('admins/periode/index', [PeriodeController::class, 'index'])->name('admins/periode/index');
-    Route::get('admins/periode/create', [PeriodeController::class, 'create'])->name('admins/periode/create');
-    Route::post('admins/periode/store', [PeriodeController::class, 'store'])->name('admins/periode/store');
-    Route::get('admins/periode/{periode}/edit', [PeriodeController::class, 'edit'])->name('admins/periode/edit');
-    Route::post('admins/periode/{periode}/update', [PeriodeController::class, 'update'])->name('admins/periode/update');
-    Route::post('admins/periode/{periode}/destroy', [PeriodeController::class, 'destroy'])->name('admins/periode/destroy');
-
     // kelas
     Route::get('admins/kelas/index', [KelasController::class, 'index'])->name('admins/kelas/index');
     Route::get('admins/kelas/create', [KelasController::class, 'create'])->name('admins/kelas/create');
@@ -121,6 +114,7 @@ Route::middleware(['auth:web'])->group(function () {
     Route::post('admins/kelas/{kelas}/destroy', [KelasController::class, 'destroy'])->name('admins/kelas/destroy');
 
     // Laporan
+    Route::get('admins/laporan/index',);
 
 
     // Profil 

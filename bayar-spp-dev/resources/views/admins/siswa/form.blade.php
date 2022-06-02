@@ -43,7 +43,7 @@
                                     @foreach ($kelas as $item)
                                         <option value="{{ $item->id }}"
                                             {{ isset($siswa) ? ($item->id == $siswa->kelas_id ? 'selected' : '') : '' }}>
-                                            {{ $item->nama }} - {{ isset($item->periode) ? $item->periode->nama : '' }}
+                                            {{ $item->nama }} - {{ isset($item->periode) ? $item->periode->tahun : '' }}
                                         </option>
                                     @endforeach
                                 </select>
@@ -82,7 +82,7 @@
                                 <label class="form-label w-100">Alamat</label>
                                 {{-- <textarea name="alamat" id="alamat" placeholder="Alamat" class="col-12"></textarea> --}}
                                 <input placeholder="Alamat" name="alamat" class="form-control"
-                                    value="{{ isset($siswa) ? $siswa->nama : old('alamat') }}" required>
+                                    value="{{ isset($siswa) ? $siswa->alamat : old('alamat') }}" required>
                             </div>
 
                             <div class="form-group">

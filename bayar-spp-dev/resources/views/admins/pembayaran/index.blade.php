@@ -34,9 +34,7 @@
                                 <th>NIS</th>
                                 <th>Nama</th>
                                 <th>Kelas</th>
-                                <th>Jurusan</th>
                                 <th>JK</th>
-                                <th>Telepon</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -46,12 +44,8 @@
                                     <td><span class="text-muted">{{ $index + 1 }}</span></td>
                                     <td>{{ $item->nis }}</td>
                                     <td>{{ $item->nama }}</td>
-                                    <td>{{ $item->kelas->nama }}{{ isset($item->kelas->periode) ? '(' . $item->kelas->periode->nama . ')' : '' }}
-                                    </td>
-                                    <td>{{ $item->jurusan->nama }}{{ isset($item->siswa->jurusan) ? '(' . $item->siswa->jurusan->nama . ')' : '' }}
-                                    </td>
+                                    <td>{{ $item->kelas->nama }} - {{ $item->jurusan->nama }}</td>
                                     <td>{{ $item->jenis_kelamin }}</td>
-                                    <td>{{ $item->telepon }}</td>
 
                                     <td class="text-center">
                                         <a class="btn btn-primary btn-sm"

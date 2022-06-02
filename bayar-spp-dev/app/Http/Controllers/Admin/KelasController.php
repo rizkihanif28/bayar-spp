@@ -20,9 +20,7 @@ class KelasController extends Controller
 
     public function create()
     {
-        $periode = Periode::all();
         return view('admins/kelas/form', [
-            'periode' => $periode,
             'title' => 'Tambah Kelas'
         ]);
     }
@@ -30,7 +28,6 @@ class KelasController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'periode_id' => 'nullable|numeric',
             'nama' => 'required|max:255',
         ]);
 
@@ -55,9 +52,7 @@ class KelasController extends Controller
      */
     public function edit(Kelas $kelas)
     {
-        $periode = Periode::all();
         return view('admins/kelas/form', [
-            'periode' => $periode,
             'kelas' => $kelas,
             'title' => 'Edit Kelas'
         ]);
@@ -73,7 +68,6 @@ class KelasController extends Controller
     public function update(Request $request, Kelas $kelas)
     {
         $request->validate([
-            'periode_id' => 'nullable|numeric',
             'nama' => 'required|max:255',
         ]);
 

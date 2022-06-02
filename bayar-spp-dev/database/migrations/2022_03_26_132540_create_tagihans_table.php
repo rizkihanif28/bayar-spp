@@ -15,11 +15,9 @@ class CreateTagihansTable extends Migration
     {
         Schema::create('tagihans', function (Blueprint $table) {
             $table->id();
-            $table->integer('tu_id');
-            $table->string('nama');
-            $table->double('jumlah');
+            $table->string('periode')->nullable();
+            $table->string('jumlah')->nullable();
             $table->boolean('wajib_semua')->nullable();
-            $table->integer('kelas_id')->nullable();
             $table->timestamps();
         });
     }

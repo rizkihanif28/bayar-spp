@@ -15,13 +15,13 @@ class Tatus extends Model
         'email'
     ];
 
-    public function Transaksi()
+    public function transaksi()
     {
         return $this->hasMany(Transaksi::class);
     }
 
-    public function Tagihan()
+    public function histori()
     {
-        return $this->hasMany(Tagihan::class);
+        return $this->hasOne(Histori::class);
     }
 }

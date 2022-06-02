@@ -11,7 +11,7 @@
             <form action="{{ isset($user) ? route('admins/user/update', $user->id) : route('admins/user/store') }}"
                 method="post" class="card">
                 <div class="card-header">
-                    <h5 class="card-title">User List</h5>
+                    <h5 class="card-title">User</h5>
                 </div>
                 <div class="card-body">
                     @if ($errors->any())
@@ -26,12 +26,12 @@
                             @csrf
                             <div class="form-group">
                                 <label class="form-label">Nama</label>
-                                <input type="name" class="form-control" name="name" placeholder="Nama Lengkap"
+                                <input type="name" class="form-control" name="name" placeholder="Nama"
                                     value="{{ isset($user) ? $user->name : old('name') }}" required>
                             </div>
                             <div class="form-group">
                                 <label class="form-label">Username</label>
-                                <input type="name" class="form-control" name="username" placeholder="Nama Lengkap"
+                                <input type="name" class="form-control" name="username" placeholder="Username"
                                     value="{{ isset($user) ? $user->username : old('username') }}" required>
                             </div>
                             <div class="form-group">

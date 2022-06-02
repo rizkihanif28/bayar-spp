@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Periode;
 use App\Models\Tagihan;
 use App\Models\Tatus;
 use Illuminate\Http\Request;
@@ -31,9 +32,7 @@ class TagihanController extends Controller
      */
     public function create()
     {
-        $tatus = Tatus::all();
         return view('admins/tagihan/form', [
-            'tatus' => $tatus,
             'title' => 'Tambah Tagihan'
         ]);
     }
@@ -47,10 +46,9 @@ class TagihanController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'tu_id' => 'required|max:255',
-            'nama' => 'required|max:255',
-            'jumlah' => 'required|numeric',
-            'peserta' => 'required|numeric'
+            'periode' => 'required',
+            'jumlah' => 'required',
+            'peserta' => 'required'
         ]);
         $tagihan = Tagihan::make($request->input());
 
@@ -94,10 +92,7 @@ class TagihanController extends Controller
      */
     public function edit(Tagihan $tagihan)
     {
-        $tatus = Tatus::all();
-
         return view('admins/tagihan/form', [
-            'tatus' => $tatus,
             'tagihan' => $tagihan,
             'title' => 'Edit Tagihan'
         ]);
@@ -113,9 +108,8 @@ class TagihanController extends Controller
     public function update(Request $request, Tagihan $tagihan)
     {
         $request->validate([
-            'tu_id' => 'required|max:255',
-            'nama' => 'required|max:255',
-            'jumlah' => 'required|numeric',
+            'periode' => 'required',
+            'jumlah' => 'required',
             'peserta' => 'required|numeric'
         ]);
 

@@ -119,22 +119,12 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item disabled" href="/admins/databayar/index">
-                                        <i class="bi bi-bar-chart-steps"></i>
-                                        Data Pembayaran
-                                    </a>
-                                </li>
-                                <li>
                                     <a class="dropdown-item" href="/admins/histori/index">
                                         <i class="bi bi-bar-chart-steps"></i>
                                         Histori Pembayaran
                                     </a>
                                 </li>
                             </ul>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link active" href="/admins/periode/index">Periode</a>
                         </li>
 
                         <li class="nav-item">
@@ -145,21 +135,10 @@
                             <a class="nav-link active" href="/admins/jurusan/index">Jurusan</a>
                         </li>
 
-                        <li class="nav-item dropdown">
-                            <a class="nav-link active dropdown-toggle" href="/laporan" id="navbarDropdown" role="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/laporan">
                                 Laporan
                             </a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a class="dropdown-item" href="/lapor-bulanan">
-                                        <i class="fa-regular fa-camera"></i>Bulanan
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="/lapor-tahunan">Tahunan</a>
-                                </li>
-                            </ul>
                         </li>
                     </ul>
 

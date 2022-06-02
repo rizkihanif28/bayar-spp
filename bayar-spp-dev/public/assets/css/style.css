@@ -58,7 +58,7 @@ a.navbar-brand {
     font-size: 19px;
     display: flex;
     align-items: center;
-    margin-right: 80px;
+    margin-right: 140px;
 }
 
 .dropdown-menu {
@@ -133,13 +133,41 @@ a.dropdown-item.active {
 /* Konten Admin Pembayaran Siswa*/
 
 /* 3. footer */
-.footer {
+/* .footer {
     display: block;
     width: 100%;
     text-align: center;
     background: rgb(247, 244, 244);
     color: #333;
-    font-family: "Nunito", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    border-top: 1px solid rgba(0, 40, 100, 0.12);
+    font-size: 0.875rem;
+    padding: 1.25rem 0;
+    color: #9aa0ac;
+} */
+
+.footer a:not(.btn) {
+    color: #6e7687;
+}
+
+@media print {
+    .footer {
+        display: none;
+    }
+}
+
+.blockquote {
+    margin-bottom: 1rem;
+    font-size: 1.171875rem;
+}
+
+.blockquote-footer {
+    display: block;
+    font-size: 80%;
+    color: #868e96;
+}
+
+.blockquote-footer::before {
+    content: "\2014 \00A0";
 }
 
 .bullet {

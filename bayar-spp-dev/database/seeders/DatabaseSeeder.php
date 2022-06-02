@@ -24,34 +24,6 @@ class DatabaseSeeder extends Seeder
         $this->call(RoleSeeder::class);
         $this->call(UserSeeder::class);
 
-        // membuat seed periode
-        $periode1 = Periode::create([
-            'nama' => '2021',
-            'tgl_mulai' => '2021-01-01',
-            'tgl_selesai' => '2022-01-01',
-            'is_active' => 1
-        ]);
-        $periode2 = Periode::create([
-            'nama' => '2022',
-            'tgl_mulai' => '2022-01-01',
-            'tgl_selesai' => '2023-01-01',
-            'is_active' => 0
-        ]);
-
-        // membuat seed kelas
-        $kelas1 = Kelas::create([
-            'periode_id' => $periode1->id,
-            'nama' => 'X'
-        ]);
-        $kelas2 = Kelas::create([
-            'periode_id' => $periode1->id,
-            'nama' => 'XI'
-        ]);
-        $kelas3 = Kelas::create([
-            'periode_id' => $periode1->id,
-            'nama' => 'XII'
-        ]);
-
         // membuat seed jurusan
         $jurusan1 = Jurusan::create([
             'nama' => 'Teknik Sepeda Motor'
@@ -66,6 +38,27 @@ class DatabaseSeeder extends Seeder
             'nama' => 'Administrasi Perkantoran'
         ]);
 
+        // membuat seed kelas
+        $kelas1 = Kelas::create([
+            'nama' => 'X'
+        ]);
+        $kelas2 = Kelas::create([
+            'nama' => 'XI'
+        ]);
+        $kelas3 = Kelas::create([
+            'nama' => 'XII'
+        ]);
+
+
+        $tatus1 = User::create([
+            'name' => 'Nurul Fadilah',
+            'username' => 'tatausaha123',
+            'email' => 'tatus@gmail.com',
+            'password' => '123',
+        ]);
+
+        $tatus1->assignRole('tata usaha');
+
         //membuat seed tatausaha 
         $tatus = Tatus::create([
             'nip' => 10012,
@@ -73,21 +66,44 @@ class DatabaseSeeder extends Seeder
             'email' => 'nurdin@gmail.com'
         ]);
 
+        // create user siswa
+        $siswa = User::create([
+            'name' => 'Ridwan Hanafi',
+            'username' => 'nafi123',
+            'email' => 'ridwan@gmail.com',
+            'password' => '123',
+        ]);
+
+        $siswa->assignRole('siswa');
+
         // membuat seed tagihan
         $tagihan = Tagihan::create([
-            'tu_id' => $tatus->id,
-            'nama' => 'Januari',
+            'periode' => 2021,
             'jumlah' => 300000,
             'wajib_semua' => 1
         ]);
 
-        // membuat seed untuk data siswa
+        $tagihan = Tagihan::create([
+            'periode' => 2022,
+            'jumlah' => 400000,
+            'wajib_semua' => 1
+        ]);
+
+        $tagihan = Tagihan::create([
+            'periode' => 2023,
+            'jumlah' => 500000,
+            'wajib_semua' => 1
+        ]);
+
+
+
+        // membuat seed siswa untuk data siswa
         Siswa::create([
             'jurusan_id' => $jurusan1->id,
             'kelas_id' => $kelas2->id,
             'nis' => '283286',
-            'nama' => 'Ahmad Safriadi',
-            'email' => 'sapri@gmail.com',
+            'nama' => 'Ridwan Hanafi',
+            'email' => 'ridwan@gmail.com',
             'jenis_kelamin' => 'L',
             'alamat' => 'Jl Swadaya 2',
             'telepon' => '089526456198'

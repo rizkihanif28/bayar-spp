@@ -20,6 +20,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('admins/tagihan/{siswa?}', [PembayaranController::class, 'tagihan'])->name('api/gettagihan');
-Route::get('admins/load/{siswa?}', [SiswaController::class, 'getLoad'])->name('api/getload');
-Route::post('admins/transaksi-spp/{siswa?}', [PembayaranController::class, 'store'])->name('api/bayar-spp');
+// Route::get('admins/tagihan/{siswa?}', [PembayaranController::class, 'tagihan'])->name('api/gettagihan');
+// Route::get('admins/load/{siswa?}', [SiswaController::class, 'getLoad'])->name('api/getload');
+// Route::post('admins/transaksi-spp/{siswa?}', [PembayaranController::class, 'store'])->name('api/bayar-spp');
