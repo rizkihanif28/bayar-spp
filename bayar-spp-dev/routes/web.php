@@ -85,11 +85,10 @@ Route::middleware(['auth:web'])->group(function () {
 
     // pembayaran
     Route::get('admins/pembayaran/index', [AdminPembayaranController::class, 'index'])->name('admins/pembayaran/index');
-    Route::get('tagihan-siswa/{periode}', [AdminPembayaranController::class, 'spp'])->name('pembayaran/spp');
+    // Route::get('spp/{periode}', [AdminPembayaranController::class, 'spp'])->name('pembayaran.spp');
     Route::get('admins/pembayaran/{nis}/create', [AdminPembayaranController::class, 'create'])->name('admins/pembayaran/create');
     Route::post('admins/pembayaran/{nis}/store', [AdminPembayaranController::class, 'store'])->name('admins/pembayaran/store');
     Route::get('admins/pembayaran/histori', [AdminPembayaranController::class, 'getHistori'])->name('admins/pembayaran/histori');
-
 
     // Data Pembayaran
     Route::get('admins/databayar/index', [DataBayarController::class, 'index'])->name('admins/databayar/index');

@@ -32,25 +32,26 @@
                         <thead>
                             <tr>
                                 <th class="w-1">No</th>
+                                <th>Petugas</th>
                                 <th>Nama Siswa</th>
-                                <th>Kelas</th>
                                 <th>NIS</th>
+                                <th>Periode</th>
                                 <th>Tanggal Bayar</th>
-                                <th>Bulan</th>
                                 <th>Jumlah</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($histori as $index => $item)
+                            @foreach ($histori as $item)
                                 <tr>
                                     {{-- <td><span class="text-muted">{{ $index + 1 }}</span></td> --}}
                                     {{-- <td>{{ $item->created_at->format('d-m-Y') }}</td> --}}
                                     <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $item->petugas->nama }}</td>
                                     <td>{{ $item->siswa->nama }}</td>
-                                    <td>{{ $item->kelas->nama }}</td>
                                     <td>{{ $item->siswa->nis }}</td>
+                                    <td>{{ $item->periode }}</td>
                                     <td>{{ $item->transaksi->tanggal_bayar }}</td>
-                                    <td>{{ $item->transaksi->jumlah }}</td>
+                                    <td>{{ $item->jumlah }}</td>
                                 </tr>
                             @endforeach
                         </tbody>

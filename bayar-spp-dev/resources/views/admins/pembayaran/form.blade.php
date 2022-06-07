@@ -8,7 +8,7 @@
     </div>
     <div class="row">
         <div class="col-8">
-            <form class="card" action="{{ route('admins/pembayaran/store', $siswa->nis) }}" method="POST">
+            <form method="POST" class="card" action="{{ route('admins/pembayaran/store', $siswa->nis) }}">
                 @csrf
                 <div class="card-header">
                     <h5 class="card-title">Pembayaran Siswa</h5>
@@ -22,24 +22,12 @@
                         </div>
                     @endif
                     <div class="row">
-                        {{-- <div class="col-lg-4">
-                            <div class="form-group">
-                                <label for="form-label">Tata Usaha</label>
-                                <input required="" type="text" name="nama_tatus" value="{{ $tatus->nama }}" readonly
-                                    id="nama_tatus" class="form-control">
-                                @error('nama_tatus')
-                                    <small class="text-danger">{{ $message }}</small>
-                                @enderror
-                            </div>
-                        </div> --}}
                         <div class="col-lg-4">
                             <div class="form-group">
                                 <label for="form-label">Nama Siswa</label>
-                                <input required="" type="hidden" name="siswa_id" value="{{ $siswa->id }}" readonly
-                                    id="siswa_id" class="form-control">
-                                <input required="" type="text" name="nama_siswa" value="{{ $siswa->nama }}" readonly
-                                    id="nama_siswa" class="form-control">
-                                @error('nama_siswa')
+                                <input required="" type="text" name="nama" value=" {{ $siswa->nama }}" readonly id="nama"
+                                    class="form-control">
+                                @error('nama')
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
                             </div>
@@ -65,7 +53,6 @@
                                 @enderror
                             </div>
                         </div>
-
                         {{-- <div class="col-lg-4">
                             <div class="form-group">
                                 <label for="form-label">Bulan</label>
@@ -80,22 +67,27 @@
                         <div class="col-lg-4">
                             <div class="form-group">
                                 <label for="form-label">Periode</label>
-                                <select required name="periode" id="select-beast periode"
-                                    class="form-control custom-select">
+                                <select required name="periode" id="select-beast" class="form-control custom-select">
                                     <option disabled="" selected>-- Pilih Periode</option>
                                     @foreach ($tagihan as $item)
                                         <option value="{{ $item->periode }}">{{ $item->periode }}</option>
                                     @endforeach
                                 </select>
+                                @error('periode')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-lg-4">
                             <div class="form-group">
-                                <label for="jumlah_tagihan">Tagihan</label>
-                                <input type="" name="jumlah" readonly id="jumlah" class="form-control">
-                                <input required type="hidden" name="nominal_bayar" readonly id="nominal_bayar"
-                                    class="form-control">
-                                @error('nominal_bayar')
+                                <label for="jumlah" id="tagihan">Tagihan</label>
+                                <select required name="jumlah" id="select-beast" class="form-control custom-select">
+                                    <option disabled="" selected>-- Pilih Tagihan</option>
+                                    @foreach ($tagihan as $item)
+                                        <option value="{{ $item->jumlah }}">@currency($item->jumlah) </option>
+                                    @endforeach
+                                </select>
+                                @error('jumlah')
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
                             </div>
@@ -120,32 +112,30 @@
 
                 $('.custom-select').selectize({});
 
+                // function rupiah(number) {
+                //     var formatter = new Intl.NumberFormat('ID', {
+                //         style: 'currency',
+                //         currency: 'idr',
+                //     })
 
-                function rupiah(number) {
-                    var formatter = new Intl.NumberFormat('ID', {
-                        style: 'currency',
-                        currency: 'idr',
-                    })
+                //     return formatter.format(number)
+                // }
 
-                    return formatter.format(number)
-                }
+                // $(document).on("change", "#periode", function() {
 
-                $(document).on("change", "#periode", function() {
-                    let periode = $(this).val()
+                //     let periode = $(this).val()
 
-                    $.ajax({
-                        url: "pembayaran/spp/" + periode,
-                        method: "GET",
-                        success: function(response) {
-                            // $("#jumlah_tagihan").html(`Tagihan ` + periode + ':')
-                            $("#jumlah").val(response.jumlah_rupiah)
-                            $("#nominal_bayar").val(response.data.jumlah)
-                        }
-                    })
-                })
-            });
-        });
+                //     $.ajax({
+                //         url: "/pembayaran/spp/" + periode,
+                //         method: "GET",
+                //         success: function(response) {
+                //             // $("#jumlah_tagihan").html(`Tagihan ` + periode + ':')
+                //             $("#nominal").val(response.nominal_rupiah)
+                //             $("#jumlah_bayar").val(response.data.jumlah)
+                //         }
+                //     })
+                // })
+            })
+        })
     </script>
-
-    <script></script>
 @endsection

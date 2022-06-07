@@ -31,7 +31,6 @@
                                 <th>No</th>
                                 <th>Jumlah</th>
                                 <th>Periode</th>
-                                <th>Peserta</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -41,11 +40,6 @@
                                     <td><span class="text-muted"> {{ $index + 1 }}</span></td>
                                     <td>@currency($item->jumlah)</td>
                                     <td>{{ $item->periode }}</td>
-                                    <td>
-                                        @if ($item->wajib_semua != null)
-                                            <p>Wajib Semua</p>
-                                        @endif
-                                    </td>
                                     <td class="text-center">
                                         {{-- <a class="icon" href="{{ route('admins/siswa/show', $item->id) }}"
                                             title="lihat detail">

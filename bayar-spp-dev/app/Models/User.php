@@ -51,8 +51,13 @@ class User extends Authenticatable
         $this->attributes['password'] = Hash::make($password);
     }
 
-    public function Tatus()
+    public function petugas()
     {
-        return $this->hasOne(Tatus::class);
+        return $this->hasOne(Petugas::class);
+    }
+
+    public function siswa()
+    {
+        return $this->hasOne(Siswa::class);
     }
 }

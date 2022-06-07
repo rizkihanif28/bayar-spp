@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Jurusan;
 use App\Models\Kelas;
 use App\Models\Periode;
+use App\Models\Petugas;
 use App\Models\Siswa;
 use App\Models\Tagihan;
 use App\Models\Tatus;
@@ -49,52 +50,69 @@ class DatabaseSeeder extends Seeder
             'nama' => 'XII'
         ]);
 
+        //membuat user admin
+        $user1 = User::create([
+            'name' => 'Abdul Hadi',
+            'username' => 'admin123',
+            'email' => 'admin@gmail.com',
+            'password' => '123',
+        ]);
 
-        $tatus1 = User::create([
+        $user1->assignRole('admin');
+
+        // membuat user tatus 
+        $user2 = User::create([
             'name' => 'Nurul Fadilah',
             'username' => 'tatausaha123',
             'email' => 'tatus@gmail.com',
             'password' => '123',
         ]);
 
-        $tatus1->assignRole('tata usaha');
-
-        //membuat seed tatausaha 
-        $tatus = Tatus::create([
-            'nip' => 10012,
-            'nama' => 'Nurdiansyah',
-            'email' => 'nurdin@gmail.com'
-        ]);
+        $user2->assignRole('tata usaha');
 
         // create user siswa
-        $siswa = User::create([
+        $user3 = User::create([
             'name' => 'Ridwan Hanafi',
             'username' => 'nafi123',
             'email' => 'ridwan@gmail.com',
             'password' => '123',
         ]);
 
-        $siswa->assignRole('siswa');
+        $user3->assignRole('siswa');
+
+
+        //membuat seed petugas
+        $petugas1 = Petugas::create([
+            'user_id' => $user1->id,
+            'nip' => 10011,
+            'nama' => 'Abdul Hadi',
+            'jenis_kelamin' => 'Laki-Laki'
+        ]);
+
+        $petugas2 = Petugas::create([
+            'user_id' => $user2->id,
+            'nip' => 10012,
+            'nama' => 'Nurul Fadilah',
+            'jenis_kelamin' => 'Perempuan'
+
+        ]);
+
 
         // membuat seed tagihan
         $tagihan = Tagihan::create([
             'periode' => 2021,
-            'jumlah' => 300000,
-            'wajib_semua' => 1
+            'jumlah' => 300000
         ]);
 
         $tagihan = Tagihan::create([
             'periode' => 2022,
-            'jumlah' => 400000,
-            'wajib_semua' => 1
+            'jumlah' => 400000
         ]);
 
         $tagihan = Tagihan::create([
             'periode' => 2023,
-            'jumlah' => 500000,
-            'wajib_semua' => 1
+            'jumlah' => 500000
         ]);
-
 
 
         // membuat seed siswa untuk data siswa

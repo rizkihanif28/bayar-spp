@@ -39,9 +39,10 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($siswa as $index => $item)
+                            @foreach ($siswa as $item)
                                 <tr>
-                                    <td><span class="text-muted">{{ $index + 1 }}</span></td>
+                                    {{-- <td><span class="text-muted">{{ $index + 1 }}</span></td> --}}
+                                    <td>{{ $loop->iteration }}</td>
                                     <td>{{ $item->nis }}</td>
                                     <td>{{ $item->nama }}</td>
                                     <td>{{ $item->kelas->nama }} - {{ $item->jurusan->nama }}</td>

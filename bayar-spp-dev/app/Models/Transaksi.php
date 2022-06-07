@@ -10,16 +10,17 @@ class Transaksi extends Model
     use HasFactory;
 
     protected $fillable = [
-        'tu_id',
+        'petugas_id',
         'siswa_id',
-        'tagihan_id',
+        'periode',
         'nis',
+        'jumlah',
         'tanggal_bayar'
     ];
 
-    public function tatus()
+    public function petugas()
     {
-        return $this->belongsTo(Tatus::class);
+        return $this->belongsTo(Petugas::class);
     }
 
     public function siswa()
@@ -27,13 +28,8 @@ class Transaksi extends Model
         return $this->belongsTo(Siswa::class);
     }
 
-    public function tagihan()
-    {
-        return $this->belongsTo(Tagihan::class);
-    }
-
     public function histori()
     {
-        return $this->belongsTo(Histori::class);
+        return $this->hasOne(Histori::class);
     }
 }

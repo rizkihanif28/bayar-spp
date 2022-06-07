@@ -8,6 +8,7 @@ use App\Models\Kelas;
 use App\Models\Siswa;
 use App\Models\Tagihan;
 use App\Models\Transaksi;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Symfony\Component\Console\Input\Input;
 

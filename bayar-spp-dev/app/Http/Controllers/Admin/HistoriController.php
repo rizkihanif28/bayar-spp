@@ -4,15 +4,17 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Histori;
+use App\Models\Siswa;
+use App\Models\Transaksi;
 
 class HistoriController extends Controller
 {
     public function index()
     {
-        $histori = Histori::orderBy('created_at', 'desc');
+        $histori = Histori::latest()->get();
         return view('admins/histori/index', [
-            'histori' => $histori,
-            'title' => 'Histori Pembayaran'
+            'title' => 'Histori Pembayaran',
+            'histori' => $histori
         ]);
     }
 }

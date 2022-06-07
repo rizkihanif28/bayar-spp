@@ -43,7 +43,7 @@
                                     @foreach ($kelas as $item)
                                         <option value="{{ $item->id }}"
                                             {{ isset($siswa) ? ($item->id == $siswa->kelas_id ? 'selected' : '') : '' }}>
-                                            {{ $item->nama }} - {{ isset($item->periode) ? $item->periode->tahun : '' }}
+                                            {{ $item->nama }}
                                         </option>
                                     @endforeach
                                 </select>

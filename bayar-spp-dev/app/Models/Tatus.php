@@ -9,19 +9,24 @@ class Tatus extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'nip',
-        'nama',
-        'email'
-    ];
+    // protected $fillable = [
+    //     'user_id',
+    //     'nip',
+    //     'nama'
+    // ];
 
-    public function transaksi()
-    {
-        return $this->hasMany(Transaksi::class);
-    }
+    // public function transaksi()
+    // {
+    //     return $this->hasMany(Transaksi::class);
+    // }
 
-    public function histori()
-    {
-        return $this->hasOne(Histori::class);
-    }
+    // public function histori()
+    // {
+    //     return $this->hasOne(Histori::class);
+    // }
+
+    // public function user()
+    // {
+    //     return $this->belongsTo(User::class);
+    // }
 }

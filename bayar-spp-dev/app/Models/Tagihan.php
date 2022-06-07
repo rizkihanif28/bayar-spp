@@ -12,16 +12,10 @@ class Tagihan extends Model
     protected $fillable = [
         'periode',
         'jumlah',
-        'wajib_semua',
     ];
 
-    public function transaksi()
+    public function siswa()
     {
-        return $this->hasOne(Transaksi::class);
-    }
-
-    public function histori()
-    {
-        return $this->hasOne(Histori::class);
+        return $this->hasMany(Siswa::class);
     }
 }

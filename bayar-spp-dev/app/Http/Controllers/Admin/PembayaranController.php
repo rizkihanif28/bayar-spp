@@ -13,6 +13,7 @@ use App\Models\Tatus;
 use App\Models\Transaksi;
 use Illuminate\Http\Request;
 use App\Helpers\Universe;
+use App\Models\Petugas;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -40,32 +41,37 @@ class PembayaranController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($nis)
     {
-        $tatus = Tatus::all()->first();
-        $siswa = Siswa::all()->first();
-        $tagihan = Tagihan::all();
-        $jurusan = Jurusan::all()->first();
+        $siswa = Siswa::find($nis);
 
-        return view('admins/pembayaran/form', [
-            'title' => 'Create Pembayaran',
-            'tatus' => $tatus,
-            'siswa' => $siswa,
-            'tagihan' => $tagihan,
-            'jurusan' => $jurusan
-        ]);
+        if ($nis) {
+            $siswa = Siswa::all()->first();
+            $tagihan = Tagihan::all();
+            $jurusan = Jurusan::all()->first();
+            return view('admins/pembayaran/form', [
+                'title' => 'Create Pembayaran',
+                'siswa' => $siswa,
+                'tagihan' => $tagihan,
+                'jurusan' => $jurusan
+            ]);
+        } else {
+            return view('admins/pembayaran/index', [
+                'title' => 'Pembayaran'
+            ]);
+        }
     }
 
-    public function spp($periode)
-    {
-        $tagihan = Tagihan::where('periode', $periode)
-            ->first();
+    // public function spp($periode)
+    // {
+    //     $tagihan = Tagihan::where('periode', $periode)
+    //         ->first();
 
-        return response()->json([
-            'data' => $tagihan,
-            'jumlah_rupiah' => 'Rp' . number_format($tagihan->jumlah, 0, 2, '.'),
-        ]);
-    }
+    //     return response()->json([
+    //         'data' => $tagihan,
+    //         'nominal_rupiah' => 'Rp' . number_format($tagihan->jumlah, 0, 2, '.'),
+    //     ]);
+    // }
 
     /**
      * Store a newly created resource in storage.
@@ -73,35 +79,49 @@ class PembayaranController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Siswa $siswa)
+    public function store(Request $request)
     {
         DB::beginTransaction();
 
+        $request->validate([
+            'periode' => 'required',
+            'jumlah' => 'required'
+        ]);
+
+        $siswa = Siswa::all()->first();
+
+        $petugas = Petugas::where('user_id', Auth::user()->id)->first();
+
         // buat transaksi
         $transaksi = Transaksi::make([
+            'petugas_id' => $petugas->id,
             'siswa_id' => $siswa->id,
-            'tagihan_id' => $request->tagihan_id,
-            'periode_id' => $request->periode_id,
+            'periode' => $request->periode,
+            'nis' => $request->nis,
+            'jumlah' => $request->jumlah,
             'tanggal_bayar' => Carbon::now('Asia/Jakarta')
         ]);
 
         if ($transaksi->save()) {
-            $histori = Histori::orderBy('created_at', 'desc')->first();
+
+            $histori = Histori::orderBy('tanggal_bayar', 'desc')->first();
 
             $histori = Histori::create([
                 'transaksi_id' => $transaksi->id,
+                'petugas_id' => $petugas->id,
                 'siswa_id' => $siswa->id,
-                'tagihan_id' => $request->tagihan_id,
-                'periode_id' => $request->periode_id,
-                'tanggal_bayar' => $request->tanggal_bayar
+                'periode' => $request->periode,
+                'nis' => $request->nis,
+                'jumlah' => $request->jumlah,
+                'tanggal_bayar' => Carbon::now('Asia/Jakarta')
             ]);
 
-            if ($histori) {
+            if ($histori != null) {
                 DB::commit();
-                dd($histori);
-                // return redirect()->route('admins/histori/index',[
-
-                // ]);
+                return redirect()->route('admins/histori/index', [
+                    'type' => 'success',
+                    'msg' => 'transaksi berhasil'
+                ]);
             } else {
                 DB::rollBack();
                 return redirect()->route('admins/pembayaran/index', [
