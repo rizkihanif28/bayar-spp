@@ -35,6 +35,7 @@
                                 <th>Petugas</th>
                                 <th>Nama Siswa</th>
                                 <th>NIS</th>
+                                <th>Kelas</th>
                                 <th>Periode</th>
                                 <th>Tanggal Bayar</th>
                                 <th>Jumlah</th>
@@ -44,14 +45,14 @@
                             @foreach ($histori as $item)
                                 <tr>
                                     {{-- <td><span class="text-muted">{{ $index + 1 }}</span></td> --}}
-                                    {{-- <td>{{ $item->created_at->format('d-m-Y') }}</td> --}}
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $item->petugas->nama }}</td>
                                     <td>{{ $item->siswa->nama }}</td>
                                     <td>{{ $item->siswa->nis }}</td>
+                                    <td>{{ $item->kelas->nama }} - {{ $item->jurusan->nama }}</td>
                                     <td>{{ $item->periode }}</td>
-                                    <td>{{ $item->transaksi->tanggal_bayar }}</td>
-                                    <td>{{ $item->jumlah }}</td>
+                                    <td>{{ $item->created_at }}</td>
+                                    <td>@currency($item->jumlah)</td>
                                 </tr>
                             @endforeach
                         </tbody>

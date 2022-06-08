@@ -126,5 +126,16 @@ class DatabaseSeeder extends Seeder
             'alamat' => 'Jl Swadaya 2',
             'telepon' => '089526456198'
         ]);
+
+        Siswa::create([
+            'jurusan_id' => $jurusan2->id,
+            'kelas_id' => $kelas1->id,
+            'nis' => '852416',
+            'nama' => 'Alfian Fajar',
+            'email' => 'alfian@gmail.com',
+            'jenis_kelamin' => 'L',
+            'alamat' => 'Jl Swadaya 3',
+            'telepon' => '089526456198'
+        ]);
     }
 }

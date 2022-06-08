@@ -41,25 +41,17 @@ class PembayaranController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($nis)
+    public function create($id)
     {
-        $siswa = Siswa::find($nis);
-
-        if ($nis) {
-            $siswa = Siswa::all()->first();
-            $tagihan = Tagihan::all();
-            $jurusan = Jurusan::all()->first();
-            return view('admins/pembayaran/form', [
-                'title' => 'Create Pembayaran',
-                'siswa' => $siswa,
-                'tagihan' => $tagihan,
-                'jurusan' => $jurusan
-            ]);
-        } else {
-            return view('admins/pembayaran/index', [
-                'title' => 'Pembayaran'
-            ]);
-        }
+        $siswa = Siswa::with(['kelas', 'jurusan'])
+            ->where('id', $id)
+            ->first();
+        $tagihan = Tagihan::all();
+        return view('admins/pembayaran/form', [
+            'title' => 'Create Pembayaran',
+            'siswa' => $siswa,
+            'tagihan' => $tagihan
+        ]);
     }
 
     // public function spp($periode)
@@ -79,16 +71,22 @@ class PembayaranController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
         DB::beginTransaction();
 
-        $request->validate([
-            'periode' => 'required',
-            'jumlah' => 'required'
-        ]);
+        // $request->validate([
+        //     'periode' => 'required',
+        //     'jumlah' => 'required'
+        // ], [
+        //     'jumlah.required' => 'Jumlah tidak boleh kosong!'
+        // ]);
 
-        $siswa = Siswa::all()->first();
+        $siswa = Siswa::with(['kelas', 'jurusan'])
+            ->where('id', $id)
+            ->first();
+        $kelas = Kelas::all()->first();
+        $jurusan = Jurusan::all()->first();
 
         $petugas = Petugas::where('user_id', Auth::user()->id)->first();
 
@@ -96,6 +94,8 @@ class PembayaranController extends Controller
         $transaksi = Transaksi::make([
             'petugas_id' => $petugas->id,
             'siswa_id' => $siswa->id,
+            'kelas_id' => $kelas->id,
+            'jurusan_id' => $jurusan->id,
             'periode' => $request->periode,
             'nis' => $request->nis,
             'jumlah' => $request->jumlah,
@@ -104,19 +104,21 @@ class PembayaranController extends Controller
 
         if ($transaksi->save()) {
 
-            $histori = Histori::orderBy('tanggal_bayar', 'desc')->first();
+            $histori = Histori::orderBy('created_at', 'desc')->first();
 
             $histori = Histori::create([
                 'transaksi_id' => $transaksi->id,
                 'petugas_id' => $petugas->id,
                 'siswa_id' => $siswa->id,
+                'kelas_id' => $kelas->id,
+                'jurusan_id' => $jurusan->id,
                 'periode' => $request->periode,
                 'nis' => $request->nis,
                 'jumlah' => $request->jumlah,
                 'tanggal_bayar' => Carbon::now('Asia/Jakarta')
             ]);
 
-            if ($histori != null) {
+            if ($histori) {
                 DB::commit();
                 return redirect()->route('admins/histori/index', [
                     'type' => 'success',

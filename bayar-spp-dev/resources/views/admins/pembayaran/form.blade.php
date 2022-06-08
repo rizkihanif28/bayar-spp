@@ -8,7 +8,7 @@
     </div>
     <div class="row">
         <div class="col-8">
-            <form method="POST" class="card" action="{{ route('admins/pembayaran/store', $siswa->nis) }}">
+            <form method="POST" class="card" action="{{ route('admins/pembayaran/store', $siswa->id) }}">
                 @csrf
                 <div class="card-header">
                     <h5 class="card-title">Pembayaran Siswa</h5>
@@ -25,11 +25,8 @@
                         <div class="col-lg-4">
                             <div class="form-group">
                                 <label for="form-label">Nama Siswa</label>
-                                <input required="" type="text" name="nama" value=" {{ $siswa->nama }}" readonly id="nama"
+                                <input required="" type="name" name="nama" value="{{ $siswa->nama }}" readonly id="nama"
                                     class="form-control">
-                                @error('nama')
-                                    <small class="text-danger">{{ $message }}</small>
-                                @enderror
                             </div>
                         </div>
                         <div class="col-lg-4">
@@ -46,14 +43,15 @@
                             <div class="form-group">
                                 <label for="form-label">Kelas</label>
                                 <input required type="text" name="kelas"
-                                    value="{{ $siswa->kelas->nama }} - {{ $jurusan->nama }} " readonly id="kelas"
+                                    value="{{ $siswa->kelas->nama }} - {{ $siswa->jurusan->nama }} " readonly id="kelas"
                                     class="form-control">
                                 @error('kelas')
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
                             </div>
                         </div>
-                        {{-- <div class="col-lg-4">
+                    </div>
+                    {{-- <div class="col-lg-4">
                             <div class="form-group">
                                 <label for="form-label">Bulan</label>
                                 <select required name="bulan_bayar[]" id="select-beast" class="form-control custom-select">
@@ -64,11 +62,12 @@
                                 </select>
                             </div>
                         </div> --}}
+                    <div class="row">
                         <div class="col-lg-4">
                             <div class="form-group">
                                 <label for="form-label">Periode</label>
                                 <select required name="periode" id="select-beast" class="form-control custom-select">
-                                    <option disabled="" selected>-- Pilih Periode</option>
+                                    <option disabled="" selected>-- Pilih Periode --</option>
                                     @foreach ($tagihan as $item)
                                         <option value="{{ $item->periode }}">{{ $item->periode }}</option>
                                     @endforeach
@@ -82,7 +81,7 @@
                             <div class="form-group">
                                 <label for="jumlah" id="tagihan">Tagihan</label>
                                 <select required name="jumlah" id="select-beast" class="form-control custom-select">
-                                    <option disabled="" selected>-- Pilih Tagihan</option>
+                                    <option disabled="" selected>-- Pilih Tagihan --</option>
                                     @foreach ($tagihan as $item)
                                         <option value="{{ $item->jumlah }}">@currency($item->jumlah) </option>
                                     @endforeach

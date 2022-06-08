@@ -24,4 +24,14 @@ class Kelas extends Model
     {
         return $this->belongsTo(Jurusan::class);
     }
+
+    public function transaksi()
+    {
+        return $this->hasOne(Transaksi::class);
+    }
+
+    public function histori()
+    {
+        return $this->hasOne(Histori::class);
+    }
 }
