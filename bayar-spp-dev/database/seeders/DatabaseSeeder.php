@@ -27,16 +27,28 @@ class DatabaseSeeder extends Seeder
 
         // membuat seed jurusan
         $jurusan1 = Jurusan::create([
-            'nama' => 'Teknik Sepeda Motor'
+            'nama' => 'TSM 1'
         ]);
         $jurusan2 = Jurusan::create([
-            'nama' => 'Teknik Kendaraan Ringan'
+            'nama' => 'TSM 2'
         ]);
         $jurusan3 = Jurusan::create([
-            'nama' => 'Akutansi'
+            'nama' => 'TKR 1'
         ]);
         $jurusan4 = Jurusan::create([
-            'nama' => 'Administrasi Perkantoran'
+            'nama' => 'TKR 2'
+        ]);
+        $jurusan5 = Jurusan::create([
+            'nama' => 'AK 1'
+        ]);
+        $jurusan6 = Jurusan::create([
+            'nama' => 'AK 2'
+        ]);
+        $jurusan7 = Jurusan::create([
+            'nama' => 'AP 1'
+        ]);
+        $jurusan8 = Jurusan::create([
+            'nama' => 'AP 2'
         ]);
 
         // membuat seed kelas
@@ -70,7 +82,7 @@ class DatabaseSeeder extends Seeder
 
         $user2->assignRole('tata usaha');
 
-        // create user siswa
+        // create user siswa 1
         $user3 = User::create([
             'name' => 'Ridwan Hanafi',
             'username' => 'nafi123',
@@ -79,6 +91,36 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $user3->assignRole('siswa');
+
+        // create user siswa 2
+        $user4 = User::create([
+            'name' => 'Alfian Fajar',
+            'username' => 'alfian123',
+            'email' => 'alfian@gmail.com',
+            'password' => '123',
+        ]);
+        $user4->assignRole('siswa');
+
+
+        // create user siswa 3
+        $user5 = User::create([
+            'name' => 'Nur Azizah',
+            'username' => 'azizah123',
+            'email' => 'azizah@gmail.com',
+            'password' => '123',
+        ]);
+
+        $user5->assignRole('siswa');
+
+        // create user siswa 4
+        $user6 = User::create([
+            'name' => 'Aisyah Nurul',
+            'username' => 'aisyah123',
+            'email' => 'aisyah@gmail.com',
+            'password' => '123',
+        ]);
+
+        $user6->assignRole('siswa');
 
 
         //membuat seed petugas
@@ -135,6 +177,28 @@ class DatabaseSeeder extends Seeder
             'email' => 'alfian@gmail.com',
             'jenis_kelamin' => 'L',
             'alamat' => 'Jl Swadaya 3',
+            'telepon' => '089526456198'
+        ]);
+
+        Siswa::create([
+            'jurusan_id' => $jurusan4->id,
+            'kelas_id' => $kelas3->id,
+            'nis' => '917162',
+            'nama' => 'Nur Azizah',
+            'email' => 'azizah@gmail.com',
+            'jenis_kelamin' => 'P',
+            'alamat' => 'Jl Swadaya 8',
+            'telepon' => '089526456198'
+        ]);
+
+        Siswa::create([
+            'jurusan_id' => $jurusan6->id,
+            'kelas_id' => $kelas3->id,
+            'nis' => '227181',
+            'nama' => 'Aisyah Nurul',
+            'email' => 'aisyah@gmail.com',
+            'jenis_kelamin' => 'P',
+            'alamat' => 'Jl Swadaya 9',
             'telepon' => '089526456198'
         ]);
     }

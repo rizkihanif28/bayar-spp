@@ -4,6 +4,8 @@ use App\Http\Controllers\Admin\DataBayarController;
 use App\Http\Controllers\Admin\HistoriController;
 use App\Http\Controllers\Admin\JurusanController;
 use App\Http\Controllers\Admin\KelasController;
+use App\Http\Controllers\Admin\Laporan;
+use App\Http\Controllers\Admin\LaporanController;
 use App\Http\Controllers\Admin\PembayaranController as AdminPembayaranController;
 use App\Http\Controllers\Admin\PeriodeController;
 use App\Http\Controllers\Admin\SiswaController;
@@ -85,13 +87,8 @@ Route::middleware(['auth:web'])->group(function () {
 
     // pembayaran
     Route::get('admins/pembayaran/index', [AdminPembayaranController::class, 'index'])->name('admins/pembayaran/index');
-    // Route::get('spp/{periode}', [AdminPembayaranController::class, 'spp'])->name('pembayaran.spp');
-    Route::get('admins/pembayaran/{siswa}/create', [AdminPembayaranController::class, 'create'])->name('admins/pembayaran/create');
-    Route::post('admins/pembayaran/{siswa}/store', [AdminPembayaranController::class, 'store'])->name('admins/pembayaran/store');
-    Route::get('admins/pembayaran/histori', [AdminPembayaranController::class, 'getHistori'])->name('admins/pembayaran/histori');
-
-    // Data Pembayaran
-    Route::get('admins/databayar/index', [DataBayarController::class, 'index'])->name('admins/databayar/index');
+    Route::get('admins/pembayaran/{id}/create', [AdminPembayaranController::class, 'create'])->name('admins/pembayaran/create');
+    Route::post('admins/pembayaran/{id}/store', [AdminPembayaranController::class, 'store'])->name('admins/pembayaran/store');
 
     // Hostori
     Route::get('admins/histori/index', [HistoriController::class, 'index'])->name('admins/histori/index');
@@ -113,11 +110,13 @@ Route::middleware(['auth:web'])->group(function () {
     Route::post('admins/kelas/{kelas}/destroy', [KelasController::class, 'destroy'])->name('admins/kelas/destroy');
 
     // Laporan
-    Route::get('admins/laporan/index',);
+    Route::get('admins/laporan/index', [LaporanController::class, 'index'])->name('admins/laporan/index');
+    Route::get('admins/laporan', [LaporanController::class, 'create'])->name('admins/laporan');
+    Route::post('admins/laporan/print', [LaporanController::class, 'print'])->name('admins/laporan/print');
 
 
     // Profil 
-    Route::get('admins');
+    // Route::get('admins');
 
 
     // {{ Route TataUsaha }}

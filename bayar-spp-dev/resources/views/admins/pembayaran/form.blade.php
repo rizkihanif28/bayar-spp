@@ -51,17 +51,6 @@
                             </div>
                         </div>
                     </div>
-                    {{-- <div class="col-lg-4">
-                            <div class="form-group">
-                                <label for="form-label">Bulan</label>
-                                <select required name="bulan_bayar[]" id="select-beast" class="form-control custom-select">
-                                    <option value="">-- Pilih Bulan --</option>
-                                    @foreach (Universe::bulanAll() as $bulan)
-                                        <option value="{{ $bulan['nama_bulan'] }}">{{ $bulan['nama_bulan'] }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div> --}}
                     <div class="row">
                         <div class="col-lg-4">
                             <div class="form-group">
@@ -110,30 +99,6 @@
             $(document).ready(function() {
 
                 $('.custom-select').selectize({});
-
-                // function rupiah(number) {
-                //     var formatter = new Intl.NumberFormat('ID', {
-                //         style: 'currency',
-                //         currency: 'idr',
-                //     })
-
-                //     return formatter.format(number)
-                // }
-
-                // $(document).on("change", "#periode", function() {
-
-                //     let periode = $(this).val()
-
-                //     $.ajax({
-                //         url: "/pembayaran/spp/" + periode,
-                //         method: "GET",
-                //         success: function(response) {
-                //             // $("#jumlah_tagihan").html(`Tagihan ` + periode + ':')
-                //             $("#nominal").val(response.nominal_rupiah)
-                //             $("#jumlah_bayar").val(response.data.jumlah)
-                //         }
-                //     })
-                // })
             })
         })
     </script>

@@ -22,14 +22,4 @@ class Jurusan extends Model
     {
         return $this->hasMany(Kelas::class);
     }
-
-    public function transaksi()
-    {
-        return $this->hasOne(Transaksi::class);
-    }
-
-    public function histori()
-    {
-        return $this->hasOne(Histori::class);
-    }
 }

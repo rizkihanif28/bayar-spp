@@ -136,7 +136,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link active" href="/laporan">
+                            <a class="nav-link active" href="/admins/laporan/index">
                                 Laporan
                             </a>
                         </li>

@@ -18,8 +18,6 @@ class CreateHistorisTable extends Migration
             $table->integer('transaksi_id');
             $table->integer('petugas_id');
             $table->integer('siswa_id');
-            $table->integer('kelas_id');
-            $table->integer('jurusan_id');
             $table->integer('periode');
             $table->string('nis');
             $table->string('jumlah');

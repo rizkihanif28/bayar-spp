@@ -12,8 +12,6 @@ class Transaksi extends Model
     protected $fillable = [
         'petugas_id',
         'siswa_id',
-        'kelas_id',
-        'jurusan_id',
         'periode',
         'nis',
         'jumlah',
@@ -28,16 +26,6 @@ class Transaksi extends Model
     public function siswa()
     {
         return $this->belongsTo(Siswa::class);
-    }
-
-    public function kelas()
-    {
-        return $this->belongsTo(Kelas::class);
-    }
-
-    public function jurusan()
-    {
-        return $this->belongsTo(Jurusan::class);
     }
 
     public function histori()

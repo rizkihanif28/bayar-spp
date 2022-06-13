@@ -12,8 +12,6 @@ class Histori extends Model
         'transaksi_id',
         'petugas_id',
         'siswa_id',
-        'kelas_id',
-        'jurusan_id',
         'periode',
         'nis',
         'jumlah',
@@ -33,15 +31,5 @@ class Histori extends Model
     public function petugas()
     {
         return $this->belongsTo(Petugas::class);
-    }
-
-    public function kelas()
-    {
-        return $this->belongsTo(Kelas::class);
-    }
-
-    public function jurusan()
-    {
-        return $this->belongsTo(Jurusan::class);
     }
 }

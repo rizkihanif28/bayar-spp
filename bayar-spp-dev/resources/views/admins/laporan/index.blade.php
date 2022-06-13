@@ -3,14 +3,16 @@
 @section('content-admin')
     <div class="page-header" style="margin-top: 7%">
         <h2 class="page-title">
-            Pembayaran SPP
+            Laporan SPP
         </h2>
     </div>
     <div class="row">
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">Pembayaran SPP</h4>
+                    <h4 class="card-title">Laporan</h4>
+                    <a href="{{ route('admins/laporan') }}" class="btn btn-primary btn-sm ml-5">
+                        <i class="bi bi-printer"></i> Cetak Laporan</a>
                 </div>
                 @if (Session::get('msg'))
                     <div class="card-alert alert alert-{{ Session::get('type') }}" id="message"
@@ -24,33 +26,27 @@
                     </div>
                 @endif
                 <div class="p-3 text-center">
-                    <table id="table-siswa" class="table table-striped card-table table-hover">
+                    <table id="table-laporan" class="table table-striped card-table table-hover">
                         <thead>
                             <tr>
                                 <th class="w-1">No</th>
+                                <th>Nama Siswa</th>
                                 <th>NIS</th>
-                                <th>Nama</th>
                                 <th>Kelas</th>
-                                <th>JK</th>
-                                <th>Aksi</th>
+                                <th>Tanggal Bayar</th>
+                                <th>Jumlah</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($siswa as $item)
+                            @foreach ($histori as $item)
                                 <tr>
                                     {{-- <td><span class="text-muted">{{ $index + 1 }}</span></td> --}}
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $item->nis }}</td>
-                                    <td>{{ $item->nama }}</td>
-                                    <td>{{ $item->kelas->nama }} - {{ $item->jurusan->nama }}</td>
-                                    <td>{{ $item->jenis_kelamin }}</td>
-
-                                    <td class="text-center">
-                                        <a class="btn btn-primary btn-sm"
-                                            href="{{ route('admins/pembayaran/create', $item->id) }}" title="bayar">
-                                            <i class="bi bi-wallet"></i> Bayar
-                                        </a>
-                                    </td>
+                                    <td>{{ $item->siswa->nama }}</td>
+                                    <td>{{ $item->siswa->nis }}</td>
+                                    <td>{{ $siswa->kelas->nama }} - {{ $siswa->jurusan->nama }}</td>
+                                    <td>{{ $item->created_at }}</td>
+                                    <td>@currency($item->jumlah)</td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -64,7 +60,7 @@
 @section('js')
     <script>
         requirejs(["datatables"], function() {
-            $("#table-siswa").dataTable();
+            $("#table-laporan").dataTable();
         });
     </script>
 @endsection

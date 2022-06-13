@@ -1,20 +1,17 @@
 @extends('layouts.app-admin')
 
 @section('content-admin')
-    <div class="page-header">
-        <div class="col-10">
-            <div class="page-title mt-3" style="font-size: 28px">
-                Histori Pembayaran
-                <hr class="solid mt-2">
-            </div>
-        </div>
+    <div class="page-header" style="margin-top: 7%">
+        <h2 class="page-title">
+            Histori Pembayaran
+        </h2>
     </div>
 
     <div class="row">
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h4>Histori</h4>
+                    <h4 class="card-title">Histori</h4>
                 </div>
                 @if (Session::get('msg'))
                     <div class="card-alert alert alert-{{ Session::get('type') }}" id="message"
@@ -49,7 +46,7 @@
                                     <td>{{ $item->petugas->nama }}</td>
                                     <td>{{ $item->siswa->nama }}</td>
                                     <td>{{ $item->siswa->nis }}</td>
-                                    <td>{{ $item->kelas->nama }} - {{ $item->jurusan->nama }}</td>
+                                    <td>{{ $siswa->kelas->nama }} - {{ $siswa->jurusan->nama }}</td>
                                     <td>{{ $item->periode }}</td>
                                     <td>{{ $item->created_at }}</td>
                                     <td>@currency($item->jumlah)</td>
@@ -67,13 +64,6 @@
     <script>
         requirejs(["datatables"], function() {
             $("#table-histori").dataTable();
-        });
-    </script>
-    <script>
-        require(['jquery'], function($) {
-            $(document).ready(function() {
-
-            });
         });
     </script>
 @endsection

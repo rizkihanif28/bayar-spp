@@ -19,6 +19,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use PhpParser\Builder\Trait_;
+use Yajra\DataTables\Contracts\DataTable;
 
 class PembayaranController extends Controller
 {
@@ -31,8 +32,8 @@ class PembayaranController extends Controller
     {
         $siswa = Siswa::all();
         return view('admins/pembayaran/index', [
-            'siswa' => $siswa,
-            'title' => 'Pembayaran'
+            'title' => 'Pembayaran',
+            'siswa' => $siswa
         ]);
     }
 
@@ -47,23 +48,13 @@ class PembayaranController extends Controller
             ->where('id', $id)
             ->first();
         $tagihan = Tagihan::all();
+
         return view('admins/pembayaran/form', [
             'title' => 'Create Pembayaran',
             'siswa' => $siswa,
             'tagihan' => $tagihan
         ]);
     }
-
-    // public function spp($periode)
-    // {
-    //     $tagihan = Tagihan::where('periode', $periode)
-    //         ->first();
-
-    //     return response()->json([
-    //         'data' => $tagihan,
-    //         'nominal_rupiah' => 'Rp' . number_format($tagihan->jumlah, 0, 2, '.'),
-    //     ]);
-    // }
 
     /**
      * Store a newly created resource in storage.
@@ -75,18 +66,9 @@ class PembayaranController extends Controller
     {
         DB::beginTransaction();
 
-        // $request->validate([
-        //     'periode' => 'required',
-        //     'jumlah' => 'required'
-        // ], [
-        //     'jumlah.required' => 'Jumlah tidak boleh kosong!'
-        // ]);
-
         $siswa = Siswa::with(['kelas', 'jurusan'])
             ->where('id', $id)
             ->first();
-        $kelas = Kelas::all()->first();
-        $jurusan = Jurusan::all()->first();
 
         $petugas = Petugas::where('user_id', Auth::user()->id)->first();
 
@@ -94,8 +76,6 @@ class PembayaranController extends Controller
         $transaksi = Transaksi::make([
             'petugas_id' => $petugas->id,
             'siswa_id' => $siswa->id,
-            'kelas_id' => $kelas->id,
-            'jurusan_id' => $jurusan->id,
             'periode' => $request->periode,
             'nis' => $request->nis,
             'jumlah' => $request->jumlah,
@@ -110,8 +90,6 @@ class PembayaranController extends Controller
                 'transaksi_id' => $transaksi->id,
                 'petugas_id' => $petugas->id,
                 'siswa_id' => $siswa->id,
-                'kelas_id' => $kelas->id,
-                'jurusan_id' => $jurusan->id,
                 'periode' => $request->periode,
                 'nis' => $request->nis,
                 'jumlah' => $request->jumlah,
@@ -132,60 +110,7 @@ class PembayaranController extends Controller
                 ]);
             }
         }
-
-        // $pembayaran = Transaksi::whereIn('bulan_bayar', $request->bulan_bayar)
-        //     ->pluck('bulan_bayar')
-        //     ->where('siswa_id', $request->siswa_id)
-        //     ->where('tagihan_id', $request->tagihan_id)
-        //     ->toArray();
-
-
-        // if (!$pembayaran) {
-        //     DB::transaction(function () use ($request) {
-        //         foreach ($request->bulan_bayar as $bulan) {
-        //             Transaksi::create([
-        //                 'tu_id' => $request->tu_id,
-        //                 'siswa_id' => $request->siswa_id,
-        //                 'tagihan_id' => $request->tagihan_id,
-        //                 'nis' => $request->nis,
-        //                 'periode_id' => $request->periode_id,
-        //                 'bulan_bayar' => $bulan,
-        //                 'tanggal_bayar' => Carbon::now('Asia/Jakarta')
-        //             ]);
-        //         }
-        //     });
-        //     return redirect()->route('admins/pembayaran/histori', [
-        //         'type' => 'success',
-        //         'msg' => 'Transaksi berhasil'
-        //     ]);
-        // } else {
-        //     return back()->with([
-        //         'type' => 'danger',
-        //         'msg' => 'Transaksi gagal'
-        //     ]);
-        // }
     }
-
-
-    // public function getHistori(Request $request)
-    // {
-    //     $histori = Transaksi::all();
-    //     $siswa = Siswa::with(['siswa', 'kelas', 'periode']);
-    //     $kelas = Kelas::all();
-    //     $periode = Periode::all();
-
-    //     if ($request->$histori) {
-    //         return view('admins/histori/index', [
-    //             'title' => 'Data Transaksi',
-    //             'histori' => $histori,
-    //             'siswa' => $siswa,
-    //             'kelas' => $kelas,
-    //             'periode' => $periode
-    //         ]);
-    //     } else {
-    //         dd($histori);
-    //     }
-    // }
 
     /**
      * Show the form for editing the specified resource.
