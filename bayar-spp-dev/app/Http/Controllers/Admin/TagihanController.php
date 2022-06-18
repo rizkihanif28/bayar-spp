@@ -47,29 +47,16 @@ class TagihanController extends Controller
     {
         $request->validate([
             'periode' => 'required',
-            'jumlah' => 'required',
-            'peserta' => 'required'
+            'nominal' => 'required',
         ]);
         $tagihan = Tagihan::make($request->input());
 
-        switch ($request->peserta) {
-            case 1: // semua
-                $tagihan->wajib_semua = 1;
-                break;
-            default:
-                return Redirect::back()->withErrors(['Peserta Wajib diisi']);
-        }
-
         if ($tagihan->save()) {
-            return redirect()->route('admins/tagihan/index',)->with([
-                'type' => 'success',
-                'msg' => 'Tagihan berhasil ditambahkan'
-            ]);
+            return redirect()->route('admins/tagihan/index',)
+                ->with('success', 'Tagihan berhasil di tambahkan!');
         } else {
-            return redirect()->route('admins/tagihan/index')->with([
-                'type' => 'danger',
-                'msg' => 'Tagihan gagal ditambahkan'
-            ]);
+            return redirect()->route('admins/tagihan/index')
+                ->with('erorr', 'Tagihan gagal ditambahkan!');
         }
     }
 
@@ -109,22 +96,17 @@ class TagihanController extends Controller
     {
         $request->validate([
             'periode' => 'required',
-            'jumlah' => 'required',
-            'peserta' => 'required|numeric'
+            'nominal' => 'required'
         ]);
 
         $tagihan = $tagihan->fill($request->input());
 
         if ($tagihan->save()) {
-            return redirect()->route('admins/tagihan/index')->with([
-                'type' => 'success',
-                'msg' => 'Tagihan diubah'
-            ]);
+            return redirect()->route('admins/tagihan/index')
+                ->with('success', 'Tagihan diubah');
         } else {
-            return redirect()->route('admins/tagihan/index')->with([
-                'type' => 'danger',
-                'msg' => 'Tagihan gagal diubah'
-            ]);
+            return redirect()->route('admins/tagihan/index')
+                ->with('error', 'Tagihan gagal diubah');
         }
     }
 
@@ -137,15 +119,11 @@ class TagihanController extends Controller
     public function destroy(Tagihan $tagihan)
     {
         if ($tagihan->delete()) {
-            return redirect()->route('admins/tagihan/index')->with([
-                'type' => 'success',
-                'msg' => 'Siswa dihapus'
-            ]);
+            return redirect()->route('admins/tagihan/index')
+                ->with('success', 'Tagihan dihapus');
         } else {
-            return redirect()->route('admins/tagihan/index')->with([
-                'type' => 'danger',
-                'msg' => 'Siswa dihapus'
-            ]);
+            return redirect()->route('admins/tagihan/index')
+                ->with('error', 'Tagihan dihapus');
         }
     }
 }

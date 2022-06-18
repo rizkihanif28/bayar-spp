@@ -33,34 +33,21 @@
 
                             <div class="form-group">
                                 <label class="form-label">Nama</label>
-                                <input type="name" placeholder="Nama" name="nama" class="form-control"
-                                    value="{{ isset($siswa) ? $siswa->nama : old('nama') }}" required>
+                                <input type="name" placeholder="Nama" name="nama_siswa" class="form-control"
+                                    value="{{ isset($siswa) ? $siswa->nama_siswa : old('nama_siswa') }}" required>
                             </div>
-
                             <div class="form-group">
                                 <label class="form-label">Kelas</label>
                                 <select id="select-beast" class="form-control custom-select" name="kelas_id">
+                                    <option>-- Pilih Kelas --</option>
                                     @foreach ($kelas as $item)
                                         <option value="{{ $item->id }}"
                                             {{ isset($siswa) ? ($item->id == $siswa->kelas_id ? 'selected' : '') : '' }}>
-                                            {{ $item->nama }}
+                                            {{ $item->nama_kelas }}
                                         </option>
                                     @endforeach
                                 </select>
                             </div>
-
-                            <div class="form-group">
-                                <label class="form-label">Jurusan</label>
-                                <select id="select-beast" class="form-control custom-select" name="jurusan_id">
-                                    @foreach ($jurusan as $item)
-                                        <option value="{{ $item->id }}"
-                                            {{ isset($siswa) ? ($item->id == $siswa->jurusan_id ? 'selected' : '') : '' }}>
-                                            {{ $item->nama }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
-
                             <div class="form-group">
                                 <label class="form-label">Email</label>
                                 <input type="email" name="email" placeholder="Email" class="form-control"
@@ -69,6 +56,7 @@
                             <div class="form-group">
                                 <label class="form-label">Jenis Kelamin</label>
                                 <select name="jenis_kelamin" id="select-beast" class="form-control custom-select">
+                                    <option>-- Jenis Kelamin --</option>
                                     <option value="L"
                                         {{ isset($siswa) ? ($siswa->jenis_kelamin == 'L' ? 'selected' : '') : '' }}>
                                         Laki-Laki</option>

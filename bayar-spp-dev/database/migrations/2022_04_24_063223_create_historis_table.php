@@ -18,9 +18,10 @@ class CreateHistorisTable extends Migration
             $table->integer('transaksi_id');
             $table->integer('petugas_id');
             $table->integer('siswa_id');
-            $table->integer('periode');
             $table->string('nis');
-            $table->string('jumlah');
+            $table->integer('bulan_bayar');
+            $table->integer('tahun_bayar');
+            $table->string('jumlah_bayar');
             $table->date('tanggal_bayar');
             $table->timestamps();
         });

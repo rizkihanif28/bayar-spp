@@ -11,7 +11,7 @@ class KelasController extends Controller
 {
     public function index()
     {
-        $kelas = Kelas::all();
+        $kelas = Kelas::orderBy('jurusan', 'asc')->get();
         return view('admins/kelas/index', [
             'kelas' => $kelas,
             'title' => 'Kelas'
@@ -20,7 +20,9 @@ class KelasController extends Controller
 
     public function create()
     {
+        $kelas = Kelas::where('jurusan')->first();
         return view('admins/kelas/form', [
+            'kelas' => $kelas,
             'title' => 'Tambah Kelas'
         ]);
     }
@@ -28,19 +30,16 @@ class KelasController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama' => 'required|max:255',
+            'nama_kelas' => 'required|max:255',
+            'jurusan' => 'required|max:255',
         ]);
 
         if (Kelas::create($request->input())) {
-            return redirect()->route('admins/kelas/index')->with([
-                'type' => 'success',
-                'msg' => 'Kelas ditambahkan'
-            ]);
+            return redirect()->route('admins/kelas/index')
+                ->with('success', 'Kelas berhasil di tambahkan!');
         } else {
-            return redirect()->route('admins/kelas/index')->with([
-                'type' => 'danger',
-                'msg' => 'Err.., Terjadi Kesalahan'
-            ]);
+            return redirect()->route('admins/kelas/index')
+                ->with('error', 'Kelas gagal di tambahkan!');
         }
     }
 
@@ -68,19 +67,16 @@ class KelasController extends Controller
     public function update(Request $request, Kelas $kelas)
     {
         $request->validate([
-            'nama' => 'required|max:255',
+            'nama_kelas' => 'required|max:255',
+            'jurusan' => 'required|max:255',
         ]);
 
         if ($kelas->fill($request->input())->save()) {
-            return redirect()->route('admins/kelas/index')->with([
-                'type' => 'success',
-                'msg' => 'Kelas diubah'
-            ]);
+            return redirect()->route('admins/kelas/index')
+                ->with('success', 'Kelas berhasil di ubah!');
         } else {
-            return redirect()->route('admins/kelas/index')->with([
-                'type' => 'danger',
-                'msg' => 'Err.., Terjadi Kesalahan'
-            ]);
+            return redirect()->route('admins/kelas/index')
+                ->with('error', 'Kelas gagal di ubah!');
         }
     }
 
@@ -99,15 +95,11 @@ class KelasController extends Controller
             ]);
         }
         if ($kelas->delete()) {
-            return redirect()->route('admins/kelas/index')->with([
-                'type' => 'success',
-                'msg' => 'Kelas dihapus'
-            ]);
+            return redirect()->route('admins/kelas/index')
+                ->with('success', 'Kelas berhasil di hapus!');
         } else {
-            return redirect()->route('admins/kelas/index')->with([
-                'type' => 'danger',
-                'msg' => 'Kelas gagal dihapus'
-            ]);
+            return redirect()->route('admins/kelas/index')
+                ->with('error', 'Kelas gagal ditambahkan');;
         }
     }
 }

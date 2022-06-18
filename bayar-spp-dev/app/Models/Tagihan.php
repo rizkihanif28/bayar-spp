@@ -11,7 +11,7 @@ class Tagihan extends Model
 
     protected $fillable = [
         'periode',
-        'jumlah',
+        'nominal',
     ];
 
     public function siswa()

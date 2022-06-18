@@ -11,8 +11,8 @@ class Kelas extends Model
     use HasFactory;
 
     protected $fillable = [
-        'jurusan_id',
-        'nama'
+        'nama_kelas',
+        'jurusan'
     ];
 
     public function siswa()
@@ -20,8 +20,8 @@ class Kelas extends Model
         return $this->hasMany(Siswa::class);
     }
 
-    public function jurusan()
+    public function histori()
     {
-        return $this->belongsTo(Jurusan::class);
+        return $this->belongsToMany(Histori::class);
     }
 }

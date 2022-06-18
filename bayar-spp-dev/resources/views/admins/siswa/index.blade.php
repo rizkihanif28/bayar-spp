@@ -13,17 +13,7 @@
                     <h4 class="card-title">Siswa</h4>
                     <a href="{{ route('admins/siswa/create') }}" class="btn btn-primary btn-sm ml-5">+ Tambah Siswa</a>
                 </div>
-                @if (Session::get('msg'))
-                    <div class="card-alert alert alert-{{ Session::get('type') }}" id="message"
-                        style="border-radius: 0px !important">
-                        @if (Session::get('type') == 'success')
-                            <i class="bi bi-check-lg" aria-hidden="true"></i>
-                        @else
-                            <i class="bi bi-x-lg" aria-hidden="true"></i>
-                        @endif
-                        {{ Session::get('msg') }}
-                    </div>
-                @endif
+                <x-alert />
                 <div class="p-3 text-center">
                     <table id="table-siswa" class="table table-striped card-table table-hover">
                         <thead>
@@ -32,7 +22,6 @@
                                 <th>NIS</th>
                                 <th>Nama</th>
                                 <th>Kelas</th>
-                                <th>Jurusan</th>
                                 <th>JK</th>
                                 <th>Telepon</th>
                                 <th>Aksi</th>
@@ -43,11 +32,8 @@
                                 <tr>
                                     <td><span class="text-muted">{{ $index + 1 }}</span></td>
                                     <td>{{ $item->nis }}</td>
-                                    <td>{{ $item->nama }}</td>
-                                    <td>{{ $item->kelas->nama }}{{ isset($item->kelas->periode) ? '(' . $item->kelas->periode->tahun . ')' : '' }}
-                                    </td>
-                                    <td>{{ $item->jurusan->nama }}{{ isset($item->siswa->jurusan) ? '(' . $item->siswa->jurusan->nama . ')' : '' }}
-                                    </td>
+                                    <td>{{ $item->nama_siswa }}</td>
+                                    <td>{{ $item->kelas->nama_kelas }}</td>
                                     <td>{{ $item->jenis_kelamin }}</td>
                                     <td>{{ $item->telepon }}</td>
 
@@ -60,8 +46,8 @@
                                             href="{{ route('admins/siswa/edit', $item->id) }}" title="edit item">
                                             <i class="bi bi-pencil"></i>
                                         </a>
-                                        <a class="btn btn-danger btn-sm btn-delete" href="#!" data-id="{{ $item->id }}"
-                                            title="delete item">
+                                        <a class="btn btn-danger btn-sm btn-delete" href="#!"
+                                            data-id="{{ $item->id }}" title="delete item">
                                             <i class="bi bi-trash3"></i>
                                         </a>
                                         <form action="{{ route('admins/siswa/destroy', $item->id) }}" method="POST"

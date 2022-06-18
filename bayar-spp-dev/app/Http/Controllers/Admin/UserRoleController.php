@@ -35,9 +35,7 @@ class UserRoleController extends Controller
         $user = User::findOrFail($id);
         $user->syncRoles($request->role);
 
-        return redirect()->route('admins/user-role/index')->with([
-            'type' => 'success',
-            'msg' => 'Role berhasil disimpan!'
-        ]);
+        return redirect()->route('admins/user-role/index')
+            ->with('success', 'User Role berhasil di ubah!');
     }
 }

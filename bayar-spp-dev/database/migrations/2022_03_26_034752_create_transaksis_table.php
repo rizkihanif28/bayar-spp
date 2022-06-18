@@ -17,9 +17,10 @@ class CreateTransaksisTable extends Migration
             $table->id();
             $table->integer('petugas_id');
             $table->integer('siswa_id');
-            $table->integer('periode');
             $table->string('nis');
-            $table->string('jumlah');
+            $table->string('bulan_bayar');
+            $table->integer('tahun_bayar');
+            $table->string('jumlah_bayar');
             $table->date('tanggal_bayar');
             $table->timestamps();
         });

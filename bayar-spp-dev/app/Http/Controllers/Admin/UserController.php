@@ -28,29 +28,6 @@ class UserController extends Controller
         ]);
     }
 
-    public function store(Request $request, User $user)
-    {
-        $request->validate([
-            'name' => 'required|max:255',
-            'username' => 'required|max:255',
-            'email' => 'required|email:dns|unique:users',
-            'password' => 'required|confirmed|min:3',
-        ]);
-
-        if (User::create($request->input())) {
-            $user->syncRoles($request->role);
-            return redirect()->route('admins/user/index')->with([
-                'type' => 'success',
-                'msg' => 'user berhasil ditambahkan'
-            ]);
-        } else {
-            return redirect()->route('admins/user/index')->with([
-                'type' => 'danger',
-                'msg' => 'user gagal ditambahkan'
-            ]);
-        }
-    }
-
     public function edit(User $user)
     {
         return view('admins/users/form', [
@@ -75,30 +52,22 @@ class UserController extends Controller
         }
 
         if ($user->save()) {
-            return redirect()->route('admins/user/index', [
-                'type' => 'success',
-                'msg' => 'user di ubah'
-            ]);
+            return redirect()->route('admins/user/index')
+                ->with('success', 'User berhasil di ubah!');
         } else {
-            return redirect()->route('admins/user/index', [
-                'type' => 'danger',
-                'msg' => 'user gagal di ubah'
-            ]);
+            return redirect()->route('admins/user/index')
+                ->with('error', 'User gagal di ubah!');
         }
     }
 
     public function destroy(User $user)
     {
         if ($user->delete()) {
-            return redirect()->route('admins/user/index')->with([
-                'type' => 'success',
-                'msg' => 'user berhasil dihapus'
-            ]);
+            return redirect()->route('admins/user/index')
+                ->with('success', 'User berhasil di ubah!');
         } else {
-            return redirect()->route('admins/user/index')->with([
-                'type' => 'danger',
-                'msg' => 'user gagal dihapus'
-            ]);
+            return redirect()->route('admins/user/index')
+                ->with('error', 'User gagal di ubah!');
         }
     }
 }

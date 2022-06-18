@@ -21,9 +21,14 @@ class Petugas extends Model
         return $this->hasMany(Transaksi::class);
     }
 
+    public function siswa()
+    {
+        return $this->hasMany(Siswa::class);
+    }
+
     public function histori()
     {
-        return $this->hasOne(Histori::class);
+        return $this->hasMany(Histori::class);
     }
 
     public function user()

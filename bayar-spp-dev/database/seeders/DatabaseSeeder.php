@@ -25,41 +25,106 @@ class DatabaseSeeder extends Seeder
         $this->call(RoleSeeder::class);
         $this->call(UserSeeder::class);
 
-        // membuat seed jurusan
-        $jurusan1 = Jurusan::create([
-            'nama' => 'TSM 1'
-        ]);
-        $jurusan2 = Jurusan::create([
-            'nama' => 'TSM 2'
-        ]);
-        $jurusan3 = Jurusan::create([
-            'nama' => 'TKR 1'
-        ]);
-        $jurusan4 = Jurusan::create([
-            'nama' => 'TKR 2'
-        ]);
-        $jurusan5 = Jurusan::create([
-            'nama' => 'AK 1'
-        ]);
-        $jurusan6 = Jurusan::create([
-            'nama' => 'AK 2'
-        ]);
-        $jurusan7 = Jurusan::create([
-            'nama' => 'AP 1'
-        ]);
-        $jurusan8 = Jurusan::create([
-            'nama' => 'AP 2'
-        ]);
-
         // membuat seed kelas
         $kelas1 = Kelas::create([
-            'nama' => 'X'
+            'nama_kelas' => 'X TSM 1',
+            'jurusan' => 'Teknik Sepeda Motor'
         ]);
         $kelas2 = Kelas::create([
-            'nama' => 'XI'
+            'nama_kelas' => 'X TSM 2',
+            'jurusan' => 'Teknik Sepeda Motor'
         ]);
         $kelas3 = Kelas::create([
-            'nama' => 'XII'
+            'nama_kelas' => 'X TKR 1',
+            'jurusan' => 'Teknik Kendaraan Ringan'
+        ]);
+        $kelas4 = Kelas::create([
+            'nama_kelas' => 'X TKR 2',
+            'jurusan' => 'Teknik Kendaraan Ringan'
+        ]);
+        $kelas5 = Kelas::create([
+            'nama_kelas' => 'X AK 1',
+            'jurusan' => 'Akutansi'
+        ]);
+        $kelas6 = Kelas::create([
+            'nama_kelas' => 'X AK 2',
+            'jurusan' => 'Akutansi'
+        ]);
+        $kelas7 = Kelas::create([
+            'nama_kelas' => 'X AP 1',
+            'jurusan' => 'Administrasi Perkantoran'
+        ]);
+        $kelas8 = Kelas::create([
+            'nama_kelas' => 'X AP 2',
+            'jurusan' => 'Administrasi Perkantoran'
+        ]);
+
+        // batas kelas X
+        $kelas9 = Kelas::create([
+            'nama_kelas' => 'XI TSM 1',
+            'jurusan' => 'Teknik Sepeda Motor'
+        ]);
+        $kelas10 = Kelas::create([
+            'nama_kelas' => 'XI TSM 2',
+            'jurusan' => 'Teknik Sepeda Motor'
+        ]);
+        $kelas11 = Kelas::create([
+            'nama_kelas' => 'XI TKR 1',
+            'jurusan' => 'Teknik Kendaraan Ringan'
+        ]);
+        $kelas12 = Kelas::create([
+            'nama_kelas' => 'XI TKR 2',
+            'jurusan' => 'Teknik Kendaraan Ringan'
+        ]);
+        $kelas13 = Kelas::create([
+            'nama_kelas' => 'XI AK 1',
+            'jurusan' => 'Akutansi'
+        ]);
+        $kelas14 = Kelas::create([
+            'nama_kelas' => 'XI AK 2',
+            'jurusan' => 'Akutansi'
+        ]);
+        $kelas15 = Kelas::create([
+            'nama_kelas' => 'XI AP 1',
+            'jurusan' => 'Adminstrasi Perkantoran'
+        ]);
+        $kelas16 = Kelas::create([
+            'nama_kelas' => 'XI AP 2',
+            'jurusan' => 'Administrasi Perkantoran'
+        ]);
+
+        //batas kelas XI
+        $kelas17 = Kelas::create([
+            'nama_kelas' => 'XII TSM 1',
+            'jurusan' => 'Teknik Sepeda Motor'
+        ]);
+        $kelas18 = Kelas::create([
+            'nama_kelas' => 'XII TSM 2',
+            'jurusan' => 'Teknik Sepeda Motor'
+        ]);
+        $kelas19 = Kelas::create([
+            'nama_kelas' => 'XII TKR 1',
+            'jurusan' => 'Teknik Kendaraan Ringan'
+        ]);
+        $kelas20 = Kelas::create([
+            'nama_kelas' => 'XII TKR 2',
+            'jurusan' => 'Teknik Kendaraan Ringan'
+        ]);
+        $kelas21 = Kelas::create([
+            'nama_kelas' => 'XII AK 1',
+            'jurusan' => 'Akutansi'
+        ]);
+        $kelas22 = Kelas::create([
+            'nama_kelas' => 'XII AK 2',
+            'jurusan' => 'Akutansi'
+        ]);
+        $kelas23 = Kelas::create([
+            'nama_kelas' => 'XII AP 1',
+            'jurusan' => 'Administrasi Perkantoran'
+        ]);
+        $kelas24 = Kelas::create([
+            'nama_kelas' => 'XII AP 2',
+            'jurusan' => 'Administrasi Perkantoran'
         ]);
 
         //membuat user admin
@@ -93,76 +158,76 @@ class DatabaseSeeder extends Seeder
         $user3->assignRole('siswa');
 
         // create user siswa 2
-        $user4 = User::create([
+        $user3 = User::create([
             'name' => 'Alfian Fajar',
             'username' => 'alfian123',
             'email' => 'alfian@gmail.com',
             'password' => '123',
         ]);
-        $user4->assignRole('siswa');
+        $user3->assignRole('siswa');
 
 
         // create user siswa 3
-        $user5 = User::create([
+        $user3 = User::create([
             'name' => 'Nur Azizah',
             'username' => 'azizah123',
             'email' => 'azizah@gmail.com',
             'password' => '123',
         ]);
 
-        $user5->assignRole('siswa');
+        $user3->assignRole('siswa');
 
         // create user siswa 4
-        $user6 = User::create([
+        $user3 = User::create([
             'name' => 'Aisyah Nurul',
             'username' => 'aisyah123',
             'email' => 'aisyah@gmail.com',
             'password' => '123',
         ]);
 
-        $user6->assignRole('siswa');
+        $user3->assignRole('siswa');
 
 
         //membuat seed petugas
         $petugas1 = Petugas::create([
             'user_id' => $user1->id,
             'nip' => 10011,
-            'nama' => 'Abdul Hadi',
+            'nama' => 'Administrator',
             'jenis_kelamin' => 'Laki-Laki'
         ]);
 
         $petugas2 = Petugas::create([
             'user_id' => $user2->id,
             'nip' => 10012,
-            'nama' => 'Nurul Fadilah',
+            'nama' => 'Tata Usaha',
             'jenis_kelamin' => 'Perempuan'
 
         ]);
 
 
         // membuat seed tagihan
-        $tagihan = Tagihan::create([
+        Tagihan::create([
             'periode' => 2021,
-            'jumlah' => 300000
+            'nominal' => 300000
         ]);
 
-        $tagihan = Tagihan::create([
+        Tagihan::create([
             'periode' => 2022,
-            'jumlah' => 400000
+            'nominal' => 400000
         ]);
 
-        $tagihan = Tagihan::create([
+        Tagihan::create([
             'periode' => 2023,
-            'jumlah' => 500000
+            'nominal' => 500000
         ]);
 
 
         // membuat seed siswa untuk data siswa
         Siswa::create([
-            'jurusan_id' => $jurusan1->id,
+            'user_id' => $user3->id,
             'kelas_id' => $kelas2->id,
             'nis' => '283286',
-            'nama' => 'Ridwan Hanafi',
+            'nama_siswa' => 'Ridwan Hanafi',
             'email' => 'ridwan@gmail.com',
             'jenis_kelamin' => 'L',
             'alamat' => 'Jl Swadaya 2',
@@ -170,10 +235,10 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Siswa::create([
-            'jurusan_id' => $jurusan2->id,
-            'kelas_id' => $kelas1->id,
+            'user_id' => $user3->id,
+            'kelas_id' => $kelas10->id,
             'nis' => '852416',
-            'nama' => 'Alfian Fajar',
+            'nama_siswa' => 'Alfian Fajar',
             'email' => 'alfian@gmail.com',
             'jenis_kelamin' => 'L',
             'alamat' => 'Jl Swadaya 3',
@@ -181,10 +246,10 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Siswa::create([
-            'jurusan_id' => $jurusan4->id,
-            'kelas_id' => $kelas3->id,
+            'user_id' => $user3->id,
+            'kelas_id' => $kelas13->id,
             'nis' => '917162',
-            'nama' => 'Nur Azizah',
+            'nama_siswa' => 'Nur Azizah',
             'email' => 'azizah@gmail.com',
             'jenis_kelamin' => 'P',
             'alamat' => 'Jl Swadaya 8',
@@ -192,10 +257,10 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Siswa::create([
-            'jurusan_id' => $jurusan6->id,
-            'kelas_id' => $kelas3->id,
+            'user_id' => $user3->id,
+            'kelas_id' => $kelas23->id,
             'nis' => '227181',
-            'nama' => 'Aisyah Nurul',
+            'nama_siswa' => 'Aisyah Nurul',
             'email' => 'aisyah@gmail.com',
             'jenis_kelamin' => 'P',
             'alamat' => 'Jl Swadaya 9',

@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\LaporanController;
 use App\Http\Controllers\Admin\PembayaranController as AdminPembayaranController;
 use App\Http\Controllers\Admin\PeriodeController;
 use App\Http\Controllers\Admin\SiswaController;
+use App\Http\Controllers\Admin\StatusPembayaranController;
 use App\Http\Controllers\Admin\TagihanController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\UserRoleController;
@@ -87,19 +88,23 @@ Route::middleware(['auth:web'])->group(function () {
 
     // pembayaran
     Route::get('admins/pembayaran/index', [AdminPembayaranController::class, 'index'])->name('admins/pembayaran/index');
-    Route::get('admins/pembayaran/{id}/create', [AdminPembayaranController::class, 'create'])->name('admins/pembayaran/create');
-    Route::post('admins/pembayaran/{id}/store', [AdminPembayaranController::class, 'store'])->name('admins/pembayaran/store');
+    Route::get('admins/pembayaran/{nis}/create', [AdminPembayaranController::class, 'create'])->name('admins/pembayaran/create');
+    Route::get('pembayaran/spp/{periode}', [AdminPembayaranController::class, 'spp'])->name('pembayaran.spp');
+    Route::post('admins/pembayaran/{nis}/store', [AdminPembayaranController::class, 'store'])->name('admins/pembayaran/store');
+    Route::get('admins/histori', [AdminPembayaranController::class, 'historiPembayaran'])->name('histori/pembayaran');
 
-    // Hostori
-    Route::get('admins/histori/index', [HistoriController::class, 'index'])->name('admins/histori/index');
+    // Status Pembayaran
+    // Route::get('admins/status/index', [AdminPembayaranController::class, 'statusPembayaran'])->name('admins/status/index');
+    Route::get('admins/status/show/{siswa:nis}', [AdminPembayaranController::class, 'statusPembayaranShow'])->name('status/show');
+    Route::get('admins/status/show/{nis}/{periode}', [AdminPembayaranController::class, 'statusPembayaranShowStatus'])->name('status-pembayaran/siswa');
 
     // jurusan
-    Route::get('admins/jurusan/index', [JurusanController::class, 'index'])->name('admins/jurusan/index');
-    Route::get('admins/jurusan/create', [JurusanController::class, 'create'])->name('admins/jurusan/create');
-    Route::post('admins/jurusan/store', [JurusanController::class, 'store'])->name('admins/jurusan/store');
-    Route::get('admins/jurusan/{jurusan}/edit', [JurusanController::class, 'edit'])->name('admins/jurusan/edit');
-    Route::post('admins/jurusan/{jurusan}/update', [JurusanController::class, 'update'])->name('admins/jurusan/update');
-    Route::post('admins/jurusan/{jurusan}/destroy', [JurusanController::class, 'destroy'])->name('admins/jurusan/destroy');
+    // Route::get('admins/jurusan/index', [JurusanController::class, 'index'])->name('admins/jurusan/index');
+    // Route::get('admins/jurusan/create', [JurusanController::class, 'create'])->name('admins/jurusan/create');
+    // Route::post('admins/jurusan/store', [JurusanController::class, 'store'])->name('admins/jurusan/store');
+    // Route::get('admins/jurusan/{jurusan}/edit', [JurusanController::class, 'edit'])->name('admins/jurusan/edit');
+    // Route::post('admins/jurusan/{jurusan}/update', [JurusanController::class, 'update'])->name('admins/jurusan/update');
+    // Route::post('admins/jurusan/{jurusan}/destroy', [JurusanController::class, 'destroy'])->name('admins/jurusan/destroy');
 
     // kelas
     Route::get('admins/kelas/index', [KelasController::class, 'index'])->name('admins/kelas/index');
@@ -112,7 +117,7 @@ Route::middleware(['auth:web'])->group(function () {
     // Laporan
     Route::get('admins/laporan/index', [LaporanController::class, 'index'])->name('admins/laporan/index');
     Route::get('admins/laporan', [LaporanController::class, 'create'])->name('admins/laporan');
-    Route::post('admins/laporan/print', [LaporanController::class, 'print'])->name('admins/laporan/print');
+    Route::post('admins/laporan/print', [LaporanController::class, 'printPDF'])->name('laporan/print');
 
 
     // Profil 

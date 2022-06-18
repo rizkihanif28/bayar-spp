@@ -12,20 +12,9 @@
                 <div class="card-header">
                     <div class="card-title">User Role</div>
                 </div>
-                @if (session()->has('msg'))
-                    <div class="card=alert alert alert-{{ session()->get('type') }}" id="message"
-                        style="border-radius: 0px !important">
-                        @if (session()->get('type') == 'success')
-                            <i class="bi bi-check-lg" aria-hidden="true"></i>
-                        @else
-                            <i class="bi bi-x-lg" aria-hidden="true"></i>
-                        @endif
-                        {{ session()->get('msg') }}
-                    </div>
-                @endif
+                <x-alert />
                 <div class="table-responsive mt-3 p-3 text-center">
-                    <table class="table table-striped card-table table-hover table-vcenter text-nowrap"
-                        id="table-user-role">
+                    <table class="table table-striped card-table table-hover table-vcenter text-nowrap" id="table-user-role">
                         <thead>
                             <tr>
                                 <th>No</th>

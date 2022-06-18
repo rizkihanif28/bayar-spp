@@ -28,24 +28,15 @@
                             @csrf
                             <div class="form-group">
                                 <label class="form-label">Periode</label>
-                                <input type="text" placeholder="Periode" name="periode" class="form-control"
+                                <input required type="text" placeholder="Periode" name="periode" id="periode"
+                                    class="form-control"
                                     value="{{ isset($tagihan) ? $tagihan->periode : old('periode') }}" required>
                             </div>
                             <div class="form-group">
                                 <label class="form-label">Jumlah</label>
-                                <input type="number" placeholder="Jumlah" name="jumlah" class="form-control"
-                                    value="{{ isset($tagihan) ? $tagihan->jumlah : old('periode') }}" required>
-                            </div>
-                            <div class="form-group">
-                                <div class="form-label">Peserta</div>
-                                <div class="custom-switches-stacked">
-                                    <label class="custom-switch">
-                                        <input type="radio" name="peserta" value="1" class="custom-switch-input"
-                                            {{ isset($tagihan) ? $tagihan->wajib_semua : old('peserta') }}>
-                                        <span class="custom-switch-indicator"></span>
-                                        <span class="custom-switch-description">Wajib Semua</span>
-                                    </label>
-                                </div>
+                                <input required type="text" placeholder="Nominal" name="nominal" id="nominal"
+                                    class="form-control"
+                                    value="{{ isset($tagihan) ? $tagihan->nominal : old('nominal') }}" required>
                             </div>
                         </div>
                     </div>

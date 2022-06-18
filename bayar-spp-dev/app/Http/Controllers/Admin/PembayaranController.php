@@ -3,23 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Histori;
-use App\Models\Jurusan;
-use App\Models\Kelas;
-use App\Models\Periode;
 use App\Models\Siswa;
 use App\Models\Tagihan;
-use App\Models\Tatus;
 use App\Models\Transaksi;
 use Illuminate\Http\Request;
-use App\Helpers\Universe;
 use App\Models\Petugas;
-use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use PhpParser\Builder\Trait_;
-use Yajra\DataTables\Contracts\DataTable;
 
 class PembayaranController extends Controller
 {
@@ -30,7 +21,7 @@ class PembayaranController extends Controller
      */
     public function index()
     {
-        $siswa = Siswa::all();
+        $siswa = Siswa::orderBy('nama_siswa', 'asc')->get();
         return view('admins/pembayaran/index', [
             'title' => 'Pembayaran',
             'siswa' => $siswa
@@ -42,11 +33,12 @@ class PembayaranController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($id)
+    public function create($nis)
     {
-        $siswa = Siswa::with(['kelas', 'jurusan'])
-            ->where('id', $id)
+        $siswa = Siswa::with(['kelas'])
+            ->where('nis', $nis)
             ->first();
+
         $tagihan = Tagihan::all();
 
         return view('admins/pembayaran/form', [
@@ -56,107 +48,106 @@ class PembayaranController extends Controller
         ]);
     }
 
+    public function spp($periode)
+    {
+        $tagihan = Tagihan::where('periode', $periode)
+            ->first();
+
+        return response()->json([
+            'data' => $tagihan,
+            'nominal_rupiah' => 'Rp ' . number_format($tagihan->nominal, 0, 2, '.')
+        ]);
+    }
+
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $id)
+    public function store(Request $request)
     {
-        DB::beginTransaction();
-
-        $siswa = Siswa::with(['kelas', 'jurusan'])
-            ->where('id', $id)
-            ->first();
+        $request->validate([
+            'jumlah_bayar' => 'required',
+        ], [
+            'jumlah_bayar.required' => 'jumlah tidak boleh kosong!'
+        ]);
 
         $petugas = Petugas::where('user_id', Auth::user()->id)->first();
 
-        // buat transaksi
-        $transaksi = Transaksi::make([
-            'petugas_id' => $petugas->id,
-            'siswa_id' => $siswa->id,
-            'periode' => $request->periode,
-            'nis' => $request->nis,
-            'jumlah' => $request->jumlah,
-            'tanggal_bayar' => Carbon::now('Asia/Jakarta')
-        ]);
+        $transaksi = Transaksi::whereIn('bulan_bayar', $request->bulan_bayar)
+            ->where('tahun_bayar', $request->tahun_bayar)
+            ->where('siswa_id', $request->siswa_id)
+            ->pluck('bulan_bayar')
+            ->toArray();
 
-        if ($transaksi->save()) {
+        if (!$transaksi) {
+            DB::transaction(function () use ($request, $petugas) {
+                foreach ($request->bulan_bayar as $bulan) {
+                    Transaksi::create([
+                        'petugas_id' => $petugas->id,
+                        'siswa_id' => $request->siswa_id,
+                        'nis' => $request->nis,
+                        'tanggal_bayar' => Carbon::now('Asia/Jakarta'),
+                        'tahun_bayar' => $request->tahun_bayar,
+                        'bulan_bayar' => $bulan,
+                        'jumlah_bayar' => $request->jumlah_bayar
+                    ]);
+                }
+            });
 
-            $histori = Histori::orderBy('created_at', 'desc')->first();
-
-            $histori = Histori::create([
-                'transaksi_id' => $transaksi->id,
-                'petugas_id' => $petugas->id,
-                'siswa_id' => $siswa->id,
-                'periode' => $request->periode,
-                'nis' => $request->nis,
-                'jumlah' => $request->jumlah,
-                'tanggal_bayar' => Carbon::now('Asia/Jakarta')
-            ]);
-
-            if ($histori) {
-                DB::commit();
-                return redirect()->route('admins/histori/index', [
-                    'type' => 'success',
-                    'msg' => 'transaksi berhasil'
-                ]);
-            } else {
-                DB::rollBack();
-                return redirect()->route('admins/pembayaran/index', [
-                    'type' => 'danger',
-                    'msg' => 'transaksi gagal'
-                ]);
-            }
+            return redirect()->route('histori/pembayaran')
+                ->with('success', 'Pembayaran berhasil');
+        } else {
+            return back()
+                ->with('error', 'Siswa dengan Nama : ' . $request->nama_siswa . ', NIS : ' .
+                    $request->nis . ' Sudah membayar spp di bulan yang di input (' . implode($transaksi,) . ")" .
+                    ' Pembayaran dibatalkan!');
         }
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function statusPembayaranShow(Siswa $siswa)
     {
-        //
+        $tagihan = Tagihan::all();
+        return view('admins/status-pembayaran/tahun', [
+            'title' => 'Status Pembayaran Tahun',
+            'tagihan' => $tagihan,
+            'siswa' => $siswa
+        ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function statusPembayaranShowStatus($nis, $periode)
     {
-        //
+        $siswa = Siswa::where('nis', $nis)
+            ->first();
+        $tagihan = Tagihan::where('periode', $periode)
+            ->first();
+
+        $transaksi = Transaksi::with(['siswa'])
+            ->where('siswa_id', $siswa->id)
+            ->where('tahun_bayar', $tagihan->periode)
+            ->get();
+
+        return view('admins/status-pembayaran/show', [
+            'title' => 'Status Pembayaran Siswa',
+            'siswa' => $siswa,
+            'tagihan' => $tagihan,
+            'transaksi' => $transaksi
+        ]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function historiPembayaran()
     {
-        //
-    }
+        $siswa = Siswa::all()->first();
+        $transaksi = Transaksi::with(['petugas', 'siswa' => function ($query) {
+            $query->with('kelas');
+        }])
+            ->latest()->get();
 
-    public function tagihan(Siswa $siswa)
-    {
-        $tagihan = $this->getTagihan($siswa);
-        return response()->json($tagihan);
-    }
-
-    protected function getTagihan()
-    {
-        $tagihan_wajib = Tagihan::where('wajib_semua', '1')->get()->toArray();
-        $tagihan = array_merge($tagihan_wajib);
-
-        return $tagihan;
+        return view('admins/histori/index', [
+            'title' => 'Histori Pembayaran',
+            'transaksi' => $transaksi,
+            'siswa' => $siswa
+        ]);
     }
 }

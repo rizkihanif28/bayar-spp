@@ -8,11 +8,12 @@
     </div>
     <div class="row">
         <div class="col-8">
-            <form action="POST" class="card" action="#">
+            <form action="POST" class="card" action="{{ route('laporan/print') }}">
                 @csrf
                 <div class="card-header">
                     <h5 class="card-title">Print</h5>
                 </div>
+                <x-alert />
                 <div class="card-body">
                     <div class="row">
                         <div class="col-lg-7">
@@ -30,12 +31,35 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-footer text-right">
-                    <div class="d-flex">
-                        <button type="submit" class="btn btn-danger"><i class="bi bi-printer"></i>Print</button>
-                    </div>
+                <div class="card-footer text-right form-group">
+                    <button type="submit" class="btn btn-danger d-flex" style="font-size: 15px">
+                        <i class="bi bi-printer"></i>Print
+                    </button>
                 </div>
             </form>
         </div>
     </div>
+@endsection
+
+@section('js')
+    <script>
+        requirejs(["datatables"], function() {
+            $(document).on("click", "#preview", function() {
+                var tanggal_mulai = $("#tanggal_mulai").val()
+                var tanggal_selesai = $("#tanggal_selesai").val()
+
+                $.ajax({
+                    url: "/pembayaran/laporan/preview-pdf",
+                    method: "GET",
+                    data: {
+                        tanggal_mulai: tanggal_mulai,
+                        tanggal_selesai: tanggal_selesai,
+                    },
+                    success: function() {
+                        window.open('/pembayaran/laporan/preview-pdf')
+                    }
+                })
+            })
+        });
+    </script>
 @endsection

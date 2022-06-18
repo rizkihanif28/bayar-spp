@@ -12,15 +12,16 @@ class Histori extends Model
         'transaksi_id',
         'petugas_id',
         'siswa_id',
-        'periode',
+        'bulan_bayar',
+        'tahun_bayar',
         'nis',
-        'jumlah',
+        'jumlah_bayar',
         'tanggal_bayar'
     ];
 
     public function transaksi()
     {
-        return $this->belongsTo(Transaksi::class);
+        return $this->belongsToMany(Transaksi::class);
     }
 
     public function siswa()
@@ -31,5 +32,10 @@ class Histori extends Model
     public function petugas()
     {
         return $this->belongsTo(Petugas::class);
+    }
+
+    public function kelas()
+    {
+        return $this->hasMany(Kelas::class);
     }
 }

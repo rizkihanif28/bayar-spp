@@ -8,8 +8,12 @@ use App\Models\Kelas;
 use App\Models\Siswa;
 use App\Models\Tagihan;
 use App\Models\Transaksi;
+use Illuminate\Support\Str;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 use Symfony\Component\Console\Input\Input;
 
 
@@ -17,7 +21,7 @@ class SiswaController extends Controller
 {
     public function index()
     {
-        $siswa = Siswa::all();
+        $siswa = Siswa::orderBy('nama_siswa', 'asc')->get();
         return view('admins/siswa/index', [
             'siswa' => $siswa,
             'title' => 'Siswa'
@@ -26,10 +30,8 @@ class SiswaController extends Controller
 
     public function create()
     {
-        $jurusan = Jurusan::all();
         $kelas = Kelas::all();
         return view('admins/siswa/form', [
-            'jurusan' => $jurusan,
             'kelas' => $kelas,
             'title' => 'Tambah Siswa'
         ]);
@@ -37,39 +39,74 @@ class SiswaController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'jurusan_id' => 'required|numeric',
-            'kelas_id' => 'required|numeric',
+        $validator = Validator::make($request->all(), [
+            'kelas_id' => 'required',
+            'username' => 'required|unique:users',
             'nis' => 'required|numeric',
-            'nama' => 'required|max:255',
+            'nama_siswa' => 'required|max:255',
             'email' => 'required|email:rfc,dns|unique:siswas|max:255',
-            'jenis_kelamin' => 'nullable|in:L,P',
-            'alamat' => 'nullable',
-            'telepon' => 'nullable|numeric',
+            'jenis_kelamin' => 'required|in:L,P',
+            'alamat' => 'required',
+            'telepon' => 'required',
         ]);
 
-        $siswa = Siswa::make($request->input());
+        if ($validator->fails()) {
+            DB::transaction(function () use ($request) {
+                $user = User::create([
+                    'name' => ($request->nama_siswa),
+                    'username' => ($request->username) . Str::lower(Str::random(5)),
+                    'email' => Str::lower($request->email),
+                    'password' => Hash::make('123'),
+                ]);
+                $user->assignRole('siswa');
 
-        if ($siswa->save()) {
-            return redirect()->route('admins/siswa/index')->with([
-                'type' => 'success',
-                'msg' => 'Siswa berhasil ditambahkan',
-            ]);
+                Siswa::create([
+                    'user_id' => $user->id,
+                    'nis' => $request->nis,
+                    'nama_siswa' => $request->nama_siswa,
+                    'kelas_id' => $request->kelas_id,
+                    'email' => $request->email,
+                    'jenis_kelamin' => $request->jenis_kelamin,
+                    'alamat' => $request->alamat,
+                    'telepon' => $request->telepon,
+                ]);
+            });
+            return redirect()->route('admins/siswa/index')
+                ->with('success', 'Siswa berhasil di tambahkan!');
         } else {
-            return redirect()->route('admins/siswa/index')->with([
-                'type' => 'danger',
-                'msg' => 'Siswa gagal ditambahkan',
-            ]);
+            return redirect()->route('admins/siswa/index')
+                ->with('error', 'Siswa gagal di tambahkan!');
         }
+        // $request->validate([
+        //     'kelas_id' => 'required|numeric',
+        //     'nis' => 'required|numeric',
+        //     'nama_siswa' => 'required|max:255',
+        //     'email' => 'required|email:rfc,dns|unique:siswas|max:255',
+        //     'jenis_kelamin' => 'nullable|in:L,P',
+        //     'alamat' => 'nullable',
+        //     'telepon' => 'nullable|numeric',
+        // ]);
+
+        // $siswa = Siswa::make($request->input());
+
+        // if ($siswa->save()) {
+        //     return redirect()->route('admins/siswa/index')->with([
+        //         'type' => 'success',
+        //         'msg' => 'Siswa berhasil ditambahkan',
+        //     ]);
+        // } else {
+        //     return redirect()->route('admins/siswa/index')->with([
+        //         'type' => 'danger',
+        //         'msg' => 'Siswa gagal ditambahkan',
+        //     ]);
+        // }
     }
 
     public function edit(Siswa $siswa)
     {
-        $jurusan = Jurusan::all();
         $kelas = Kelas::all();
 
         return view('admins/siswa/form', [
-            'jurusan' => $jurusan,
             'kelas' => $kelas,
             'siswa' => $siswa,
             'title' => 'Edit Siswa'
@@ -79,87 +116,32 @@ class SiswaController extends Controller
     public function update(Request $request, Siswa $siswa)
     {
         $request->validate([
-            'jurusan_id' => 'required|numeric',
             'kelas_id' => 'required|numeric',
             'nis' => 'required',
-            'nama' => 'required|max:255',
+            'nama_siswa' => 'required|max:255',
             'email' => 'required|max:255',
             'jenis_kelamin' => 'nullable|in:L,P',
             'alamat' => 'nullable',
             'telepon' => 'nullable|numeric',
         ]);
 
-        $siswa = $siswa->fill($request->input());
-
-        if ($siswa->save()) {
-            return redirect()->route('admins/siswa/index', [
-                'type' => 'Success',
-                'msg' => 'Siswa diubah'
-            ]);
+        if ($siswa->fill($request->input())->save()) {
+            return redirect()->route('admins/siswa/index',)
+                ->with('success', 'Siswa berhasil di ubah!');
         } else {
-            return redirect()->route('admins/siswa/index', [
-                'type' => 'danger',
-                'msg' => 'Siswa gagal diubah'
-            ]);
+            return redirect()->route('admins/siswa/index')
+                ->with('error', 'Siswa gagal di ubah!');
         }
     }
 
     public function destroy(Siswa $siswa)
     {
         if ($siswa->delete()) {
-            return redirect()->route('admins/siswa/index')->with([
-                'type' => 'success',
-                'msg' => 'Siswa dihapus'
-            ]);
+            return redirect()->route('admins/siswa/index')
+                ->with('success', 'Siswa berhasil di hapus!');
         } else {
-            return redirect()->route('admins/siswa/index')->with([
-                'type' => 'danger',
-                'msg' => 'Siswa gagal dihapus'
-            ]);
+            return redirect()->route('admins/siswa/index')
+                ->with('error', 'Siswa gagal di hapus!');
         }
     }
-
-    // api load
-    // public function getLoad(Siswa $siswa)
-    // {
-    //     if ($siswa == null) {
-    //         return response()->json(['msg' => 'siswa tidak ditemukan'], 404);
-    //     }
-    // }
-
-    // public function getTagihan(Siswa $siswa)
-    // {
-    //     $tagihan = [];
-    //     $tagihan_ids = [];
-
-    //     // wajib_semua
-    //     $tagihan_wajib = Tagihan::where('wajib_semua', '1')->get()->toArray();
-
-    //     $tagihan_semua = array_merge($tagihan_wajib);
-
-    //     foreach ($tagihan_semua as $tagih) {
-    //         $tagihan_ids[] = $tagih['id'];
-    //         $payed = Transaksi::where('tagihan_id', $tagih['id'])->where('siswa_id', $siswa->id)->get();
-    //         if ($payed->count() == 0) {
-    //             $tagihan[] = [
-    //                 'nama' => $tagih['nama'],
-    //                 'jumlah' => format_idr($tagih['jumlah']),
-    //                 'total' => '',
-    //                 'is_lunas' => '0',
-    //                 'created_at' => ''
-    //             ];
-    //         } else {
-    //             foreach ($payed as $pay) {
-    //                 $tagihan[] = [
-    //                     'nama' => $pay['nama'],
-    //                     'jumlah' => format_idr($pay['jumlah']),
-    //                     'total' => format_idr($pay->jumlah),
-    //                     'is_lunas' => $pay->is_lunas,
-    //                     'created_at' => $pay->created_at->format('d-m-Y'),
-    //                 ];
-    //             }
-    //         }
-    //     }
-    //     return $tagihan;
-    // }
 }

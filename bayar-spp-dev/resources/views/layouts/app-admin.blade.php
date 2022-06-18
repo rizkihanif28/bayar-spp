@@ -26,14 +26,15 @@
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i,500,500i,600,600i,700,700i&amp;subset=latin-ext">
 
     <link rel="stylesheet" href="{{ asset('assets/plugins/datatables/datatables.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/plugins/select2/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/select2/select2-bootstrap4.min.css') }}">
 
     {{-- Other Script --}}
-
-    <script src=""></script>
+    <script src="{{ asset('assets/plugins/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/select2/select2.min.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
     </script>
-
     <script src="{{ asset('assets/js/require.min.js') }}"></script>
 
     {{-- Other CSS --}}
@@ -104,22 +105,20 @@
                                         Siswa
                                     </a>
                                 </li>
-
-                                <li>
-                                    <a class="dropdown-item" href="/admins/tagihan/index">
-                                        <i class="bi bi-receipt"></i>
-                                        Tagihan
-                                    </a>
-                                </li>
-
                                 <li>
                                     <a class="dropdown-item" href="/admins/pembayaran/index">
                                         <i class="bi bi-wallet"></i>
                                         Pembayaran
                                     </a>
                                 </li>
+                                {{-- <li>
+                                    <a class="dropdown-item" href="/admins/status/index">
+                                        <i class="bi bi-bell"></i>
+                                        Status Pembayaran
+                                    </a>
+                                </li> --}}
                                 <li>
-                                    <a class="dropdown-item" href="/admins/histori/index">
+                                    <a class="dropdown-item" href="/admins/histori">
                                         <i class="bi bi-bar-chart-steps"></i>
                                         Histori Pembayaran
                                     </a>
@@ -128,11 +127,11 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link active" href="/admins/kelas/index">Kelas</a>
+                            <a class="nav-link active" href="/admins/tagihan/index">Tagihan</a>
                         </li>
 
-                        <li class="nav-item ">
-                            <a class="nav-link active" href="/admins/jurusan/index">Jurusan</a>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/admins/kelas/index">Kelas</a>
                         </li>
 
                         <li class="nav-item">

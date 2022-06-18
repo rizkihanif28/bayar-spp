@@ -177,3 +177,30 @@ a.dropdown-item.active {
 .bullet:after {
     content: "\2022";
 }
+
+/* base class callout */
+.callout {
+    padding: 1.25rem;
+    margin-bottom: 1.25rem;
+    background-color: var(--bd-callout-bg, var(--bs-gray-100));
+    border-left: 0.25rem solid var(--bd-callout-border, var(--bs-gray-300));
+}
+
+/* Modifier classes */
+.callout-info {
+    margin-left: 10px;
+    padding: 1.25rem;
+    --bd-callout-bg: rgba(var(--bs-info-rgb), 0.075);
+    --bd-callout-border: rgba(var(--bs-info-rgb), 0.5);
+}
+.callout-warning {
+    margin-left: 10px;
+    --bd-callout-bg: rgba(var(--bs-warning-rgb), 0.075);
+    --bd-callout-border: rgba(var(--bs-warning-rgb), 0.5);
+}
+
+.list-group-item {
+    color: rgb(255, 255, 255);
+    background-color: rgb(0, 123, 255);
+    border-color: rgb(0, 123, 255);
+}

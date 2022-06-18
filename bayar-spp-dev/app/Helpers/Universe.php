@@ -2,7 +2,9 @@
 
 namespace App\Helpers;
 
+use App\Models\Siswa;
 use App\Models\Tatus;
+use App\Models\Transaksi;
 use Illuminate\Support\Facades\Auth;
 
 // if (!function_exists('format_idr')) {
@@ -17,6 +19,11 @@ class Universe
     public function Tatus()
     {
         return Tatus::where('user_id', Auth::user()->id)->first();
+    }
+
+    public function siswa()
+    {
+        return Siswa::where('user_id', Auth::user()->id)->first();
     }
 
     public static function bulanAll()
@@ -71,5 +78,42 @@ class Universe
                 'kode_bulan' => '12',
             ],
         ]);
+    }
+
+    // cek status pembayaran (di akses oleh siswa)
+    public function statusPembayaranBulan($bulan, $tagihan_periode)
+    {
+        $siswa = Siswa::where('user_id', Auth::user()->id)
+            ->first();
+
+        $transaksi = Transaksi::where('siswa_id', $siswa->id)
+            ->where('tahun_bayar', $tagihan_periode)
+            ->oldest()
+            ->pluck('bulan_bayar')
+            ->toArray();
+
+        foreach ($transaksi as $key => $bayar) {
+            if ($bayar == $bulan) {
+                return "LUNAS";
+            }
+        }
+        return "BELUM LUNAS";
+    }
+
+    // cek status pembayaran (di akses oleh petugas)
+    public function petugasStatusPembayaran($siswa_id, $periode, $bulan)
+    {
+        $transaksi = Transaksi::where('siswa_id', $siswa_id)
+            ->where('tahun_bayar', $periode)
+            ->oldest()
+            ->pluck('bulan_bayar')
+            ->toArray();
+
+        foreach ($transaksi as $key => $bayar) {
+            if ($bayar == $bulan) {
+                return "LUNAS";
+            }
+        }
+        return "BELUM LUNAS";
     }
 }
