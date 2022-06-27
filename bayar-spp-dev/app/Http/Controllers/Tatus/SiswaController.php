@@ -6,13 +6,18 @@ use App\Http\Controllers\Controller;
 use App\Models\Jurusan;
 use App\Models\Kelas;
 use App\Models\Siswa;
+use App\Models\User;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class SiswaController extends Controller
 {
     public function index()
     {
-        $siswa = Siswa::all();
+        $siswa = Siswa::orderBy('nama_siswa', 'asc')->get();
         return view('tatus/siswa/index', [
             'siswa' => $siswa,
             'title' => 'Siswa'
@@ -21,10 +26,8 @@ class SiswaController extends Controller
 
     public function create()
     {
-        $jurusan = Jurusan::all();
         $kelas = Kelas::all();
         return view('tatus/siswa/form', [
-            'jurusan' => $jurusan,
             'kelas' => $kelas,
             'title' => 'Tambah Siswa'
         ]);
@@ -32,38 +35,51 @@ class SiswaController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'jurusan_id' => 'required|numeric',
-            'kelas_id' => 'required|numeric',
-            'nama' => 'required|max:255',
+        $validator = Validator::make($request->all(), [
+            'kelas_id' => 'required',
+            'username' => 'required|unique:users',
+            'nis' => 'required|numeric',
+            'nama_siswa' => 'required|max:255',
             'email' => 'required|email:rfc,dns|unique:siswas|max:255',
-            'jenis_kelamin' => 'nullable|in:L,P',
-            'alamat' => 'nullable',
-            'telepon' => 'nullable|numeric',
+            'jenis_kelamin' => 'required|in:L,P',
+            'alamat' => 'required',
+            'telepon' => 'required',
         ]);
 
-        $siswa = Siswa::make($request->input());
+        if ($validator->fails()) {
+            DB::transaction(function () use ($request) {
+                $user = User::create([
+                    'name' => ($request->nama_siswa),
+                    'username' => ($request->username) . Str::lower(Str::random(5)),
+                    'email' => Str::lower($request->email),
+                    'password' => Hash::make('123'),
+                ]);
+                $user->assignRole('siswa');
 
-        if ($siswa->save()) {
-            return redirect()->route('tatus/siswa/index')->with([
-                'type' => 'success',
-                'msg' => 'Siswa berhasil ditambahkan',
-            ]);
+                Siswa::create([
+                    'user_id' => $user->id,
+                    'nis' => $request->nis,
+                    'nama_siswa' => $request->nama_siswa,
+                    'kelas_id' => $request->kelas_id,
+                    'email' => $request->email,
+                    'jenis_kelamin' => $request->jenis_kelamin,
+                    'alamat' => $request->alamat,
+                    'telepon' => $request->telepon,
+                ]);
+            });
+            return redirect()->route('tatus/siswa/index')
+                ->with('success', 'Siswa berhasil di tambahkan!');
         } else {
-            return redirect()->route('tatus/siswa/index')->with([
-                'type' => 'danger',
-                'msg' => 'Siswa gagal ditambahkan',
-            ]);
+            return redirect()->route('tatus/siswa/index')
+                ->with('error', 'Siswa gagal di tambahkan!');
         }
     }
 
     public function edit(Siswa $siswa)
     {
-        $jurusan = Jurusan::all();
         $kelas = Kelas::all();
 
         return view('tatus/siswa/form', [
-            'jurusan' => $jurusan,
             'kelas' => $kelas,
             'siswa' => $siswa,
             'title' => 'Edit Siswa'
@@ -73,42 +89,32 @@ class SiswaController extends Controller
     public function update(Request $request, Siswa $siswa)
     {
         $request->validate([
-            'jurusan_id' => 'required|numeric',
             'kelas_id' => 'required|numeric',
-            'nama' => 'required|max:255',
-            'email' => 'required|email:rfc,dns|unique:siswas|max:255',
+            'nis' => 'required',
+            'nama_siswa' => 'required|max:255',
+            'email' => 'required|max:255',
             'jenis_kelamin' => 'nullable|in:L,P',
             'alamat' => 'nullable',
             'telepon' => 'nullable|numeric',
         ]);
 
-        $siswa = $siswa->fill($request->input());
-
-        if ($siswa->save()) {
-            return redirect()->route('tatus/siswa/index', [
-                'type' => 'Success',
-                'msg' => 'Siswa diubah'
-            ]);
+        if ($siswa->fill($request->input())->save()) {
+            return redirect()->route('tatus/siswa/index',)
+                ->with('success', 'Siswa berhasil di ubah!');
         } else {
-            return redirect()->route('tatus/siswa/index', [
-                'type' => 'danger',
-                'msg' => 'Siswa gagal diubah'
-            ]);
+            return redirect()->route('tatus/siswa/index')
+                ->with('error', 'Siswa gagal di ubah!');
         }
     }
 
     public function destroy(Siswa $siswa)
     {
         if ($siswa->delete()) {
-            return redirect()->route('tatus/siswa/index')->with([
-                'type' => 'Success',
-                'msg' => 'Siswa dihapus'
-            ]);
+            return redirect()->route('tatus/siswa/index')
+                ->with('success', 'Siswa berhasil di hapus!');
         } else {
-            return redirect()->route('tatus/siswa/index')->with([
-                'type' => 'Success',
-                'msg' => 'Siswa gagal dihapus'
-            ]);
+            return redirect()->route('tatus/siswa/index')
+                ->with('error', 'Siswa gagal di hapus!');
         }
     }
 }

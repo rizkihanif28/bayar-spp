@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Tatus;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use App\Models\Siswa;
 use App\Models\Tagihan;
 use App\Models\Transaksi;
-use Illuminate\Http\Request;
 use App\Models\Petugas;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -22,12 +22,11 @@ class PembayaranController extends Controller
     public function index()
     {
         $siswa = Siswa::orderBy('nama_siswa', 'asc')->get();
-        return view('admins/pembayaran/index', [
+        return view('tatus/pembayaran/index', [
             'title' => 'Pembayaran',
             'siswa' => $siswa
         ]);
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -41,7 +40,7 @@ class PembayaranController extends Controller
 
         $tagihan = Tagihan::all();
 
-        return view('admins/pembayaran/form', [
+        return view('tatus/pembayaran/form', [
             'title' => 'Create Pembayaran',
             'siswa' => $siswa,
             'tagihan' => $tagihan
@@ -58,7 +57,6 @@ class PembayaranController extends Controller
             'nominal_rupiah' => 'Rp ' . number_format($tagihan->nominal, 0, 2, '.')
         ]);
     }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -96,7 +94,7 @@ class PembayaranController extends Controller
                 }
             });
 
-            return redirect()->route('histori/pembayaran')
+            return redirect()->route('tatus/histori')
                 ->with('success', 'Pembayaran berhasil!');
         } else {
             return back()
@@ -105,18 +103,17 @@ class PembayaranController extends Controller
                     ' Pembayaran dibatalkan!');
         }
     }
-
-    public function statusPembayaranShow(Siswa $siswa)
+    public function tatusShowStatus(Siswa $siswa)
     {
         $tagihan = Tagihan::all();
-        return view('admins/status-pembayaran/tahun', [
+        return view('tatus/status-pembayaran/tahun', [
             'title' => 'Status Pembayaran Tahun',
             'tagihan' => $tagihan,
             'siswa' => $siswa
         ]);
     }
 
-    public function statusPembayaranShowStatus($nis, $periode)
+    public function tatusShowPembayaran($nis, $periode)
     {
         $siswa = Siswa::where('nis', $nis)
             ->first();
@@ -128,7 +125,7 @@ class PembayaranController extends Controller
             ->where('tahun_bayar', $tagihan->periode)
             ->get();
 
-        return view('admins/status-pembayaran/show', [
+        return view('tatus/status-pembayaran/show', [
             'title' => 'Status Pembayaran Siswa',
             'siswa' => $siswa,
             'tagihan' => $tagihan,
@@ -144,7 +141,7 @@ class PembayaranController extends Controller
         }])
             ->latest()->get();
 
-        return view('admins/histori/index', [
+        return view('tatus/histori/index', [
             'title' => 'Histori Pembayaran',
             'transaksi' => $transaksi,
             'siswa' => $siswa

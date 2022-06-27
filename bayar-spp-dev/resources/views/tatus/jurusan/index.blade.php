@@ -42,11 +42,11 @@
                                         {{ $item->nama }}
                                     </td>
                                     <td>
-                                        <a class="icon" href="{{ route('admins/jurusan/edit', $item->id) }}"
-                                            title="edit item">
+                                        <a class="btn btn-success btn-sm"
+                                            href="{{ route('admins/jurusan/edit', $item->id) }}" title="edit item">
                                             <i class="bi bi-pencil"></i>
                                         </a>
-                                        <a class="icon btn-delete" href="#!" data-id="{{ $item->id }}"
+                                        <a class="btn btn-danger btn-sm btn-delete" href="#!" data-id="{{ $item->id }}"
                                             title="delete item">
                                             <i class="bi-trash3"></i>
                                         </a>

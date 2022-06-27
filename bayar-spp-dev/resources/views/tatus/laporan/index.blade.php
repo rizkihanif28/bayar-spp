@@ -1,16 +1,18 @@
-@extends('layouts.app-admin')
+@extends('layouts.app-tatus')
 
-@section('content-admin')
+@section('content-tatus')
     <div class="page-header" style="margin-top: 7%">
         <h2 class="page-title">
-            Status Pembayaran SPP
+            Laporan SPP
         </h2>
     </div>
     <div class="row">
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">Status Pembayaran</h4>
+                    <h4 class="card-title">Laporan</h4>
+                    <a href="{{ route('tatus/laporan') }}" class="btn btn-primary btn-sm ml-5">
+                        <i class="bi bi-printer"></i> Cetak Laporan</a>
                 </div>
                 @if (Session::get('msg'))
                     <div class="card-alert alert alert-{{ Session::get('type') }}" id="message"
@@ -24,32 +26,32 @@
                     </div>
                 @endif
                 <div class="p-3 text-center">
-                    <table id="table-status" class="table table-striped card-table table-hover">
+                    <table id="table-laporan" class="table table-striped card-table table-hover">
                         <thead>
                             <tr>
                                 <th class="w-1">No</th>
-                                <th>NIS</th>
-                                <th>Nama</th>
+                                <th>Petugas</th>
+                                <th>Nama Siswa</th>
                                 <th>Kelas</th>
-                                <th>JK</th>
-                                <th>Aksi</th>
+                                <th>NIS</th>
+                                <th>Tanggal Bayar</th>
+                                <th>Bulan</th>
+                                <th>Periode</th>
+                                <th>Nominal</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($siswa as $item)
+                            @foreach ($transaksi as $item)
                                 <tr>
-                                    {{-- <td><span class="text-muted">{{ $index + 1 }}</span></td> --}}
                                     <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $item->petugas->nama }}</td>
+                                    <td>{{ $item->siswa->nama_siswa }}</td>
+                                    <td>{{ $item->siswa->kelas->nama_kelas }}</td>
                                     <td>{{ $item->nis }}</td>
-                                    <td>{{ $item->nama_siswa }}</td>
-                                    <td>{{ $item->kelas->nama_kelas }}</td>
-                                    <td>{{ $item->jenis_kelamin }}</td>
-
-                                    <td class="text-center">
-                                        <a class="btn btn-green btn-sm" href="{{ route('status/show', $item->nis) }}">
-                                            <i class="bi bi-wallet"></i> Detail
-                                        </a>
-                                    </td>
+                                    <td>{{ \Carbon\Carbon::parse($item->tanggal_bayar)->format('d-m-Y') }}</td>
+                                    <td>{{ $item->bulan_bayar }}</td>
+                                    <td>{{ $item->tahun_bayar }}</td>
+                                    <td>{{ $item->jumlah_bayar }}</td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -63,7 +65,7 @@
 @section('js')
     <script>
         requirejs(["datatables"], function() {
-            $("#table-status").dataTable();
+            $("#table-laporan").dataTable();
         });
     </script>
 @endsection

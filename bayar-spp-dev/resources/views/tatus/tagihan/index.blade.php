@@ -3,44 +3,47 @@
 @section('content-tatus')
     <div class="page-header" style="margin-top: 7%">
         <h2 class="page-title">
-            Kelas
+            Tagihan
         </h2>
     </div>
     <div class="row">
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">Kelas</h4>
-                    <a href="{{ route('tatus/kelas/create') }}" class="btn btn-primary btn-sm ml-5">+ Tambah
-                        Kelas</a>
+                    <h4 class="card-title">Tagihan</h4>
+                    <a href="{{ route('tatus/tagihan/create') }}" class="btn btn-primary btn-sm ml-5">+ Tambah Tagihan</a>
                 </div>
                 <x-alert />
-                <div class="table-responsive mt-3 p-3 text-center">
-                    <table class="table table-striped card-table table-hover table-vcenter text-nowrap" id="table-kelas">
+                <div class="p-3 text-center">
+                    <table id="table-tagihan" class="table table-striped card-table table-hover">
                         <thead>
                             <tr>
-                                <th style="width: 40px">No.</th>
-                                <th>Nama Kelas</th>
-                                <th>Kompetensi Keahlian</th>
+                                <th>No</th>
+                                <th>Periode</th>
+                                <th>Jumlah</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($kelas as $index => $item)
+                            @foreach ($tagihan as $index => $item)
                                 <tr>
-                                    <td><span class="text-muted">{{ $index + 1 }}</span></td>
-                                    <td>{{ $item->nama_kelas }}</td>
-                                    <td>{{ $item->jurusan }}</td>
-                                    <td>
+                                    <td><span class="text-muted"> {{ $index + 1 }}</span></td>
+                                    <td>{{ $item->periode }}</td>
+                                    <td> @currency($item->nominal)</td>
+                                    <td class="text-center">
+                                        {{-- <a class="icon" href="{{ route('tatus/siswa/show', $item->id) }}"
+                                            title="lihat detail">
+                                            <i class="bi bi-ticket-detailed"></i>
+                                        </a> --}}
                                         <a class="btn btn-success btn-sm"
-                                            href="{{ route('tatus/kelas/edit', $item->id) }}" title="edit item">
+                                            href="{{ route('tatus/tagihan/edit', $item->id) }}" title="edit item">
                                             <i class="bi bi-pencil"></i>
                                         </a>
                                         <a class="btn btn-danger btn-sm btn-delete" href="#!"
                                             data-id="{{ $item->id }}" title="delete item">
-                                            <i class="bi-trash3"></i>
+                                            <i class="bi bi-trash3"></i>
                                         </a>
-                                        <form action="{{ route('tatus/kelas/destroy', $item->id) }}" method="POST"
+                                        <form action="{{ route('tatus/tagihan/destroy', $item->id) }}" method="POST"
                                             id="form-{{ $item->id }}">
                                             @csrf
                                         </form>
@@ -58,7 +61,7 @@
 @section('js')
     <script>
         requirejs(["datatables"], function() {
-            $('#table-kelas').dataTable();
+            $('#table-tagihan').dataTable();
         });
     </script>
     <script>
@@ -69,7 +72,7 @@
                     formid = $(this).attr('data-id');
                     swal({
                         title: 'Anda yakin ingin menghapus?',
-                        text: 'kelas yang dihapus tidak dapat dikembalikan',
+                        text: 'tagihan yang dihapus tidak dapat dikembalikan',
                         dangerMode: true,
                         buttons: {
                             cancel: true,

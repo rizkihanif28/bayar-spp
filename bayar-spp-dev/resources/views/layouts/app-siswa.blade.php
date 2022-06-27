@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>SPP WJ | Dashboard</title>
+    <title>SPP WJ | {{ $title }}</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -19,19 +19,37 @@
 
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('assets/js/bootstrap.min.js') }}" />
-    <link rel="stylesheet" href="{{ asset('assets/fonts/font-awesome/css/fontawesome.css') }}" />
-    <link rel="stylesheet" href="{{ asset('assets/fonts/font-awesome/css/fontawesome.min.css') }}" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
-    <link rel="stylesheet" href="https://code.jquery.com/jquery-3.6.0.min.js">
+    <link rel="shortcut icon" href="{{ asset('assets/img/favicon.ico') }}" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i,500,500i,600,600i,700,700i&amp;subset=latin-ext">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/datatables/datatables.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/plugins/select2/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/select2/select2-bootstrap4.min.css') }}">
+
+
+    {{-- Other Script --}}
+    <script src="{{ asset('assets/plugins/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/select2/select2.min.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
+    </script>
+
+    <script src="{{ asset('assets/js/require.min.js') }}"></script>
+
+    {{-- Other CSS --}}
+    <link rel="stylesheet" href="{{ asset('assets/css/tabler.css') }}">
+
+    {{-- Datepicker CSS --}}
+    <link rel="stylesheet" href="{{ asset('assets/plugins/datepicker/datepicker.css') }}" />
 </head>
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-light fixed-top">
-        <div class="container-fluid mx-5">
+        <div class="container-fluid ml-9">
 
-            <img src="{{ asset('assets/img/logo-brand.png') }}" style="width: 33px" class="icon-brand" />
-            <a class="navbar-brand" href="http://127.0.0.1:8000">
+            <img src="{{ asset('assets/img/logo-brand.png') }}" style="width: 40px" class="icon-brand" />
+            <a class="navbar-brand" href="http://127.0.0.1:8000/dashboard/siswa">
                 Pembayaran Walang Jaya
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -45,59 +63,60 @@
 
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
-                        <li class="nav-item mx-auto">
-                            <a class="nav-link" href="/home-siswa">Beranda</a>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/dashboard/siswa">Beranda</a>
                         </li>
-                        <li class="nav-item mx-4">
-                            <a class="nav-link" href="#">SPP Pembayaran</a>
-                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                SPP Pembayaran
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li>
+                                    <a class="dropdown-item" href="/siswa/status/pembayaran">
+                                        <i class="bi bi-bell"></i>
+                                        Status Pembayaran
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="#">
+                                        <i class="bi bi-bar-chart-steps"></i>
+                                        Histori Pembayaran
+                                    </a>
+                                </li>
+                            </ul>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav">
-
-                        <!-- Authentication Links -->
-                        @guest
-                            @if (Route::has('login'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                    <ul class="navbar-nav mr-9">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link active" href="#" id="navbarDropdown" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                <img alt="image" src="{{ asset('assets/img/avatar/avatar-1.png') }}"
+                                    style="width: 30px" class="rounded-circle mr-1" />
+                                <div class="d-sm-none d-lg-inline-block">{{ Auth::user()->name }}</div>
+                            </a>
+                            <ul class="dropdown-menu ">
+                                <li>
+                                    <form action="">
+                                        <button class="dropdown-item">
+                                            <i class="bi bi-person-bounding-box"></i>
+                                            Profil
+                                        </button>
+                                    </form>
                                 </li>
-                            @endif
 
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            <ul class="navbar-nav">
-                                <li class="nav-item dropdown">
-                                    <a id="navbarDropdown" class="nav-link" href="#" role="button"
-                                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                        <img alt="image" src="{{ asset('assets/img/avatar/avatar-1.png') }}"
-                                            style="width: 30px" class="rounded-circle mr-1" />
-                                        {{ Auth::user()->name }}
-                                    </a>
-                                    <ul class="dropdown-menu pr-md-4">
-                                        <li>
-                                            <form action="#" method="post">
-                                                <button type="submit" class="dropdown-item">
-                                                    Profil
-                                                </button>
-                                            </form>
-                                        </li>
-                                        <li>
-                                            <form action="/logout" method="post">
-                                                @csrf
-                                                <button type="submit" class="dropdown-item">
-                                                    Keluar
-                                                </button>
-                                            </form>
-                                        </li>
-                                    </ul>
+                                <li>
+                                    <form action="/logout" method="post">
+                                        @csrf
+                                        <button type="submit" class="dropdown-item">
+                                            <i class="bi bi-box-arrow-left"></i>
+                                            Keluar
+                                        </button>
+                                    </form>
                                 </li>
                             </ul>
-                        @endguest
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -118,9 +137,7 @@
         SMK Walang Jaya Jakarta
     </footer>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 
 </body>
 

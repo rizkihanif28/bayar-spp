@@ -63,7 +63,7 @@
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-light fixed-top">
-        <div class="container-fluid ml-6">
+        <div class="container-fluid ml-9">
             <img src="{{ asset('assets/img/logo-brand.png') }}" style="width: 40px" class="icon-brand" />
             <a class="navbar-brand" href="http://127.0.0.1:8000">
                 Pembayaran Walang Jaya
@@ -141,7 +141,7 @@
                         </li>
                     </ul>
 
-                    <ul class="navbar-nav mr-7">
+                    <ul class="navbar-nav mr-9">
                         <li class="nav-item dropdown">
                             <a class="nav-link active" href="#" id="navbarDropdown" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
@@ -199,6 +199,5 @@
     @yield('js')
 
 </body>
-{{-- @stack('js') --}}
 
 </html>

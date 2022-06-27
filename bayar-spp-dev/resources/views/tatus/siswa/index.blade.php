@@ -13,28 +13,16 @@
                     <h4 class="card-title">Siswa</h4>
                     <a href="{{ route('tatus/siswa/create') }}" class="btn btn-primary btn-sm ml-5">+ Tambah Siswa</a>
                 </div>
-                @if (Session::get('msg'))
-                    <div class="card-alert alert alert-{{ Session::get('type') }}" id="message"
-                        style="border-radius: 0px !important">
-                        @if (Session::get('type') == 'success')
-                            <i class="bi bi-check-lg" aria-hidden="true"></i>
-                        @else
-                            <i class="bi bi-x-lg" aria-hidden="true"></i>
-                        @endif
-                        {{ Session::get('msg') }}
-                    </div>
-                @endif
+                <x-alert />
                 <div class="p-3 text-center">
                     <table id="table-siswa" class="table table-striped card-table table-hover">
                         <thead>
                             <tr>
                                 <th class="w-1">No</th>
-                                <th>Jurusan</th>
-                                <th>Kelas</th>
+                                <th>NIS</th>
                                 <th>Nama</th>
-                                <th>Email</th>
+                                <th>Kelas</th>
                                 <th>JK</th>
-                                <th>Alamat</th>
                                 <th>Telepon</th>
                                 <th>Aksi</th>
                             </tr>
@@ -43,27 +31,23 @@
                             @foreach ($siswa as $index => $item)
                                 <tr>
                                     <td><span class="text-muted">{{ $index + 1 }}</span></td>
-                                    <td>{{ $item->jurusan->nama }}{{ isset($item->siswa->jurusan) ? '(' . $item->siswa->jurusan->nama . ')' : '' }}
-                                    </td>
-                                    <td>{{ $item->kelas->nama }}{{ isset($item->kelas->periode) ? '(' . $item->kelas->periode->nama . ')' : '' }}
-                                    </td>
-                                    <td>{{ $item->nama }}</td>
-                                    <td>{{ $item->email }}</td>
+                                    <td>{{ $item->nis }}</td>
+                                    <td>{{ $item->nama_siswa }}</td>
+                                    <td>{{ $item->kelas->nama_kelas }}</td>
                                     <td>{{ $item->jenis_kelamin }}</td>
-                                    <td>{{ $item->alamat }}</td>
                                     <td>{{ $item->telepon }}</td>
 
                                     <td class="text-center">
-                                        {{-- <a class="icon" href="{{ route('admins/siswa/show', $item->id) }}"
+                                        {{-- <a class="icon" href="{{ route('tatus/siswa/show', $item->id) }}"
                                             title="lihat detail">
                                             <i class="bi bi-ticket-detailed"></i>
                                         </a> --}}
-                                        <a class="icon" href="{{ route('tatus/siswa/edit', $item->id) }}"
-                                            title="edit item">
+                                        <a class="btn btn-success btn-sm"
+                                            href="{{ route('tatus/siswa/edit', $item->id) }}" title="edit item">
                                             <i class="bi bi-pencil"></i>
                                         </a>
-                                        <a class="icon btn-delete" href="#!" data-id="{{ $item->id }}"
-                                            title="delete item">
+                                        <a class="btn btn-danger btn-sm btn-delete" href="#!"
+                                            data-id="{{ $item->id }}" title="delete item">
                                             <i class="bi bi-trash3"></i>
                                         </a>
                                         <form action="{{ route('tatus/siswa/destroy', $item->id) }}" method="POST"

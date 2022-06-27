@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Tatus;
 
 use App\Http\Controllers\Controller;
 use App\Models\Siswa;
@@ -8,8 +8,6 @@ use App\Models\Transaksi;
 use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
-
 
 class LaporanController extends Controller
 {
@@ -19,7 +17,7 @@ class LaporanController extends Controller
             ->first();
         $transaksi = Transaksi::latest()->get();
 
-        return view('admins/laporan/index', [
+        return view('tatus/laporan/index', [
             'title' => 'Laporan',
             'transaksi' => $transaksi,
             'siswa' => $siswa
@@ -28,7 +26,7 @@ class LaporanController extends Controller
 
     public function create()
     {
-        return view('admins/laporan/form', [
+        return view('tatus/laporan/form', [
             'title' => 'Print Laporan',
         ]);
     }
@@ -44,7 +42,7 @@ class LaporanController extends Controller
             ->whereBetween('tanggal_bayar', $tanggal)->get();
 
         if ($data['transaksi']->count() > 0) {
-            $pdf = FacadePdf::loadView('admins/laporan/printpdf', $data);
+            $pdf = FacadePdf::loadView('tatus/laporan/printpdf', $data);
             return $pdf->download(
                 'SPP-WJ ' .
                     Carbon::parse($request->tanggal_mulai)->format('d-m-Y') . '-' .

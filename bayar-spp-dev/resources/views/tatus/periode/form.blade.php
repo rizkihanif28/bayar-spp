@@ -26,9 +26,9 @@
                         <div class="col-12">
                             @csrf
                             <div class="form-group mb-3">
-                                <label class="form-label">Nama</label>
-                                <input type="text" placeholder="Nama" name="nama" class="form-control"
-                                    value="{{ isset($periode) ? $periode->nama : old('nama') }}" required>
+                                <label class="form-label">Tahun</label>
+                                <input type="text" placeholder="Tahun" name="tahun" class="form-control"
+                                    value="{{ isset($periode) ? $periode->tahun : old('tahun') }}" required>
                             </div>
                             <div class="form-group">
                                 <label class="form-label">Tanggal Mulai s/d Selesai</label>

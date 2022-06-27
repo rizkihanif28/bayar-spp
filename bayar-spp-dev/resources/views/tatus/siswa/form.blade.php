@@ -8,8 +8,9 @@
     </div>
     <div class="row">
         <div class="col-8">
-            <form action="{{ isset($siswa) ? route('tatus/siswa/update', $siswa->id) : route('tatus/siswa/store') }}"
-                method="POST" class="card">
+            <form class="card"
+                action="{{ isset($siswa) ? route('tatus/siswa/update', $siswa->id) : route('tatus/siswa/store') }}"
+                method="POST">
                 <div class="card-header">
                     <h5 class="card-title">Siswa</h5>
                 </div>
@@ -25,35 +26,28 @@
                         <div class="col-12">
                             @csrf
                             <div class="form-group">
-                                <label class="form-label">Jurusan</label>
-                                <select id="select-beast" class="form-control custom-select" name="jurusan_id">
-                                    @foreach ($jurusan as $item)
-                                        <option value="{{ $item->id }}"
-                                            {{ isset($siswa) ? ($item->id == $siswa->jurusan_id ? 'selected' : '') : '' }}>
-                                            {{ $item->nama }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="form-label">Kelas</label>
-                                <select id="select-beast" class="form-control custom-select" name="kelas_id">
-                                    @foreach ($kelas as $item)
-                                        <option value="{{ $item->id }}"
-                                            {{ isset($siswa) ? ($item->id == $siswa->kelas_id ? 'selected' : '') : '' }}>
-                                            {{ $item->nama }} - {{ isset($item->periode) ? $item->periode->nama : '' }}
-                                        </option>
-                                    @endforeach
-                                </select>
+                                <label class="form-label">NIS</label>
+                                <input type="text" placeholder="NIS" name="nis" class="form-control"
+                                    value="{{ isset($siswa) ? $siswa->nis : old('nis') }}" required>
                             </div>
 
                             <div class="form-group">
                                 <label class="form-label">Nama</label>
-                                <input type="text" placeholder="Nama Lengkap" name="nama" class="form-control"
-                                    value="{{ isset($siswa) ? $siswa->nama : old('nama') }}" required>
+                                <input type="name" placeholder="Nama" name="nama_siswa" class="form-control"
+                                    value="{{ isset($siswa) ? $siswa->nama_siswa : old('nama_siswa') }}" required>
                             </div>
-
+                            <div class="form-group">
+                                <label class="form-label">Kelas</label>
+                                <select id="select-beast" class="form-control custom-select" name="kelas_id">
+                                    <option>-- Pilih Kelas --</option>
+                                    @foreach ($kelas as $item)
+                                        <option value="{{ $item->id }}"
+                                            {{ isset($siswa) ? ($item->id == $siswa->kelas_id ? 'selected' : '') : '' }}>
+                                            {{ $item->nama_kelas }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
                             <div class="form-group">
                                 <label class="form-label">Email</label>
                                 <input type="email" name="email" placeholder="Email" class="form-control"
@@ -62,6 +56,7 @@
                             <div class="form-group">
                                 <label class="form-label">Jenis Kelamin</label>
                                 <select name="jenis_kelamin" id="select-beast" class="form-control custom-select">
+                                    <option>-- Jenis Kelamin --</option>
                                     <option value="L"
                                         {{ isset($siswa) ? ($siswa->jenis_kelamin == 'L' ? 'selected' : '') : '' }}>
                                         Laki-Laki</option>
@@ -75,7 +70,7 @@
                                 <label class="form-label w-100">Alamat</label>
                                 {{-- <textarea name="alamat" id="alamat" placeholder="Alamat" class="col-12"></textarea> --}}
                                 <input placeholder="Alamat" name="alamat" class="form-control"
-                                    value="{{ isset($siswa) ? $siswa->nama : old('alamat') }}" required>
+                                    value="{{ isset($siswa) ? $siswa->alamat : old('alamat') }}" required>
                             </div>
 
                             <div class="form-group">

@@ -18,8 +18,13 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Dashboard\AdminController as DashboardAdminController;
 use App\Http\Controllers\Dashboard\SiswaController as DashboardSiswaController;
 use App\Http\Controllers\Dashboard\TatusController;
+use App\Http\Controllers\Siswa\StatusBayarSiswaController;
+use App\Http\Controllers\Tatus\KelasController as TatusKelasController;
+use App\Http\Controllers\Tatus\LaporanController as TatusLaporanController;
+use App\Http\Controllers\Tatus\PembayaranController;
 use App\Http\Controllers\Tatus\ProfilController;
 use App\Http\Controllers\Tatus\SiswaController as TatusSiswaController;
+use App\Http\Controllers\Tatus\TagihanController as TatusTagihanController;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -90,22 +95,12 @@ Route::middleware(['auth:web'])->group(function () {
     Route::get('admins/pembayaran/index', [AdminPembayaranController::class, 'index'])->name('admins/pembayaran/index');
     Route::get('admins/pembayaran/{nis}/create', [AdminPembayaranController::class, 'create'])->name('admins/pembayaran/create');
     Route::get('pembayaran/spp/{periode}', [AdminPembayaranController::class, 'spp'])->name('pembayaran.spp');
-    Route::post('admins/pembayaran/{nis}/store', [AdminPembayaranController::class, 'store'])->name('admins/pembayaran/store');
+    Route::post('admins/pembayaran/store/{nis}', [AdminPembayaranController::class, 'store'])->name('admins/pembayaran/store');
     Route::get('admins/histori', [AdminPembayaranController::class, 'historiPembayaran'])->name('histori/pembayaran');
 
     // Status Pembayaran
-    // Route::get('admins/status/index', [AdminPembayaranController::class, 'statusPembayaran'])->name('admins/status/index');
     Route::get('admins/status/show/{siswa:nis}', [AdminPembayaranController::class, 'statusPembayaranShow'])->name('status/show');
     Route::get('admins/status/show/{nis}/{periode}', [AdminPembayaranController::class, 'statusPembayaranShowStatus'])->name('status-pembayaran/siswa');
-
-    // jurusan
-    // Route::get('admins/jurusan/index', [JurusanController::class, 'index'])->name('admins/jurusan/index');
-    // Route::get('admins/jurusan/create', [JurusanController::class, 'create'])->name('admins/jurusan/create');
-    // Route::post('admins/jurusan/store', [JurusanController::class, 'store'])->name('admins/jurusan/store');
-    // Route::get('admins/jurusan/{jurusan}/edit', [JurusanController::class, 'edit'])->name('admins/jurusan/edit');
-    // Route::post('admins/jurusan/{jurusan}/update', [JurusanController::class, 'update'])->name('admins/jurusan/update');
-    // Route::post('admins/jurusan/{jurusan}/destroy', [JurusanController::class, 'destroy'])->name('admins/jurusan/destroy');
-
     // kelas
     Route::get('admins/kelas/index', [KelasController::class, 'index'])->name('admins/kelas/index');
     Route::get('admins/kelas/create', [KelasController::class, 'create'])->name('admins/kelas/create');
@@ -125,7 +120,7 @@ Route::middleware(['auth:web'])->group(function () {
 
 
     // {{ Route TataUsaha }}
-    // siswa
+    // Siswa
     Route::get('tatus/siswa/index', [TatusSiswaController::class, 'index'])->name('tatus/siswa/index');
     Route::get('tatus/siswa/create', [TatusSiswaController::class, 'create'])->name('tatus/siswa/create');
     Route::post('tatus/siswa/store', [TatusSiswaController::class, 'store'])->name('tatus/siswa/store');
@@ -133,6 +128,41 @@ Route::middleware(['auth:web'])->group(function () {
     Route::post('tatus/siswa/{siswa}/update', [TatusSiswaController::class, 'update'])->name('tatus/siswa/update');
     Route::post('tatus/siswa/{siswa}/destroy', [TatusSiswaController::class, 'destroy'])->name('tatus/siswa/destroy');
 
+    // Tagihan
+    Route::get('tatus/tagihan/index', [TatusTagihanController::class, 'index'])->name('tatus/tagihan/index');
+    Route::get('tatus/tagihan/create', [TatusTagihanController::class, 'create'])->name('tatus/tagihan/create');
+    Route::post('tatus/tagihan/store', [TatusTagihanController::class, 'store'])->name('tatus/tagihan/store');
+    Route::get('tatus/tagihan/{tagihan}/edit', [TatusTagihanController::class, 'edit'])->name('tatus/tagihan/edit');
+    Route::post('tatus/tagihan/{tagihan}/update', [TatusTagihanController::class, 'update'])->name('tatus/tagihan/update');
+    Route::post('tatus/tagihan/{tagihan}/destroy', [TatusTagihanController::class, 'destroy'])->name('tatus/tagihan/destroy');
+
+    // Kelas
+    Route::get('tatus/kelas/index', [TatusKelasController::class, 'index'])->name('tatus/kelas/index');
+    Route::get('tatus/kelas/create', [TatusKelasController::class, 'create'])->name('tatus/kelas/create');
+    Route::get('tatus/kelas/store', [TatusKelasController::class, 'store'])->name('tatus/kelas/store');
+    Route::get('tatus/kelas/{kelas}/edit', [TatusKelasController::class, 'edit'])->name('tatus/kelas/edit');
+    Route::get('tatus/kelas/{kelas}/update', [TatusKelasController::class, 'update'])->name('tatus/kelas/update');
+    Route::get('tatus/kelas/{kelas}/destroy', [TatusKelasController::class, 'destroy'])->name('tatus/kelas/destroy');
+
+    // Pembayaran
+    Route::get('tatus/pembayaran/index', [PembayaranController::class, 'index'])->name('tatus/pembayaran/index');
+    Route::get('tatus/pembayaran/{nis}/create', [PembayaranController::class, 'create'])->name('tatus/pembayaran/create');
+    Route::get('tatus/pembayaran/spp/{periode}', [PembayaranController::class, 'spp'])->name('tatus.pembayaran.spp');
+    Route::post('tatus/pembayaran/store/{nis}', [PembayaranController::class, 'store'])->name('tatus/pembayaran/store');
+    Route::get('tatus/histori/pembayaran', [PembayaranController::class, 'historiPembayaran'])->name('tatus/histori');
+
+    // Status Pembayaran
+    Route::get('status/show/{siswa:nis}', [PembayaranController::class, 'tatusShowStatus'])->name('status/show/tahun');
+    Route::get('status/show/pembayaran/{nis}/{periode}', [PembayaranController::class, 'tatusShowPembayaran'])->name('statusBayar/siswa');
+
+    // Laporan
+    Route::get('tatus/laporan/index', [TatusLaporanController::class, 'index'])->name('tatus/laporan/index');
+    Route::get('tatus/laporan/create', [TatusLaporanController::class, 'create'])->name('tatus/laporan');
+    Route::post('tatus/laporan/print', [TatusLaporanController::class, 'printPDF'])->name('tatus/laporan/print');
+
+    // Siswa 
+    Route::get('siswa/status/pembayaran', [StatusBayarSiswaController::class, 'statusBayarSiswa'])->name('siswa/status');
+    Route::get('siswa/status/show/{periode:tahun}', [StatusBayarSiswaController::class, 'statusBayarShow'])->name('siswa/status/show');
 
     // Profil 
     // Route::get('tatus/profil/{user}/edit', [UserContoller::class, 'edit'])->name('tatus/profil/edit');

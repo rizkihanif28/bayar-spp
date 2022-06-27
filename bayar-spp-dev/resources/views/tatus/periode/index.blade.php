@@ -30,7 +30,7 @@
                         <thead>
                             <tr>
                                 <th>No.</th>
-                                <th>Nama</th>
+                                <th>Tahun</th>
                                 <th>Tanggal Mulai</th>
                                 <th>Tanggal Selesai</th>
                                 <th>Status</th>
@@ -41,7 +41,7 @@
                             @foreach ($periode as $index => $item)
                                 <tr>
                                     <td><span class="text-muted">{{ $index + 1 }}</span></td>
-                                    <td>{{ $item->nama }}</td>
+                                    <td>{{ $item->tahun }}</td>
                                     <td>
                                         {{ $item->tgl_mulai }}
                                     </td>
@@ -54,11 +54,11 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <a class="icon" href="{{ route('admins/periode/edit', $item->id) }}"
-                                            title="edit item">
+                                        <a class="btn btn-success btn-sm"
+                                            href="{{ route('admins/periode/edit', $item->id) }}" title="edit item">
                                             <i class="bi bi-pencil"></i>
                                         </a>
-                                        <a class="icon btn-delete" href="#!" data-id="{{ $item->id }}"
+                                        <a class="btn btn-danger btn-sm" href="#!" data-id="{{ $item->id }}"
                                             title="delete item">
                                             <i class="bi bi-trash3"></i>
                                         </a>

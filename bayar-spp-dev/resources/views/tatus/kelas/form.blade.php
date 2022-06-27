@@ -1,6 +1,6 @@
-@extends('layouts.app-admin')
+@extends('layouts.app-tatus')
 
-@section('content-admin')
+@section('content-tatus')
     <div class="page-header" style="margin-top: 7%">
         <h2 class="page-title">
             Form Kelas
@@ -8,8 +8,9 @@
     </div>
     <div class="row">
         <div class="col-8">
-            <form action="{{ isset($kelas) ? route('admins/kelas/update', $kelas->id) : route('admins/kelas/store') }}"
+            <form action="{{ isset($kelas) ? route('tatus/kelas/update', $kelas->id) : route('tatus/kelas/store') }}"
                 method="post" class="card">
+                @csrf
                 <div class="card-header">
                     <h3 class="card-title">Kelas</h3>
                 </div>
@@ -23,12 +24,16 @@
                     @endif
                     <div class="row">
                         <div class="col-12">
-                            @csrf
                             <div class="form-group mt-3">
-                                <label class="form-label">Nama</label>
-                                <input type="text" class="form-control" name="nama" placeholder="Nama Kelas"
-                                    value="{{ isset($kelas) ? $kelas->nama : old('nama') }}" required>
+                                <label class="form-label">Nama Kelas</label>
+                                <input type="text" class="form-control" name="nama_kelas" placeholder="Kelas"
+                                    value="{{ isset($kelas) ? $kelas->nama_kelas : old('nama_kelas') }}" required>
                             </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Kompetensi Keahlian</label>
+                            <input type="text" class="form-control" name="jurusan" placeholder="Jurusan"
+                                value="{{ isset($kelas) ? $kelas->jurusan : old('jurusan') }}" required>
                         </div>
                     </div>
                 </div>

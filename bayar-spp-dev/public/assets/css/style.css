@@ -39,6 +39,7 @@
 }
 
 /* Beranda */
+
 nav.navbar-expand-lg,
 .navbar-light {
     background-color: #ffad32;
@@ -115,17 +116,12 @@ a.dropdown-item.active {
 }
 
 /* 2. isi content utama*/
-.app-admin {
-    margin-top: 80px;
-}
-
 .jumbotron {
-    margin-top: 100px;
+    margin-top: 180px;
     text-align: center;
     font-size: 40px;
     border-radius: 20px;
 }
-
 .jumbotron p {
     font-size: 25px;
 }

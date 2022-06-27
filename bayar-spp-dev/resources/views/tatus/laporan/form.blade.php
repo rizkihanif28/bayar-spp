@@ -1,6 +1,6 @@
-@extends('layouts.app-admin')
+@extends('layouts.app-tatus')
 
-@section('content-admin')
+@section('content-tatus')
     <div class="page-header" style="margin-top: 7%">
         <h2 class="page-title">
             Print Laporan
@@ -8,7 +8,7 @@
     </div>
     <div class="row">
         <div class="col-8">
-            <form method="POST" class="card" action="{{ route('laporan/print') }}">
+            <form method="POST" class="card" action="{{ route('tatus/laporan/print') }}">
                 @csrf
                 <div class="card-header">
                     <h5 class="card-title">Print</h5>
@@ -43,23 +43,6 @@
 
 @section('js')
     <script>
-        requirejs(["datatables"], function() {
-            // $(document).on("click", "#preview", function() {
-            //     var tanggal_mulai = $("#tanggal_mulai").val()
-            //     var tanggal_selesai = $("#tanggal_selesai").val()
-
-            //     $.ajax({
-            //         url: "/pembayaran/laporan/preview-pdf",
-            //         method: "GET",
-            //         data: {
-            //             tanggal_mulai: tanggal_mulai,
-            //             tanggal_selesai: tanggal_selesai,
-            //         },
-            //         success: function() {
-            //             window.open('/pembayaran/laporan/preview-pdf')
-            //         }
-            //     })
-            // })
-        });
+        requirejs(["datatables"], function() {});
     </script>
 @endsection

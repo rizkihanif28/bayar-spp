@@ -28,10 +28,13 @@
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i,500,500i,600,600i,700,700i&amp;subset=latin-ext">
     <link rel="stylesheet" href="{{ asset('assets/plugins/datatables/datatables.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/plugins/select2/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/select2/select2-bootstrap4.min.css') }}">
+
 
     {{-- Other Script --}}
-
-    <script src=""></script>
+    <script src="{{ asset('assets/plugins/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/select2/select2.min.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
     </script>
@@ -62,8 +65,8 @@
 <body>
 
     <nav class="navbar navbar-expand-lg navbar-light fixed-top">
-        <div class="container-fluid ml-6">
-            <img src="{{ asset('assets/img/logo-brand.png') }}" style="width: 33px" class="icon-brand" />
+        <div class="container-fluid ml-9">
+            <img src="{{ asset('assets/img/logo-brand.png') }}" style="width: 40px" class="icon-brand" />
             <a class="navbar-brand" href="http://127.0.0.1:8000/dashboard/tatus">
                 Pembayaran Walang Jaya
             </a>
@@ -81,7 +84,7 @@
                             <a class="nav-link active" href="/dashboard/tatus">Beranda</a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link active dropdown-toggle mx-3" href="/kesiswaan" id="navbarDropdown"
+                            <a class="nav-link active dropdown-toggle" href="/kesiswaan" id="navbarDropdown"
                                 role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Kesiswaan
                             </a>
@@ -93,64 +96,48 @@
                                         Siswa</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="/pembayaran">
+                                    <a class="dropdown-item" href="/tatus/pembayaran/index">
                                         <i class="bi bi-wallet"></i>
                                         Pembayaran</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="/data-bayar">
+                                    <a class="dropdown-item" href="/tatus/histori/pembayaran">
                                         <i class="bi bi-bar-chart-steps"></i>
-                                        Data Pembayaran</a>
+                                        Histori Pembayaran
+                                    </a>
                                 </li>
                             </ul>
                         </li>
-
                         <li class="nav-item">
-                            <a class="nav-link active" href="/tatus/periode/index">Periode</a>
+                            <a class="nav-link active" href="/tatus/tagihan/index">Tagihan</a>
                         </li>
-
                         <li class="nav-item">
                             <a class="nav-link active" href="/tatus/kelas/index">Kelas</a>
                         </li>
-
-                        <li class="nav-item ">
-                            <a class="nav-link active" href="/tatus/jurusan/index">Jurusan</a>
-                        </li>
-
-                        <li class="nav-item dropdown">
-                            <a class="nav-link active dropdown-toggle mx-3" href="/laporan" id="navbarDropdown"
-                                role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/tatus/laporan/index">
                                 Laporan
                             </a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a class="dropdown-item" href="/lapor-bulanan">
-                                        <i class="fa-regular fa-camera"></i>Bulanan
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="/lapor-tahunan">Tahunan</a>
-                                </li>
-                            </ul>
                         </li>
                     </ul>
 
-                    <ul class="navbar-nav mr-7">
+                    <ul class="navbar-nav mr-9">
                         <li class="nav-item dropdown">
                             <a class="nav-link active" href="#" id="navbarDropdown" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
                                 <img alt="image" src="{{ asset('assets/img/avatar/avatar-1.png') }}"
                                     style="width: 30px" class="rounded-circle mr-1" />
-                                <div class="d-sm-none d-lg-inline-block">Tata Usaha</div>
+                                <div class="d-sm-none d-lg-inline-block">{{ Auth::user()->name }}</div>
                             </a>
                             <ul class="dropdown-menu ">
-                                {{-- <li>
-                                    <a class="dropdown-item"
-                                        href="{{ route('/tatus/profil/edit', Auth::user()->id) }}">
-                                        <i class="bi bi-person-bounding-box"></i>
-                                        Profil
-                                    </a>
-                                </li> --}}
+                                <li>
+                                    <form action="">
+                                        <button class="dropdown-item">
+                                            <i class="bi bi-person-bounding-box"></i>
+                                            Profil
+                                        </button>
+                                    </form>
+                                </li>
 
                                 <li>
                                     <form action="/logout" method="post">
@@ -185,6 +172,5 @@
     @yield('js')
 
 </body>
-{{-- @stack('js') --}}
 
 </html>
