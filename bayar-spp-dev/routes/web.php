@@ -163,6 +163,7 @@ Route::middleware(['auth:web'])->group(function () {
     // Siswa 
     Route::get('siswa/status/pembayaran', [StatusBayarSiswaController::class, 'statusBayarSiswa'])->name('siswa/status');
     Route::get('siswa/status/show/{periode:tahun}', [StatusBayarSiswaController::class, 'statusBayarShow'])->name('siswa/status/show');
+    Route::get('siswa/histori', [StatusBayarSiswaController::class, 'historiSiswa'])->name('siswa/historiPembayaran');
 
     // Profil 
     // Route::get('tatus/profil/{user}/edit', [UserContoller::class, 'edit'])->name('tatus/profil/edit');

@@ -63,14 +63,12 @@
 </head>
 
 <body>
-
     <nav class="navbar navbar-expand-lg navbar-light fixed-top">
         <div class="container-fluid ml-9">
             <img src="{{ asset('assets/img/logo-brand.png') }}" style="width: 40px" class="icon-brand" />
             <a class="navbar-brand" href="http://127.0.0.1:8000/dashboard/tatus">
                 Pembayaran Walang Jaya
             </a>
-
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -79,7 +77,7 @@
 
             <div class="container">
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <ul class="navbar-nav me-auto mb-lg-0">
                         <li class="nav-item">
                             <a class="nav-link active" href="/dashboard/tatus">Beranda</a>
                         </li>

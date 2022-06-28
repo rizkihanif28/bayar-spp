@@ -14,13 +14,17 @@ class StatusBayarSiswaController extends Controller
     public function statusBayarSiswa()
     {
         $tagihan = Tagihan::all();
+        $siswa = Siswa::where('user_id', Auth::user()->id)->first();
         return view('siswa/statusBayar', [
             'title' => 'Status Pembayaran',
-            'tagihan' => $tagihan
+            'tagihan' => $tagihan,
+            'siswa' => $siswa
         ]);
     }
-    public function statusBayarShow(Tagihan $tagihan)
+    public function statusBayarShow($periode)
     {
+        $tagihan = Tagihan::where('periode', $periode)
+            ->first();
         $siswa = Siswa::where('user_id', Auth::user()->id)
             ->first();
 
@@ -31,10 +35,27 @@ class StatusBayarSiswaController extends Controller
             ->get();
 
         return view('siswa/statusBayarShow', [
-            'title' => 'Status Pembayaran Siswa',
+            'title' => 'Status Pembayaran Show',
+            'transaksi' => $transaksi,
             'siswa' => $siswa,
-            'tagihan' => $tagihan,
-            'transaksi' => $transaksi
+            'tagihan' => $tagihan
+        ]);
+    }
+
+    public function historiSiswa()
+    {
+        $siswa = Siswa::where('user_id', Auth::user()->id)->first();
+
+        $transaksi = Transaksi::with(['petugas', 'siswa' => function ($query) {
+            $query->with('kelas');
+        }])
+            ->where('siswa_id', $siswa->id)
+            ->latest()->get();
+
+        return view('siswa/historiSiswa', [
+            'title' => 'Histori Pembayaran',
+            'transaksi' => $transaksi,
+            'siswa' => $siswa
         ]);
     }
 }

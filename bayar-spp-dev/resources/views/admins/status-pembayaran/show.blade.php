@@ -3,11 +3,11 @@
 @section('content-admin')
     <div class="page-header" style="margin-top: 8%">
         <h2 class="page-title">
-            Status Pembayaran SPP
+            Status Pembayaran SPP {{ $tagihan->periode }}
         </h2>
     </div>
     <div class="row">
-        <div class="col-lg-11">
+        <div class="col-md-11">
             <div class="card">
                 <div class="card-header">
                     <a href="{{ route('status/show', $siswa->nis) }}" class="btn btn-danger btn-sm">
@@ -21,8 +21,8 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Nama Siswa</th>
-                                    <th>Kelas</th>
                                     <th>NIS</th>
+                                    <th>Kelas</th>
                                     <th>Tanggal Bayar</th>
                                     <th>Nama Petugas</th>
                                     <th>Bulan</th>
@@ -63,9 +63,9 @@
         </div>
     </div>
 
-    {{-- Row Status --}}
+    {{-- Row Status Pembayaran Bulan --}}
     <div class="row">
-        <div class="col-8">
+        <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
                     <a href="javascript:void(0)" class="btn btn-primary btn-sm">

@@ -127,84 +127,6 @@ class DatabaseSeeder extends Seeder
             'jurusan' => 'Administrasi Perkantoran'
         ]);
 
-        //membuat user admin
-        $user1 = User::create([
-            'name' => 'Abdul Hadi',
-            'username' => 'admin123',
-            'email' => 'admin@gmail.com',
-            'password' => '123',
-        ]);
-
-        $user1->assignRole('admin');
-
-        // membuat user tatus 
-        $user2 = User::create([
-            'name' => 'Nurul Fadilah',
-            'username' => 'tatausaha123',
-            'email' => 'tatus@gmail.com',
-            'password' => '123',
-        ]);
-
-        $user2->assignRole('tata usaha');
-
-        // create user siswa 1
-        $user3 = User::create([
-            'name' => 'Ridwan Hanafi',
-            'username' => 'nafi123',
-            'email' => 'ridwan@gmail.com',
-            'password' => '123',
-        ]);
-
-        $user3->assignRole('siswa');
-
-        // create user siswa 2
-        $user3 = User::create([
-            'name' => 'Alfian Fajar',
-            'username' => 'alfian123',
-            'email' => 'alfian@gmail.com',
-            'password' => '123',
-        ]);
-        $user3->assignRole('siswa');
-
-
-        // create user siswa 3
-        $user3 = User::create([
-            'name' => 'Nur Azizah',
-            'username' => 'azizah123',
-            'email' => 'azizah@gmail.com',
-            'password' => '123',
-        ]);
-
-        $user3->assignRole('siswa');
-
-        // create user siswa 4
-        $user3 = User::create([
-            'name' => 'Aisyah Nurul',
-            'username' => 'aisyah123',
-            'email' => 'aisyah@gmail.com',
-            'password' => '123',
-        ]);
-
-        $user3->assignRole('siswa');
-
-
-        //membuat seed petugas
-        $petugas1 = Petugas::create([
-            'user_id' => $user1->id,
-            'nip' => 10011,
-            'nama' => 'Administrator',
-            'jenis_kelamin' => 'Laki-Laki'
-        ]);
-
-        $petugas2 = Petugas::create([
-            'user_id' => $user2->id,
-            'nip' => 10012,
-            'nama' => 'Tata Usaha',
-            'jenis_kelamin' => 'Perempuan'
-
-        ]);
-
-
         // membuat seed tagihan
         Tagihan::create([
             'periode' => 2021,
@@ -221,8 +143,50 @@ class DatabaseSeeder extends Seeder
             'nominal' => 500000
         ]);
 
+        //membuat user dan admin
+        $user1 = User::create([
+            'name' => 'Abdul Hadi',
+            'username' => 'admin123',
+            'email' => 'admin@gmail.com',
+            'password' => '123',
+        ]);
+        $user1->assignRole('admin');
 
-        // membuat seed siswa untuk data siswa
+        $petugas1 = Petugas::create([
+            'user_id' => $user1->id,
+            'nip' => 10011,
+            'nama' => 'Administrator',
+            'jenis_kelamin' => 'Laki-Laki'
+        ]);
+
+        // membuat user dan tatus 
+        $user2 = User::create([
+            'name' => 'Nurul Fadilah',
+            'username' => 'tatausaha123',
+            'email' => 'tatus@gmail.com',
+            'password' => '123',
+        ]);
+
+        $user2->assignRole('tata usaha');
+
+        $petugas2 = Petugas::create([
+            'user_id' => $user2->id,
+            'nip' => 10012,
+            'nama' => 'Tata Usaha',
+            'jenis_kelamin' => 'Perempuan'
+
+        ]);
+
+        // create user dan siswa 1
+        $user3 = User::create([
+            'name' => 'Ridwan Hanafi',
+            'username' => 'nafi123',
+            'email' => 'ridwan@gmail.com',
+            'password' => '123',
+        ]);
+
+        $user3->assignRole('siswa');
+
         Siswa::create([
             'user_id' => $user3->id,
             'kelas_id' => $kelas2->id,
@@ -234,8 +198,17 @@ class DatabaseSeeder extends Seeder
             'telepon' => '089526456198'
         ]);
 
+        // create user dan siswa 2
+        $user4 = User::create([
+            'name' => 'Alfian Fajar',
+            'username' => 'alfian123',
+            'email' => 'alfian@gmail.com',
+            'password' => '123',
+        ]);
+        $user4->assignRole('siswa');
+
         Siswa::create([
-            'user_id' => $user3->id,
+            'user_id' => $user4->id,
             'kelas_id' => $kelas10->id,
             'nis' => '852416',
             'nama_siswa' => 'Alfian Fajar',
@@ -245,8 +218,18 @@ class DatabaseSeeder extends Seeder
             'telepon' => '089526456198'
         ]);
 
+        // create user siswa 3
+        $user5 = User::create([
+            'name' => 'Nur Azizah',
+            'username' => 'azizah123',
+            'email' => 'azizah@gmail.com',
+            'password' => '123',
+        ]);
+
+        $user5->assignRole('siswa');
+
         Siswa::create([
-            'user_id' => $user3->id,
+            'user_id' => $user5->id,
             'kelas_id' => $kelas13->id,
             'nis' => '917162',
             'nama_siswa' => 'Nur Azizah',
@@ -256,8 +239,18 @@ class DatabaseSeeder extends Seeder
             'telepon' => '089526456198'
         ]);
 
+        // create user siswa 4
+        $user6 = User::create([
+            'name' => 'Aisyah Nurul',
+            'username' => 'aisyah123',
+            'email' => 'aisyah@gmail.com',
+            'password' => '123',
+        ]);
+
+        $user6->assignRole('siswa');
+
         Siswa::create([
-            'user_id' => $user3->id,
+            'user_id' => $user6->id,
             'kelas_id' => $kelas23->id,
             'nis' => '227181',
             'nama_siswa' => 'Aisyah Nurul',

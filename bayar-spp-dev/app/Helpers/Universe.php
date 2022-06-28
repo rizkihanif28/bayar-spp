@@ -2,23 +2,16 @@
 
 namespace App\Helpers;
 
+use App\Models\Petugas;
 use App\Models\Siswa;
-use App\Models\Tatus;
 use App\Models\Transaksi;
 use Illuminate\Support\Facades\Auth;
 
-// if (!function_exists('format_idr')) {
-// 	function format_idr($val)
-// 	{
-// 		return number_format($val, 0, ',', '.');
-// 	}
-// }
-
 class Universe
 {
-    public function Tatus()
+    public function Petugas()
     {
-        return Tatus::where('user_id', Auth::user()->id)->first();
+        return Petugas::where('user_id', Auth::user()->id)->first();
     }
 
     public function siswa()
