@@ -3,11 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Periode;
+use Illuminate\Support\Str;
 use App\Models\Tagihan;
-use App\Models\Tatus;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
 
 class TagihanController extends Controller
 {
@@ -45,11 +43,16 @@ class TagihanController extends Controller
      */
     public function store(Request $request)
     {
+
         $request->validate([
             'periode' => 'required',
             'nominal' => 'required',
         ]);
-        $tagihan = Tagihan::make($request->input());
+
+        $tagihan = Tagihan::make([
+            'periode' => $request->periode,
+            'nominal' => Str::replace(".", "", $request->nominal)
+        ]);
 
         if ($tagihan->save()) {
             return redirect()->route('admins/tagihan/index',)

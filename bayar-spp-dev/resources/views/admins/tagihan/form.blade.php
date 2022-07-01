@@ -32,11 +32,14 @@
                                     class="form-control"
                                     value="{{ isset($tagihan) ? $tagihan->periode : old('periode') }}" required>
                             </div>
-                            <div class="form-group">
-                                <label class="form-label">Jumlah</label>
+                            <label class="form-label">Jumlah</label>
+                            <div class="input-group">
+                                <span class="input-group-text" id="basic-addon1">Rp</span>
                                 <input required type="text" placeholder="Nominal" name="nominal" id="nominal"
                                     class="form-control"
-                                    value="{{ isset($tagihan) ? $tagihan->nominal : old('nominal') }}" required>
+                                    aria-describedby="basic-addon1
+                                    value="{{ isset($tagihan) ? $tagihan->nominal : old('nominal') }}"
+                                    required>
                             </div>
                         </div>
                     </div>
@@ -58,6 +61,13 @@
             $(document).ready(function() {
                 $('.custom-select').selectize({});
             });
+        });
+    </script>
+    <script>
+        new AutoNumeric('#nominal', {
+            decimalPlaces: '0',
+            decimalCharacter: ',',
+            digitGroupSeparator: '.'
         });
     </script>
 @endsection

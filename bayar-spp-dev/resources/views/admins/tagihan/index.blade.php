@@ -29,12 +29,8 @@
                                 <tr>
                                     <td><span class="text-muted"> {{ $index + 1 }}</span></td>
                                     <td>{{ $item->periode }}</td>
-                                    <td> @currency($item->nominal)</td>
+                                    <td> @currency(str_replace('.', '', $item->nominal))</td>
                                     <td class="text-center">
-                                        {{-- <a class="icon" href="{{ route('admins/siswa/show', $item->id) }}"
-                                            title="lihat detail">
-                                            <i class="bi bi-ticket-detailed"></i>
-                                        </a> --}}
                                         <a class="btn btn-success btn-sm"
                                             href="{{ route('admins/tagihan/edit', $item->id) }}" title="edit item">
                                             <i class="bi bi-pencil"></i>
