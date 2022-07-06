@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Tatus;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Str;
 use App\Models\Tagihan;
 use Illuminate\Http\Request;
 
@@ -47,7 +48,10 @@ class TagihanController extends Controller
             'periode' => 'required',
             'nominal' => 'required',
         ]);
-        $tagihan = Tagihan::make($request->input());
+        $tagihan = Tagihan::make([
+            'periode' => $request->periode,
+            'nominal' => Str::replace(".", "", $request->nominal)
+        ]);
 
         if ($tagihan->save()) {
             return redirect()->route('tatus/tagihan/index',)
@@ -86,14 +90,15 @@ class TagihanController extends Controller
             'nominal' => 'required'
         ]);
 
-        $tagihan = $tagihan->fill($request->input());
-
-        if ($tagihan->save()) {
+        if ($tagihan->update([
+            'periode' => $request->periode,
+            'nominal' => Str::replace(".", "", $request->nominal)
+        ])) {
             return redirect()->route('tatus/tagihan/index')
-                ->with('success', 'Tagihan diubah');
+                ->with('success', 'Tagihan berhasil diubah!');
         } else {
             return redirect()->route('tatus/tagihan/index')
-                ->with('error', 'Tagihan gagal diubah');
+                ->with('error', 'Tagihan gagal diubah!');
         }
     }
 
@@ -107,10 +112,10 @@ class TagihanController extends Controller
     {
         if ($tagihan->delete()) {
             return redirect()->route('tatus/tagihan/index')
-                ->with('success', 'Tagihan dihapus');
+                ->with('success', 'Tagihan berhasil dihapus!');
         } else {
             return redirect()->route('tatus/tagihan/index')
-                ->with('error', 'Tagihan dihapus');
+                ->with('error', 'Tagihan gagal dihapus!');
         }
     }
 }

@@ -102,14 +102,15 @@ class TagihanController extends Controller
             'nominal' => 'required'
         ]);
 
-        $tagihan = $tagihan->fill($request->input());
-
-        if ($tagihan->save()) {
+        if ($tagihan->update([
+            'periode' => $request->periode,
+            'nominal' => Str::replace(".", "", $request->nominal)
+        ])) {
             return redirect()->route('admins/tagihan/index')
-                ->with('success', 'Tagihan diubah');
+                ->with('success', 'Tagihan diubah!');
         } else {
             return redirect()->route('admins/tagihan/index')
-                ->with('error', 'Tagihan gagal diubah');
+                ->with('error', 'Tagihan gagal diubah!');
         }
     }
 
@@ -123,10 +124,10 @@ class TagihanController extends Controller
     {
         if ($tagihan->delete()) {
             return redirect()->route('admins/tagihan/index')
-                ->with('success', 'Tagihan dihapus');
+                ->with('success', 'Tagihan dihapus!');
         } else {
             return redirect()->route('admins/tagihan/index')
-                ->with('error', 'Tagihan dihapus');
+                ->with('error', 'Tagihan dihapus!');
         }
     }
 }

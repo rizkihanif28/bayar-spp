@@ -7,7 +7,7 @@
         </h2>
     </div>
     <div class="row">
-        <div class="col-8">
+        <div class="col-md-8">
             <form method="POST" class="card" action="{{ route('admins/pembayaran/store', $siswa->nis) }}">
                 @csrf
                 <div class="card-header">
@@ -23,7 +23,7 @@
                         </div>
                     @endif
                     <div class="row">
-                        <div class="col-lg-4">
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label for="nama_siswa">Nama Siswa</label>
                                 <input required="" type="hidden" name="siswa_id" value="{{ $siswa->id }}" readonly
@@ -35,7 +35,7 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="col-lg-4">
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label for="form-label">NIS</label>
                                 <input required="" type="text" name="nis" value="{{ $siswa->nis }}" readonly
@@ -45,7 +45,7 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="col-lg-4">
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label for="form-label">Kelas</label>
                                 <input required type="text" name="kelas" value="{{ $siswa->kelas->nama_kelas }}"
@@ -57,7 +57,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-lg-4">
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label for="tahun_bayar">Periode</label>
                                 <select required="" name="tahun_bayar" id="tahun_bayar" class="form-control select2bs4">
@@ -68,7 +68,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-lg-4">
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label for="jumlah_bayar" id="nominal_spp_label">Nominal</label>
                                 <input type="" name="nominal" readonly="" id="nominal" class="form-control">
@@ -79,7 +79,7 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="col-lg-4">
+                        <div class="col-md-4">
                             <div class="form-group select2-purple">
                                 <label for="bulan_bayar">Bulan</label>
                                 <select required="" name="bulan_bayar[]" id="bulan_bayar" class="select2"
@@ -92,7 +92,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-lg-8">
+                        <div class="col-md-8">
                             <div class="form-group">
                                 <label for="total_bayar"><strong>Total Bayar</strong></label>
                                 <input required="" type="" name="total_bayar" readonly="" id="total_bayar"

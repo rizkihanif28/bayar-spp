@@ -1,14 +1,19 @@
 @extends('layouts.app-siswa')
 
 @section('content-siswa')
+    <div class="page-header" style="margin-top: 8%">
+        <h2 class="page-title">
+            Status Pembayaran SPP
+        </h2>
+    </div>
     <div class="container align-items-center">
         <div class="row">
-            <div class="col-lg-6" style="margin-top: 14%">
+            <div class="col-md-6">
                 <div class="card">
                     <div class="card-header">
                         <h4>Status</h4>
                     </div>
-                    <div class="col-12">
+                    <div class="col-md-12">
                         <div class="callout callout-info mt-5">
                             <h5>Data Siswa</h5>
                             <p>
@@ -25,15 +30,7 @@
                     </div>
                 </div>
             </div>
-
-            {{-- <div class="col-md-5 ml-9" style="margin-top: 19%">
-                <div class="callout" style="background-color: white">
-                    <h5>Pemberitahuan !</h5>
-                    <p>Garis biru pada list periode menandakan tahun aktif atau tahun sekarang</p>
-                </div>
-            </div> --}}
-
-            <div class="col-md-5" style="margin-top: 14%">
+            <div class="col-md-5" style="margin-top: 7%">
                 <div class="card">
                     <div class="card-header">
                         <a href="javascript:void(0)" class="btn btn-primary btn-sm">

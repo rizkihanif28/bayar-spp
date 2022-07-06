@@ -7,7 +7,7 @@
         </h2>
     </div>
     <div class="row">
-        <div class="col-lg-11">
+        <div class="col-md-11">
             <div class="card">
                 <div class="card-header">
                     <a href="{{ route('status/show/tahun', $siswa->nis) }}" class="btn btn-danger btn-sm">

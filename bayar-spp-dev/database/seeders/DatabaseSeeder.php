@@ -130,12 +130,12 @@ class DatabaseSeeder extends Seeder
         // membuat seed tagihan
         Tagihan::create([
             'periode' => '2021',
-            'nominal' => 300000
+            'nominal' => 500000
         ]);
 
         Tagihan::create([
             'periode' => '2022',
-            'nominal' => 400000
+            'nominal' => 500000
         ]);
 
         Tagihan::create([

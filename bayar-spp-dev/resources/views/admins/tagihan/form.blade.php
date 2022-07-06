@@ -7,7 +7,7 @@
         </h2>
     </div>
     <div class="row">
-        <div class="col-8">
+        <div class="col-md-8">
             <form class="card"
                 action="{{ isset($tagihan) ? route('admins/tagihan/update', $tagihan->id) : route('admins/tagihan/store') }}"
                 method="POST">
@@ -24,7 +24,7 @@
                     @endif
 
                     <div class="row">
-                        <div class="col-12">
+                        <div class="col-md-12">
                             @csrf
                             <div class="form-group">
                                 <label class="form-label">Periode</label>
@@ -36,10 +36,8 @@
                             <div class="input-group">
                                 <span class="input-group-text" id="basic-addon1">Rp</span>
                                 <input required type="text" placeholder="Nominal" name="nominal" id="nominal"
-                                    class="form-control"
-                                    aria-describedby="basic-addon1
-                                    value="{{ isset($tagihan) ? $tagihan->nominal : old('nominal') }}"
-                                    required>
+                                    class="form-control" aria-describedby="basic-addon1"
+                                    value="{{ isset($tagihan) ? $tagihan->nominal : old('nominal') }}" required>
                             </div>
                         </div>
                     </div>

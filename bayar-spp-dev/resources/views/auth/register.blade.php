@@ -10,11 +10,11 @@
                 <form method="POST" action="{{ route('register') }}">
                     @csrf
                     <h2 class="h3 mb-3 fw-normal text-center">Form Registrasi Siswa</h2>
-
+                    <x-alert />
                     <div class="form-floating">
-                        <input id="name" type="text" class="form-control rounded-top @error('name') is-invalid @enderror"
-                            name="name" value="{{ old('name') }}" placeholder="Nama Lengkap" required autocomplete="name"
-                            autofocus>
+                        <input id="name" type="text"
+                            class="form-control rounded-top @error('name') is-invalid @enderror" name="name"
+                            value="{{ old('name') }}" placeholder="Nama Lengkap" required autocomplete="name" autofocus>
                         <label for="name">{{ __('Nama Lengkap') }}</label>
                         @error('name')
                             <div class="invalid-feedback">{{ $message }}</div>

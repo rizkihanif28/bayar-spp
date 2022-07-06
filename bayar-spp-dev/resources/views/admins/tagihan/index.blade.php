@@ -7,7 +7,7 @@
         </h2>
     </div>
     <div class="row">
-        <div class="col-12">
+        <div class="col-md-11">
             <div class="card">
                 <div class="card-header">
                     <h4 class="card-title">Tagihan</h4>

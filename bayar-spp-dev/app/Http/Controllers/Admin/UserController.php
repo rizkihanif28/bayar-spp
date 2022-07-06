@@ -64,10 +64,10 @@ class UserController extends Controller
     {
         if ($user->delete()) {
             return redirect()->route('admins/user/index')
-                ->with('success', 'User berhasil di ubah!');
+                ->with('success', 'User berhasil di hapus!');
         } else {
             return redirect()->route('admins/user/index')
-                ->with('error', 'User gagal di ubah!');
+                ->with('error', 'User gagal di hapus!');
         }
     }
 }

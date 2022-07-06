@@ -7,7 +7,7 @@
         </h2>
     </div>
     <div class="row">
-        <div class="col-8">
+        <div class="col-md-8">
             <form action="{{ isset($kelas) ? route('admins/kelas/update', $kelas->id) : route('admins/kelas/store') }}"
                 method="post" class="card">
                 @csrf
@@ -23,7 +23,7 @@
                         </div>
                     @endif
                     <div class="row">
-                        <div class="col-12">
+                        <div class="col-md-12">
                             <div class="form-group mt-3">
                                 <label class="form-label">Kelas</label>
                                 <input type="text" class="form-control" name="nama_kelas" placeholder="Kelas"

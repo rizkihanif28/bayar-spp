@@ -7,14 +7,14 @@
         </h2>
     </div>
     <div class="row">
-        <div class="col-12">
+        <div class="col-md-11">
             <div class="card">
                 <div class="card-header">
                     <h4 class="card-title">Laporan</h4>
                     <a href="{{ route('admins/laporan') }}" class="btn btn-primary btn-sm ml-5">
                         <i class="bi bi-printer"></i> Cetak Laporan</a>
                 </div>
-                @if (Session::get('msg'))
+                {{-- @if (Session::get('msg'))
                     <div class="card-alert alert alert-{{ Session::get('type') }}" id="message"
                         style="border-radius: 0px !important">
                         @if (Session::get('type') == 'success')
@@ -24,7 +24,7 @@
                         @endif
                         {{ Session::get('msg') }}
                     </div>
-                @endif
+                @endif --}}
                 <div class="p-3 text-center">
                     <table id="table-laporan" class="table table-striped card-table table-hover">
                         <thead>

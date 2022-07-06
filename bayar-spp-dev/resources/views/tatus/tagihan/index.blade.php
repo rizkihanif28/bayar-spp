@@ -7,7 +7,7 @@
         </h2>
     </div>
     <div class="row">
-        <div class="col-12">
+        <div class="col-md-11">
             <div class="card">
                 <div class="card-header">
                     <h4 class="card-title">Tagihan</h4>
@@ -29,7 +29,7 @@
                                 <tr>
                                     <td><span class="text-muted"> {{ $index + 1 }}</span></td>
                                     <td>{{ $item->periode }}</td>
-                                    <td> @currency($item->nominal)</td>
+                                    <td> @currency(str_replace('.', '', $item->nominal))</td>
                                     <td class="text-center">
                                         {{-- <a class="icon" href="{{ route('tatus/siswa/show', $item->id) }}"
                                             title="lihat detail">

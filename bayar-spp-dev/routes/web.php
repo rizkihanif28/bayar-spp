@@ -139,10 +139,10 @@ Route::middleware(['auth:web'])->group(function () {
     // Kelas
     Route::get('tatus/kelas/index', [TatusKelasController::class, 'index'])->name('tatus/kelas/index');
     Route::get('tatus/kelas/create', [TatusKelasController::class, 'create'])->name('tatus/kelas/create');
-    Route::get('tatus/kelas/store', [TatusKelasController::class, 'store'])->name('tatus/kelas/store');
+    Route::post('tatus/kelas/store', [TatusKelasController::class, 'store'])->name('tatus/kelas/store');
     Route::get('tatus/kelas/{kelas}/edit', [TatusKelasController::class, 'edit'])->name('tatus/kelas/edit');
-    Route::get('tatus/kelas/{kelas}/update', [TatusKelasController::class, 'update'])->name('tatus/kelas/update');
-    Route::get('tatus/kelas/{kelas}/destroy', [TatusKelasController::class, 'destroy'])->name('tatus/kelas/destroy');
+    Route::post('tatus/kelas/{kelas}/update', [TatusKelasController::class, 'update'])->name('tatus/kelas/update');
+    Route::post('tatus/kelas/{kelas}/destroy', [TatusKelasController::class, 'destroy'])->name('tatus/kelas/destroy');
 
     // Pembayaran
     Route::get('tatus/pembayaran/index', [PembayaranController::class, 'index'])->name('tatus/pembayaran/index');

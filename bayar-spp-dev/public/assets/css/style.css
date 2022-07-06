@@ -5,38 +5,6 @@
 3. footer */
 
 /* Form Login */
-.title.row.justify-content-center {
-    padding-bottom: 40px;
-    font-size: 2vw;
-}
-
-.row.justify-content-center {
-    margin-top: 15px;
-}
-
-.logo-brand {
-    display: block;
-    margin: auto;
-}
-
-.form-floating input {
-    margin-top: -1px;
-}
-
-.form-floating:focus-within {
-    z-index: 2;
-}
-
-.form-floating input {
-    height: 80%;
-}
-
-/* Form registrasi */
-
-.form-registration input {
-    border-radius: 0;
-    margin-top: 0px;
-}
 
 /* Beranda */
 

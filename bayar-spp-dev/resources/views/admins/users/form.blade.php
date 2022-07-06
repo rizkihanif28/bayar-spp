@@ -7,7 +7,7 @@
         </h2>
     </div>
     <div class="row">
-        <div class="col-8">
+        <div class="col-md-8">
             <form action="{{ isset($user) ? route('admins/user/update', $user->id) : route('admins/user/store') }}"
                 method="post" class="card">
                 <div class="card-header">

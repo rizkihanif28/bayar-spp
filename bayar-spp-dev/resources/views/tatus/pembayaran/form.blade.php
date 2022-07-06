@@ -1,14 +1,14 @@
-@extends('layouts.app-admin')
+@extends('layouts.app-tatus')
 
-@section('content-admin')
+@section('content-tatus')
     <div class="page-header" style="margin-top: 7%">
         <h2 class="page-title">
             Form Pembayaran Siswa
         </h2>
     </div>
     <div class="row">
-        <div class="col-8">
-            <form method="POST" class="card" action="{{ route('admins/pembayaran/store', $siswa->nis) }}">
+        <div class="col-md-8">
+            <form method="POST" class="card" action="{{ route('tatus/pembayaran/store', $siswa->nis) }}">
                 @csrf
                 <div class="card-header">
                     <h5 class="card-title">Pembayaran Siswa</h5>
@@ -23,7 +23,7 @@
                         </div>
                     @endif
                     <div class="row">
-                        <div class="col-lg-4">
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label for="nama_siswa">Nama Siswa</label>
                                 <input required="" type="hidden" name="siswa_id" value="{{ $siswa->id }}" readonly
@@ -86,7 +86,8 @@
                                     multiple="multiple" data-dropdown-css-class="select2-purple"
                                     data-placeholder=" Pilih Bulan " style="width: 100%;">
                                     @foreach (Universe::bulanAll() as $bulan)
-                                        <option value="{{ $bulan['nama_bulan'] }}">{{ $bulan['nama_bulan'] }}
+                                        <option value="{{ $bulan['nama_bulan'] }}">
+                                            {{ $bulan['nama_bulan'] }}
                                         </option>
                                     @endforeach
                                 </select>

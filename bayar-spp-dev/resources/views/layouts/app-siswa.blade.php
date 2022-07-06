@@ -142,7 +142,9 @@
     {{-- Main Content --}}
     <div id="app-siswa">
         <main class="container ml-9">
-            @yield('content-siswa')
+            <div class="row ml-7">
+                @yield('content-siswa')
+            </div>
         </main>
     </div>
     {{-- Custom JS --}}

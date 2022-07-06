@@ -39,7 +39,7 @@ class SiswaController extends Controller
             'kelas_id' => 'required',
             'username' => 'required|unique:users',
             'nis' => 'required|numeric',
-            'nama_siswa' => 'required|max:255',
+            'nama_siswa' => 'required|max:255|unique:users',
             'email' => 'required|email:rfc,dns|unique:siswas|max:255',
             'jenis_kelamin' => 'required|in:L,P',
             'alamat' => 'required',
@@ -50,7 +50,7 @@ class SiswaController extends Controller
             DB::transaction(function () use ($request) {
                 $user = User::create([
                     'name' => ($request->nama_siswa),
-                    'username' => ($request->username) . Str::lower(Str::random(5)),
+                    'username' => 'sppwj' . substr($request->nis, 3),
                     'email' => Str::lower($request->email),
                     'password' => Hash::make('123'),
                 ]);

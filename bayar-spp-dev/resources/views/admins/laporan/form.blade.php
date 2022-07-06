@@ -7,7 +7,7 @@
         </h2>
     </div>
     <div class="row">
-        <div class="col-8">
+        <div class="col-md-8">
             <form method="POST" class="card" action="{{ route('laporan/print') }}">
                 @csrf
                 <div class="card-header">
@@ -16,13 +16,13 @@
                 <x-alert />
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-lg-7">
+                        <div class="col-md-7">
                             <div class="form-group">
                                 <label for="tanggal_mulai"><strong>Tanggal Mulai</strong></label>
                                 <input type="date" name="tanggal_mulai" required class="form-control" id="tanggal_mulai">
                             </div>
                         </div>
-                        <div class="col-lg-7">
+                        <div class="col-md-7">
                             <div class="form-group">
                                 <label for="tanggal_selesai"><strong>Tanggal Selesai</strong></label>
                                 <input type="date" name="tanggal_selesai" required class="form-control"
@@ -43,23 +43,6 @@
 
 @section('js')
     <script>
-        requirejs(["datatables"], function() {
-            // $(document).on("click", "#preview", function() {
-            //     var tanggal_mulai = $("#tanggal_mulai").val()
-            //     var tanggal_selesai = $("#tanggal_selesai").val()
-
-            //     $.ajax({
-            //         url: "/pembayaran/laporan/preview-pdf",
-            //         method: "GET",
-            //         data: {
-            //             tanggal_mulai: tanggal_mulai,
-            //             tanggal_selesai: tanggal_selesai,
-            //         },
-            //         success: function() {
-            //             window.open('/pembayaran/laporan/preview-pdf')
-            //         }
-            //     })
-            // })
-        });
+        requirejs(["datatables"], function() {});
     </script>
 @endsection

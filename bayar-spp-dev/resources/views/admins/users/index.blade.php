@@ -7,10 +7,11 @@
         </h2>
     </div>
     <div class="row">
-        <div class="col-12">
+        <div class="col-md-11">
             <div class="card">
                 <div class="card-header">
                     <div class="card-title">User List</div>
+                    {{-- <a href="{{ route('admins/user/create') }}" class="btn btn-primary btn-sm ml-5">+ Tambah User</a> --}}
                 </div>
                 <x-alert />
                 <div class="table-responsive mt-3 p-3 text-center">

@@ -7,12 +7,12 @@
         </h2>
     </div>
     <div class="row">
-        <div class="col-lg-6">
+        <div class="col-md-6">
             <div class="card">
                 <div class="card-header">
                     <h4>Status</h4>
                 </div>
-                <div class="col-12">
+                <div class="col-md-12">
                     <div class="callout callout-info mt-5">
                         <h5>Data Siswa</h5>
                         <p>
@@ -31,7 +31,7 @@
         </div>
 
 
-        <div class="col-lg-5">
+        <div class="col-md-5">
             <div class="card">
                 <div class="card-header">
                     <a href="javascript:void(0)" class="btn btn-primary btn-sm">

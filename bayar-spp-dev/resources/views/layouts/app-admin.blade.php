@@ -52,7 +52,6 @@
                 "datatables": "assets/plugins/datatables/datatables.min",
                 "selectize": "assets/js/vendors/selectize.min",
                 "datepicker": "assets/js/vendors/datepicker",
-                "selectize": "assets/js/vendors/selectize.min",
                 "sweetalert": "assets/js/vendors/sweetalert.min",
                 "select2": "assets/js/vendors/select2.min",
             }
@@ -180,7 +179,9 @@
     {{-- Main Content --}}
     <div class="app-admin ">
         <div class="container">
-            @yield('content-admin')
+            <div class="row ml-7">
+                @yield('content-admin')
+            </div>
         </div>
     </div>
 

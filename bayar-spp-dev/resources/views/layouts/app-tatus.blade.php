@@ -38,7 +38,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
     </script>
-
+    <script src="{{ asset('assets/plugins/autonumeric/autoNumeric.min.js') }}"></script>
     <script src="{{ asset('assets/js/require.min.js') }}"></script>
 
     {{-- Other CSS --}}
@@ -55,8 +55,8 @@
                 "datatables": "assets/plugins/datatables/datatables.min",
                 "selectize": "assets/js/vendors/selectize.min",
                 "datepicker": "assets/js/vendors/datepicker",
-                "selectize": "assets/js/vendors/selectize.min",
                 "sweetalert": "assets/js/vendors/sweetalert.min",
+                "select2": "assets/js/vendors/select2.min",
             }
         });
     </script>
@@ -157,7 +157,9 @@
     {{-- Main Content --}}
     <div id="app-tatus">
         <main class="container">
-            @yield('content-tatus')
+            <div class="row ml-7">
+                @yield('content-tatus')
+            </div>
         </main>
     </div>
     {{-- <footer class="main-footer fixed-bottom">

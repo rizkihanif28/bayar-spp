@@ -7,7 +7,7 @@
         </h2>
     </div>
     <div class="row">
-        <div class="col-8">
+        <div class="col-md-8">
             <form class="card"
                 action="{{ isset($siswa) ? route('tatus/siswa/update', $siswa->id) : route('tatus/siswa/store') }}"
                 method="POST">
@@ -23,7 +23,7 @@
                         </div>
                     @endif
                     <div class="row">
-                        <div class="col-12">
+                        <div class="col-md-12">
                             @csrf
                             <div class="form-group">
                                 <label class="form-label">NIS</label>
