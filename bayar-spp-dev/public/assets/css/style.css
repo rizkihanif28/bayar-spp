@@ -168,3 +168,8 @@ a.dropdown-item.active {
     background-color: rgb(0, 123, 255);
     border-color: rgb(0, 123, 255);
 }
+
+/* Profile */
+.card.card-primary {
+    border-top: 2px solid #6777ef;
+}

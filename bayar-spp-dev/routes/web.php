@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\Laporan;
 use App\Http\Controllers\Admin\LaporanController;
 use App\Http\Controllers\Admin\PembayaranController as AdminPembayaranController;
 use App\Http\Controllers\Admin\PeriodeController;
+use App\Http\Controllers\Admin\ProfilController as AdminProfilController;
 use App\Http\Controllers\Admin\SiswaController;
 use App\Http\Controllers\Admin\StatusPembayaranController;
 use App\Http\Controllers\Admin\TagihanController;
@@ -18,6 +19,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Dashboard\AdminController as DashboardAdminController;
 use App\Http\Controllers\Dashboard\SiswaController as DashboardSiswaController;
 use App\Http\Controllers\Dashboard\TatusController;
+use App\Http\Controllers\Siswa\ProfilController as SiswaProfilController;
 use App\Http\Controllers\Siswa\StatusBayarSiswaController;
 use App\Http\Controllers\Tatus\KelasController as TatusKelasController;
 use App\Http\Controllers\Tatus\LaporanController as TatusLaporanController;
@@ -116,7 +118,8 @@ Route::middleware(['auth:web'])->group(function () {
 
 
     // Profil 
-    // Route::get('admins');
+    Route::middleware(['role:admin'])->get('profil', [AdminProfilController::class, 'index'])->name('profil');
+    Route::middleware(['role:admin'])->patch('pass/update', [AdminProfilController::class, 'update'])->name('pass/update');
 
 
     // {{ Route TataUsaha }}
@@ -160,12 +163,16 @@ Route::middleware(['auth:web'])->group(function () {
     Route::get('tatus/laporan/create', [TatusLaporanController::class, 'create'])->name('tatus/laporan');
     Route::post('tatus/laporan/print', [TatusLaporanController::class, 'printPDF'])->name('tatus/laporan/print');
 
+    // Profil 
+    Route::middleware(['role:tata usaha'])->get('profil/tatus', [ProfilController::class, 'index'])->name('profil/tatus');
+    Route::middleware(['role:tata usaha'])->patch('pasw/update', [ProfilController::class, 'update'])->name('pasw/update');
+
+    // {{ Route Siswa }}
     // Siswa 
     Route::get('siswa/status/pembayaran', [StatusBayarSiswaController::class, 'statusBayarSiswa'])->name('siswa/status');
     Route::get('siswa/status/show/{periode:tahun}', [StatusBayarSiswaController::class, 'statusBayarShow'])->name('siswa/status/show');
     Route::get('siswa/histori', [StatusBayarSiswaController::class, 'historiSiswa'])->name('siswa/historiPembayaran');
 
-    // Profil 
-    // Route::get('tatus/profil/{user}/edit', [UserContoller::class, 'edit'])->name('tatus/profil/edit');
-    // Route::post('tatus/profil/{user}/update', [ProfilController::class, 'update'])->name('tatus/profil/update');
+    Route::middleware(['role:siswa'])->get('profil/siswa', [SiswaProfilController::class, 'index'])->name('profil/siswa');
+    Route::middleware(['role:siswa'])->patch('passw/update', [SiswaProfilController::class, 'update'])->name('passw/update');
 });

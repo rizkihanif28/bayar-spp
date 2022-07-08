@@ -129,19 +129,19 @@
                             </a>
                             <ul class="dropdown-menu ">
                                 <li>
-                                    <form action="">
+                                    <form action="/profil/tatus">
                                         <button class="dropdown-item">
-                                            <i class="bi bi-person-bounding-box"></i>
+                                            <i class="bi bi-person-fill mr-1" style="font-size: 18px"></i>
                                             Profil
                                         </button>
                                     </form>
                                 </li>
-
+                                <div class="dropdown-divider"></div>
                                 <li>
                                     <form action="/logout" method="post">
                                         @csrf
                                         <button type="submit" class="dropdown-item">
-                                            <i class="bi bi-box-arrow-left"></i>
+                                            <i class="bi bi-box-arrow-right mr-1" style="font-size: 18px"></i>
                                             Keluar
                                         </button>
                                     </form>

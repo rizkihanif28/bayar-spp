@@ -8,6 +8,7 @@ use App\Models\Tagihan;
 use App\Models\Transaksi;
 use Illuminate\Http\Request;
 use App\Models\Petugas;
+use Illuminate\Support\Str;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -85,6 +86,7 @@ class PembayaranController extends Controller
             DB::transaction(function () use ($request, $petugas) {
                 foreach ($request->bulan_bayar as $bulan) {
                     Transaksi::create([
+                        'kode_pembayaran' => 'SPPWJ-' . Str::upper(Str::random(4)),
                         'petugas_id' => $petugas->id,
                         'siswa_id' => $request->siswa_id,
                         'nis' => $request->nis,
