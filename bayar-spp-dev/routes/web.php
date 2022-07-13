@@ -173,6 +173,7 @@ Route::middleware(['auth:web'])->group(function () {
     Route::get('siswa/status/show/{periode:tahun}', [StatusBayarSiswaController::class, 'statusBayarShow'])->name('siswa/status/show');
     Route::get('siswa/histori', [StatusBayarSiswaController::class, 'historiSiswa'])->name('siswa/historiPembayaran');
 
+    // Profil
     Route::middleware(['role:siswa'])->get('profil/siswa', [SiswaProfilController::class, 'index'])->name('profil/siswa');
     Route::middleware(['role:siswa'])->patch('passw/update', [SiswaProfilController::class, 'update'])->name('passw/update');
 });

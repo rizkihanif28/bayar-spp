@@ -90,17 +90,17 @@
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li>
                                     <a class="dropdown-item" href="/tatus/siswa/index">
-                                        <i class="bi bi-person-lines-fill"></i>
+                                        <i class="bi bi-person-lines-fill mr-2"></i>
                                         Siswa</a>
                                 </li>
                                 <li>
                                     <a class="dropdown-item" href="/tatus/pembayaran/index">
-                                        <i class="bi bi-wallet"></i>
+                                        <i class="bi bi-wallet mr-2"></i>
                                         Pembayaran</a>
                                 </li>
                                 <li>
                                     <a class="dropdown-item" href="/tatus/histori/pembayaran">
-                                        <i class="bi bi-bar-chart-steps"></i>
+                                        <i class="bi bi-bar-chart-steps mr-2"></i>
                                         Histori Pembayaran
                                     </a>
                                 </li>

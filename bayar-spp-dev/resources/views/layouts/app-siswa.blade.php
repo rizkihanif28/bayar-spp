@@ -87,20 +87,28 @@
 
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li>
+                                    <a class="dropdown-item" href="#bayar" data-bs-toggle="modal"
+                                        data-bs-target="#bayarModal">
+                                        <i class="bi bi-wallet mr-2"></i>
+                                        Pembayaran Spp
+                                    </a>
+                                </li>
+                                <li>
                                     <a class="dropdown-item" href="/siswa/status/pembayaran">
-                                        <i class="bi bi-bell"></i>
+                                        <i class="bi bi-bell mr-2"></i>
                                         Status Pembayaran
                                     </a>
                                 </li>
                                 <li>
                                     <a class="dropdown-item" href="/siswa/histori">
-                                        <i class="bi bi-bar-chart-steps"></i>
+                                        <i class="bi bi-bar-chart-steps mr-2"></i>
                                         Histori Pembayaran
                                     </a>
                                 </li>
                             </ul>
                         </li>
                     </ul>
+
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav mr-9">
@@ -138,6 +146,28 @@
         </div>
     </nav>
 
+    <!-- Navbar Akhir -->
+
+    <!-- Bagian Modal -->
+    <div class="modal" id="bayarModal" tabindex="-1" role="dialog" aria-hidden="false">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content bg-light shadow">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="modalSiswaBayar">Pembayaran SPP</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     {{-- Main Content --}}
     <div id="app-siswa">

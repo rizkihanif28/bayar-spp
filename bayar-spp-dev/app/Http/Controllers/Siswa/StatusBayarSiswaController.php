@@ -11,6 +11,18 @@ use Illuminate\Support\Facades\Auth;
 
 class StatusBayarSiswaController extends Controller
 {
+    // SEMENTARA
+    public function indexPayment()
+    {
+        $tagihan = Tagihan::all();
+        $siswa = Siswa::where('user_id', Auth::user()->id)->first();
+        return view('siswa/payment', [
+            'title' => 'Pembayaran Spp',
+            'tagihan' => $tagihan,
+            'siswa' => $siswa
+        ]);
+    }
+
     public function statusBayarSiswa()
     {
         $tagihan = Tagihan::all();
